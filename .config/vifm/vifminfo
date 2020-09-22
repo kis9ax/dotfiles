@@ -1,0 +1,80 @@
+# You can edit this file by hand, but it's recommended not to do that.
+
+# Marks:
+'H
+	/Users/kaitomori/
+	..
+1601899593
+'b
+	/Users/kaitomori/bin/
+	..
+1601899593
+'h
+	/Users/kaitomori/
+	..
+1601899593
+'z
+	/Users/kaitomori/.config/vifm
+	..
+1601899593
+
+# Bookmarks:
+
+# TUI:
+al
+q0
+v2
+ov
+m-1
+l2
+r2
+
+# Left window history (oldest to newest):
+d/Users/kaitomori
+	go
+16
+d/Users/kaitomori/go
+	src
+3
+d/Users/kaitomori/go/src
+	a
+1
+d/Users/kaitomori/go/src/a
+	1
+1
+d/Users/kaitomori/go/src/a/1
+	..
+0
+d
+
+# Right window history (oldest to newest):
+D/Users/kaitomori
+	Applications
+1
+D
+
+# Command line history (oldest to newest):
+:q
+
+# Search history (oldest to newest):
+
+# Prompt history (oldest to newest):
+
+# Local filter history (oldest to newest):
+
+# Registers:
+
+# Directory stack (oldest to newest):
+
+# Trash content:
+
+# State:
+f
+i1
+[.1
+[F
+F
+I1
+].1
+]F
+s0
