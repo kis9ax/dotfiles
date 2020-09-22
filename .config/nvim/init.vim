@@ -14,6 +14,8 @@ set shiftwidth=2
 set expandtab
 set splitright
 set clipboard=unnamed  
+set tags=./tags;$HOME
+set clipboard=unnamed
 set background=dark
 set nocompatible
 syntax on
@@ -28,11 +30,28 @@ nnoremap s "_s
 " color
 
 colorscheme gruvbox 
+noremap <S-b>   ^
+nnoremap <CR> A<CR><ESC>
+nnoremap == gg=G''
+nnoremap <C-]> g<C-]>zz
+nnoremap <C-]> <ESC>g<C-]>
+
+imap <C-k> <Up>
+imap <C-j> <Down>
+imap <C-h> <Left>
+imap <C-l> <Right>
+
+command! RmTrailing :%s/\s\+$//e
+command! So :so %
+
+" color
+
+colorscheme gruvbox
 highlight Normal ctermbg=none
-highlight NonText ctermbg=none
 highlight LineNr ctermbg=none
 highlight Folded ctermbg=none
 highlight EndOfBuffer ctermbg=none 
+highlight EndOfBuffer ctermbg=none
 highlight StatusLine ctermbg=NONE cterm=NONE
 
 "" toggle statusline
@@ -44,19 +63,19 @@ set noshowcmd
 
 let s:hidden_all = 1
 function! ToggleHiddenAll()
-    if s:hidden_all  == 0
-        let s:hidden_all = 1
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-    else
-        let s:hidden_all = 0
-        set showmode
-        set ruler
-        set laststatus=2
-        set showcmd
-    endif
+  if s:hidden_all  == 0
+    let s:hidden_all = 1
+    set noshowmode
+    set noruler
+    set laststatus=0
+    set noshowcmd
+  else
+    let s:hidden_all = 0
+    set showmode
+    set ruler
+    set laststatus=2
+    set showcmd
+  endif
 endfunction
 
 nnoremap <S-q> :call ToggleHiddenAll()<CR>
@@ -64,34 +83,41 @@ nnoremap <S-q> :call ToggleHiddenAll()<CR>
 " plugin
 
 call plug#begin('~/.local/share/nvim/plugged')
-  Plug 'fatih/vim-go'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'dense-analysis/ale'
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
-  Plug 'scrooloose/nerdtree'
-  Plug 'junegunn/goyo.vim'
-  Plug 'easymotion/vim-easymotion'
-  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-  Plug 'terryma/vim-multiple-cursors'
-  Plug 'tpope/vim-commentary'
-  Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-surround'
-  Plug 'fatih/vim-go'
-  Plug 'alvan/vim-closetag'
-  Plug 'vimwiki/vimwiki'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dense-analysis/ale'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'junegunn/goyo.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-surround'
+Plug 'fatih/vim-go'
+Plug 'alvan/vim-closetag'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'Yggdroot/indentLine'
+Plug 'SirVer/ultisnips'
+Plug 'fatih/vim-go'
+Plug 'svermeulen/vim-easyclip'
 call plug#end()
 
 " junegunn/fzf.vim
-let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
+
+let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all --no-border --no-margin'
 
 let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit',
-  \ 'ctrl-y': {lines -> setreg('*', join(lines, "\n"))}}
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit',
+      \ 'ctrl-y': {lines -> setreg('*', join(lines, "\n"))}}
 
 nnoremap <silent> <C-p> :Files<CR>
+nnoremap <silent> <C-g> :GFiles<CR>
+nnoremap <silent> <S-o> :Commands<CR>
 nnoremap <silent> <Leader><Enter> :Buffers<CR>
 nnoremap <silent> <Leader>l :Lines<CR>
 
@@ -128,6 +154,20 @@ highlight CocErrorSign ctermfg=15 ctermbg=196
 highlight CocWarningSign ctermfg=0 ctermbg=172
 
 nmap <silent> ;; :<C-u>CocList<cr>
+let g:coc_global_extensions = [
+      \  'coc-lists'
+      \, 'coc-json'
+      \, 'coc-go'
+      \, 'coc-rls'
+      \, 'coc-python'
+      \, 'coc-html'
+      \, 'coc-css'
+      \, 'coc-tsserver'
+      \, 'coc-snippets'
+      \, 'coc-vetur'
+      \ ]
+
+nmap <silent> <Leader>; :<C-u>CocList<cr>
 nmap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
 nmap <silent> <space>df <Plug>(coc-definition)
 nmap <silent> <space>rf <Plug>(coc-references)
@@ -149,3 +189,40 @@ let g:go_highlight_methods = 1
 
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
+
+" airblade/vim-gitgutter
+
+let g:gitgutter_highlight_lines = 0
+set updatetime=250
+
+" svermeulen/vim-easyclip
+
+let g:EasyClipShareYanks = 1
+
+function! s:yank_list()
+  redir => ys
+  silent Yanks
+  redir END
+  return split(ys, '\n')[1:]
+endfunction
+
+function! s:yank_handler(reg)
+  let apple = a:reg
+  if empty(a:reg)
+    echo "no register paste"
+  else
+    let token = split(a:reg, ' ')
+    " let @+ = token[0]
+    execute 'Paste' . token[0]
+  endif
+endfunction
+
+command! FZFYank call fzf#run({
+      \ 'source': <sid>yank_list(),
+      \ 'sink': function('<sid>yank_handler'),
+      \ 'options': '-m --prompt="FZFYank> "',
+      \ 'down':    '40%'
+      \ })
+
+nnoremap <C-Y><C-Y> :<C-U>FZFYank<CR>
+inoremap <C-Y><C-Y> <C-O>:<C-U>FZFYank<CR>
