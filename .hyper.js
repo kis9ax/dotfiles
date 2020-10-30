@@ -6,10 +6,11 @@ module.exports = {
   config: {
     hyperBorder: {
       borderColors: ['black', 'black'],
-      borderWidth: '3px',
-      borderRadiusOuter: '0px',
-      borderRadiusInner: '0px',
+      borderWidth: '0px',
     },
+    // materialBox: {
+    //   scheme: 'gruvbox-dark-hard',
+    // },
     frame: false,
     minimizable: false,
     maximizable: false,
@@ -18,7 +19,10 @@ module.exports = {
     // materialBox: {
     //   scheme: 'nord'
     // },
-    // opacity: 0.9,
+    opacity: {
+     focus: 0.98,
+     blur: 0.94,
+    },
     // vibrancy: 'dark',
 
     // choose either `'stable'` for receiving highly polished,
@@ -66,6 +70,8 @@ module.exports = {
     selectionColor: '#bdae93',
 
     // border color (window, tabs)
+    borderColor: '#bdae93',
+    // borderColor: '#bdae93',
     // custom CSS to embed in the main window
     css: '',
 
@@ -82,7 +88,7 @@ module.exports = {
     showWindowControls: '',
 
     // custom padding (CSS format, i.e.: `top right bottom left`)
-    padding: '12px 14px',
+    padding: '4px 8px',
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
@@ -162,15 +168,15 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-    "hyper-gruvbox",
+    "hyper-opacity",
     "hyper",
     "hyperminimal",
     "hyper-hide-scroll",
-    "hyperborder",
     "hypercwd",
+    "hyperborder",
+    "hyper-gruvbox",
   ],
-    // "hyper-pokemon",
-  // "hyper-material-box"
+  // "hyper-pokemon",
     // "hyper-gruvbox",
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
@@ -181,4 +187,4 @@ module.exports = {
     // Example
     // 'window:devtools': 'cmd+alt+o',
   },
-};
+}

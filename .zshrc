@@ -1,4 +1,4 @@
-source ~/.zsh.alias
+source ~/.alias
 
 setopt hist_ignore_dups
 setopt EXTENDED_HISTORY
@@ -12,6 +12,12 @@ setopt hist_ignore_dups
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt hist_reduce_blanks
+autoload -Uz colors && colors
+autoload -Uz compinit && compinit
+unsetopt PROMPT_SP
+export HISTSIZE=100
+export HISTFILE=${HOME}/.zsh_history
+export LANG=ja_JP.UTF-n
 
 <<<<<<< HEAD
 <<<<<<< HEAD
