@@ -33,7 +33,7 @@ module.exports = {
     fontSize: 12,
 
     // font family with optional fallbacks
-    fontFamily: 'Victor Mono, Consolas, "Lucida Console", monospace',
+    fontFamily: '"Victor Mono", Hack Nerd Font',
 
     // default font weight: 'normal' or 'bold'
     fontWeight: 'normal',
