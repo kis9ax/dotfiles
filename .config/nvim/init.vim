@@ -1,13 +1,18 @@
 let mapleader=" "
 let maplocalleader=" "
+
 set number
 set number relativenumber
 set encoding=utf-8
+set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set fileformats=unix,dos,mac
 set hidden
 set cursorline
 set autoindent
 set tabstop=2
 set shiftwidth=2
+set timeoutlen=1000
+set ttimeoutlen=0
 set expandtab
 set splitright
 set clipboard=unnamed
@@ -18,10 +23,6 @@ set noswapfile
 
 syntax on
 filetype plugin on
-
-nmap <Leader>- :sp<CR>
-nmap <Leader>\ :vsp<CR>
-nmap <Leader>r :so %<CR>
 
 nnoremap x "_x
 nnoremap s "_s
@@ -35,17 +36,24 @@ nnoremap <CR> A<CR><ESC>
 nnoremap == gg=G''
 nnoremap <C-]> g<C-]>zz
 nnoremap <C-]> <ESC>g<C-]>
-nnoremap <silent> <C-w>< :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
-nnoremap <silent> <C-w>> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
+nnoremap <Leader>- :sp<CR>
+nnoremap <Leader>\ :vsp<CR>
+nnoremap <Leader>r :so %<CR>
+nnoremap <C-c> :bd<cr>
+nnoremap <C-q> :q!<cr>
+nnoremap <C-s> :w<cr>
+nnoremap ; :
+nnoremap : ;
+nnoremap <C-j><C-j> <C-W>\| <C-W>_
+nnoremap <C-j><C-k> <C-w>=
 
 imap <C-k> <Up>
 imap <C-j> <Down>
 imap <C-h> <Left>
 imap <C-l> <Right>
+imap <C-s> <Esc>:w<cr>
 
-command! RmTrailing :%s/\s\+$//e
-
-" color
+" colorscheme
 
 colorscheme gruvbox
 highlight Normal ctermbg=none
@@ -56,12 +64,12 @@ highlight StatusLine ctermbg=NONE cterm=NONE
 
 "" toggle statusline
 
-" set noshowmode
-" set noruler
-" set laststatus=0
-" set noshowcmd
+set noshowmode
+set noruler
+set laststatus=0
+set noshowcmd
 
-let s:hidden_all = 0
+let s:hidden_all = 1
 function! ToggleHiddenAll()
     if s:hidden_all  == 0
         let s:hidden_all = 1
@@ -80,6 +88,8 @@ endfunction
 
 nnoremap <S-q> :call ToggleHiddenAll()<CR>
 
+command! RmTrailing :%s/\s\+$//e
+
 "" tabpages
 
 nnoremap t1 1gt
@@ -88,60 +98,78 @@ nnoremap t3 3gt
 nnoremap t4 4gt
 nnoremap t5 5gt
 
-nnoremap tH  :tabfirst<CR>
+nnoremap th  :tabprevious<CR>
 nnoremap tl  :tabnext<CR>
-nnoremap th  :tabprev<CR>
-nnoremap tL  :tablast<CR>
 nnoremap td  :tabclose<CR>
 nnoremap tn :tabnew<CR>
 
-" plugin
+" plugins
 
-if empty(glob('~/.local/share/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim  --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall | source ~/.config/nvim/init.vim
 endif
 
+if empty(glob('~/.tmux/plugins/tpm'))
+  silent git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+endif
+
 call plug#begin('~/.local/share/nvim/plugged')
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'dense-analysis/ale'
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
-  Plug 'scrooloose/nerdtree'
-  Plug 'junegunn/goyo.vim'
-  Plug 'easymotion/vim-easymotion'
-  Plug 'terryma/vim-multiple-cursors'
-  Plug 'tpope/vim-commentary'
-  Plug 'tpope/vim-fugitive'
-  Plug 'airblade/vim-gitgutter'
-  Plug 'tpope/vim-surround'
-  Plug 'alvan/vim-closetag'
-  Plug 'ntpeters/vim-better-whitespace'
-  Plug 'Yggdroot/indentLine'
-  Plug 'SirVer/ultisnips'
-  Plug 'svermeulen/vim-easyclip'
-  Plug 'iamcco/mathjax-support-for-mkdp'
-  Plug 'terryma/vim-multiple-cursors'
-  Plug 'tpope/vim-commentary'
-  Plug 'tpope/vim-fugitive'
-  Plug 'airblade/vim-gitgutter'
-  Plug 'tpope/vim-surround'
-  Plug 'alvan/vim-closetag'
-  Plug 'ntpeters/vim-better-whitespace'
-  Plug 'Yggdroot/indentLine'
-  Plug 'SirVer/ultisnips'
-  Plug 'fatih/vim-go'
-  Plug 'cespare/vim-toml'
-  Plug 'rhysd/vim-grammarous'
-  Plug 'junegunn/vim-easy-align'
-  Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
-  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-  Plug 'leafgarland/typescript-vim'
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'aklt/plantuml-syntax'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'dense-analysis/ale'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'junegunn/goyo.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/vim-easy-align'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tyru/open-browser.vim'
+Plug 'itchyny/calendar.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'alvan/vim-closetag'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'Yggdroot/indentLine'
+Plug 'SirVer/ultisnips'
+Plug 'cespare/vim-toml'
+Plug 'leafgarland/typescript-vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'svermeulen/vim-easyclip'
+Plug 'tpope/vim-repeat'
+
+" git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-rhubarb'
+Plug 'junegunn/gv.vim'
+
+" dorkpowers
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deol.nvim'
+
+"golang
+Plug 'fatih/vim-go'
+
+" documentation
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'aklt/plantuml-syntax'
+Plug 'weirongxu/plantuml-previewer.vim'
+Plug 'rhysd/vim-grammarous'
+
+" javascript
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'HerringtonDarkholme/yats.vim'
+
 call plug#end()
 
 " junegunn/fzf.vim
@@ -157,7 +185,6 @@ let g:fzf_action = {
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-g> :GFiles<CR>
 nnoremap <silent> <S-o> :Commands<CR>
-" nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-p> :GFiles<CR>
 nnoremap <silent> <S-p> :Commands<CR>
 nnoremap <silent> <Leader><Enter> :Buffers<CR>
@@ -176,20 +203,13 @@ let g:multi_cursor_quit_key            = '<Esc>'
 
 " easymotion/easymotion
 
-nmap s <Leader><Leader>s
+nnoremap s <Leader><Leader>s
 
 " iamcco/markdown-preview.nvim
 
 let g:mkdp_auto_close=0
 let g:mkdp_refresh_slow=1
-
-" scrooloose/nerdtree
-
-let g:NERDTreeShowHidden=1
-let g:NERDTreeAutoDeleteBuffer=1
-let g:NERDTreeQuitOnOpen=0
-
-nnoremap <silent> <expr> <C-C> g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
+let g:mkdp_echo_preview_url = 1
 
 " neoclide/coc
 highlight CocErrorSign ctermfg=15 ctermbg=196
@@ -207,6 +227,8 @@ let g:coc_global_extensions = [
       \, 'coc-snippets'
       \, 'coc-vetur'
       \, 'coc-toml'
+      \, 'coc-eslint'
+      \, 'coc-prettier'
       \ ]
 
 nmap <silent> <Leader>; :<C-u>CocList<cr>
@@ -227,7 +249,13 @@ endfunction
 
 " Keymapping for grep word under cursor with interactive mode
 nnoremap <silent> <Leader>gf :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
-
+nnoremap <silent> <Leader>; :<C-u>CocList<cr>
+nnoremap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
+nnoremap <silent> <space>df <Plug>(coc-definition)
+nnoremap <silent> <space>rf <Plug>(coc-references)
+nnoremap <silent> <space>rn <Plug>(coc-rename)
+nnoremap <silent> <space>fmt <Plug>(coc-format)et hls
+nnoremap <silent> <Leader>g :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
 
 " analysis/ale
 let g:ale_lint_on_text_changed = 0
@@ -246,12 +274,13 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
 " airblade/vim-gitgutter
-
 let g:gitgutter_highlight_lines = 0
 set updatetime=250
 
 "junegunn/goyo.vim
-nnoremap <silent> <Leader>j gg:Goyo<CR>
+nnoremap <silent> <Leader>k gg:Goyo<CR>
+let g:goyo_width = "90%"
+let g:goyo_height = "90%"
 
 nnoremap <C-Y><C-Y> :<C-U>FZFYank<CR>
 inoremap <C-Y><C-Y> <C-O>:<C-U>FZFYank<CR>
@@ -260,3 +289,46 @@ inoremap <C-Y><C-Y> <C-O>:<C-U>FZFYank<CR>
 " vim-airline/vim-airline
 let g:airline_theme = 'base16_gruvbox_dark_hard'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline_powerline_fonts = 1
+
+" itchyny/calendar.vim
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
+let g:calendar_view = "day"
+let g:calendar_views = ['year', 'month', 'week', 'day', 'clock' ]
+source ~/.cache/calendar.vim/credentials.vim
+
+" javascript
+let g:vim_jsx_pretty_colorful_config = 1
+
+" dorkpowers
+source ~/.config/nvim/plugins/defx.rc.vim
+source ~/.config/nvim/plugins/denite.rc.vim
+" source ~/.config/nvim/plugins/deol.rc.vim
+
+" Shougo/denite.nvim
+nnoremap <silent><Leader>a :<C-u>Denite file buffer -split=floating file:new<CR>
+nnoremap <silent><Leader>b :<C-u>Denite buffer -split=floating file:new<CR>
+nnoremap <silent><Leader>f :<C-u>Denite file -split=floating file:new<CR>
+nnoremap <silent><Leader>r :<C-u>Denite file/rec -split=floating file:new<CR>
+nnoremap <silent><Leader>gr :<C-u>Denite grep -buffer-name=search<CR>
+nnoremap <silent><Leader>, :<C-u>DeniteCursorWord grep -buffer-name=search line<CR>
+nnoremap <silent><Leader>gs :<C-u>Denite -resume -buffer-name=search<CR>
+nnoremap <silent><Leader>c :<C-u>Denite command_history -split=floating<CR>
+
+" Shougo/defx.nvim
+nnoremap <silent><Leader>s :<C-u>Defx -listed -resume
+      \ -columns=indent:mark:icon:icons:filename:git:size
+      \ -buffer-name=tab`tabpagenr()`
+      \ `expand('%:p:h')` -search=`expand('%:p')`<CR>
+
+" junegunn/vim-easy-align
+nnoremap <silent> <Leader>y :Yanks<CR>
+let g:EasyClipAutoFormat = 1
+let g:EasyClipYankHistorySize = 20
+let g:EasyClipShareYanks = 1
+
+" vim-grammarous
+let g:grammarous#enable_spell_check=1

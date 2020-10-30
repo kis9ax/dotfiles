@@ -1,12 +1,4 @@
 autocmd FileType defx call s:defx_my_settings()
-
-nnoremap <silent><Leader>sf :<C-u>Defx -listed -resume
-      \ -columns=indent:mark:icon:icons:filename:git:size
-      \ -buffer-name=tab`tabpagenr()`
-      \ `expand('%:p:h')` -search=`expand('%:p')`<CR>
-
-" autocmd VimEnter * execute 'Defx'
-" nnoremap <silent> <Leader>f :<C-u> Defx <CR>
 autocmd BufWritePost * call defx#redraw()
 autocmd BufEnter * call defx#redraw()
 

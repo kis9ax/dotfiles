@@ -20,8 +20,8 @@ module.exports = {
     //   scheme: 'nord'
     // },
     opacity: {
-     focus: 0.98,
-     blur: 0.94,
+     focus: 0.96,
+     blur: 0.82,
     },
     // vibrancy: 'dark',
 

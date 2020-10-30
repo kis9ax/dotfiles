@@ -18,12 +18,16 @@ unsetopt PROMPT_SP
 export HISTSIZE=100
 export HISTFILE=${HOME}/.zsh_history
 export LANG=ja_JP.UTF-n
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
 >>>>>>> '
+=======
+KEYTIMEOUT=1
+>>>>>>> 2020-10 nerdtree > defx.vim and change faster vim keymap
 
 # fbr - checkout git branch (including remote branches)
 fbr() {
