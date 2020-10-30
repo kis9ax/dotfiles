@@ -1,8 +1,8 @@
 " --- setting ---
 syntax on
 filetype plugin on
-let mapleader=" "
-let maplocalleader=" "
+let mapleader="\<Space>"
+let maplocalleader="\,"
 set number
 set number relativenumber
 set encoding=UTF-8
@@ -18,8 +18,8 @@ set splitright
 set clipboard=unnamed
 set tags=./tags;$HOME
 set background=dark
-set nocompatible
 set noswapfile
+set modifiable
 
 " --- color setting ---
 colorscheme gruvbox
@@ -31,10 +31,11 @@ highlight EndOfBuffer ctermbg=none
 highlight StatusLine ctermbg=NONE cterm=NONE
 
 " --- 0 keymapping ---
+" nnoremap
 nnoremap x "_x
 nnoremap s "_s
-noremap <S-e>   $
-noremap <S-b>   ^
+nnoremap <S-e>   $
+nnoremap <S-b>   ^
 nnoremap <CR> A<CR><ESC>
 nnoremap == gg=G''
 nnoremap <C-]> g<C-]>zz
@@ -45,11 +46,16 @@ nnoremap <Leader>r :so %<CR>
 nnoremap <C-c> :bd<cr>
 nnoremap <C-q> :q!<cr>
 nnoremap <C-s> :w<cr>
+nnoremap z0 zt
 nnoremap ; :
 nnoremap : ;
 nnoremap <C-j><C-j> <C-W>\| <C-W>_
 nnoremap <C-j><C-k> <C-w>=
-" vimtab
+nnoremap <silent> <Space>h "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
+nnoremap <Leader>c <Space>h:%s/<C-r>///g<Left><Left>
+nnoremap <C-Up> "zdd<Up>"zP
+nnoremap <C-Down> "zdd"zp
+"" vimtab
 nnoremap t1 1gt
 nnoremap t2 2gt
 nnoremap t3 3gt
@@ -65,37 +71,45 @@ imap <C-j> <Down>
 imap <C-h> <Left>
 imap <C-l> <Right>
 imap <C-s> <Esc>:w<cr>
+imap <C-CR> <End><CR>
+imap <C-o> <Home><CR><Up>
+imap <C-b> <Esc>bi
+imap <C-e> <Esc>ea
+imap <C-d> <BS>
+imap <C-f> <Del>
+imap <C-t> <Esc><Left>"zx"zpa
+imap <C-u> <Esc>ui
+imap <C-r> <Esc><C-r>i
+imap <C-]> <Esc><Right>
+imap <C-w> <Esc><Plug>(easymotion-sn)
+"vmap
+vnoremap <C-k> "zx<Up>"zP`[V`]
+vnoremap <C-j> "zx"zp`[V`]
+"cnoremap
+cnoremap <C-k> <Up>
+cnoremap <C-j> <Down>
+cnoremap <C-h> <Left>
+cnoremap <C-l> <Right>
+cnoremap <C-b> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-d> <BS>
+cnoremap <C-f> <Del>
 
-" --- vimstatusbar ---
-set noshowmode
-set noruler
-set laststatus=0
-set noshowcmd
-
-let s:hidden_all = 1
-function! ToggleHiddenAll()
-    if s:hidden_all  == 0
-        let s:hidden_all = 1
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-    else
-        let s:hidden_all = 0
-        set showmode
-        set ruler
-        set laststatus=2
-        set showcmd
-    endif
+" vimquickfix
+function! ToggleQuickfix()
+  let l:nr = winnr('$')
+  cwindow
+  let l:nr2 = winnr('$')
+  if l:nr == l:nr2
+    cclose
+  endif
 endfunction
-
-nnoremap <S-q> :call ToggleHiddenAll()<CR>
+nnoremap <script> <silent> <Leader>q :call ToggleQuickfix()<CR>
 
 " --- commands ---
 command! RmTrailing :%s/\s\+$//e
-command! -bang Registers call s:registers('<bang>' ==# '!')
 
-" --- plugins ---
+" --- plugin manager ---
 " vim-plug install
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
   silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim  --create-dirs
@@ -112,34 +126,52 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 " plugin
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'dense-analysis/ale'
-  Plug 'ryanoasis/vim-devicons'
-  Plug 'preservim/nerdtree' |
-        \ Plug 'Xuyuanp/nerdtree-git-plugin' |
-        \ Plug 'ryanoasis/vim-devicons'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
-  Plug 'junegunn/goyo.vim'
+  Plug 'dense-analysis/ale'
   Plug 'junegunn/vim-easy-align'
+  Plug 'itchyny/calendar.vim'
+  Plug 'airblade/vim-rooter'
+  Plug 'SirVer/ultisnips'
+  Plug 'cespare/vim-toml'
+  Plug 'liuchengxu/vim-which-key'
+  Plug 'preservim/nerdtree' |
+\ Plug 'Xuyuanp/nerdtree-git-plugin' |
+\ Plug 'ryanoasis/vim-devicons'
+  " sub
+  Plug 'mbbill/undotree', {'on': 'UndotreeToggle'} "undo tree to see recent changed
+  Plug 'norcalli/nvim-colorizer.lua'
+  Plug 'tiagofumo/vim-nerdtree-syntax-highlight' "color for icons
+  Plug 'terryma/vim-expand-region'
+  Plug 'szw/vim-tags'
+  Plug 'preservim/tagbar'
+
+" themes
+  Plug 'morhetz/gruvbox'
+  Plug 'junegunn/goyo.vim'
+  Plug 'Yggdroot/indentLine'
+  Plug 'ryanoasis/vim-devicons'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'tyru/open-browser.vim'
-  Plug 'itchyny/calendar.vim'
-  Plug 'easymotion/vim-easymotion'
-  Plug 'terryma/vim-multiple-cursors'
+
+" edit
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-commentary'
+  Plug 'tpope/vim-repeat'
+  Plug 'svermeulen/vim-easyclip'
   Plug 'alvan/vim-closetag'
   Plug 'ntpeters/vim-better-whitespace'
-  Plug 'Yggdroot/indentLine'
-  Plug 'SirVer/ultisnips'
-  Plug 'rhysd/vim-grammarous'
-  Plug 'junegunn/vim-easy-align'
-  Plug 'leafgarland/typescript-vim'
-  Plug 'cespare/vim-toml'
-  Plug 'jiangmiao/auto-pairs'
-  Plug 'tpope/vim-commentary'
-  Plug 'tpope/vim-surround'
-  Plug 'svermeulen/vim-easyclip'
-  Plug 'tpope/vim-repeat'
+
+" move
+  Plug 'unblevable/quick-scope'
+  Plug 'easymotion/vim-easymotion'
+
+" search
+  Plug 'mhinz/vim-grepper'
+
+" quickfix
+  Plug 'romainl/vim-qf'
+  Plug 'stefandtw/quickfix-reflector.vim'
 
 " git
   Plug 'tpope/vim-fugitive'
@@ -147,21 +179,18 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-rhubarb'
   Plug 'junegunn/gv.vim'
 
-" dorkpowers
-  " Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-  " Plug 'kristijanhusak/defx-git'
-  " Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-  " Plug 'Shougo/deol.nvim'
-
 " golang
-  Plug 'fatih/vim-go'
+  Plug 'fatih/vim-go', { 'autoload': {'filetypes': 'go'}}
 
 " documentation
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
   Plug 'iamcco/mathjax-support-for-mkdp'
+  Plug 'tyru/open-browser.vim'
   Plug 'aklt/plantuml-syntax'
   Plug 'weirongxu/plantuml-previewer.vim'
   Plug 'rhysd/vim-grammarous'
+  Plug 'vimwiki/vimwiki'
+  Plug 'tpope/vim-markdown'
 
 " javascript
   Plug 'yuezk/vim-js'
@@ -169,13 +198,16 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'HerringtonDarkholme/yats.vim'
+  Plug 'ElmCast/elm-vim', { 'for': 'elm' }
+  Plug 'evanleck/vim-svelte', {'branch': 'main'}
+  Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 " --- junegunn/fzf.vim ---
 nnoremap <silent> <C-p> :GFiles<CR>
 nnoremap <silent> <S-p> :GFiles?<CR>
 nnoremap <silent> sp :Commands<CR>
-nnoremap <silent> s: :Files<CR>
+nnoremap <silent> sf :Files<CR>
 nnoremap <silent> sj :Buffers<CR>
 nnoremap <silent> sh :History<CR>
 nnoremap <silent> s; :History:<CR>
@@ -184,12 +216,12 @@ nnoremap <silent> st :Tags<CR>
 nnoremap <silent> sc :Commits<CR>
 nnoremap <silent> sm :Maps<CR>
 nnoremap <silent> sa :Ag<CR>
-nnoremap <silent> sr :Rg<CR>
+nnoremap <silent> sg :Rg<CR>
 nnoremap <silent> s<Tab> :Snippets<CR>
 
 let $FZF_DEFAULT_OPTS="--color=dark --layout=reverse --margin=1,1 --color=fg:15,bg:-1,hl:1,fg+:#ffffff,bg+:0,hl+:1 --color=info:0,pointer:12,marker:4,spinner:11,header:-1"
 let $FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard || fd --type f --type l --hidden --follow"
-let g:fzf_layout = {  'window': { 'yoffset': 0.05 ,'width': 1, 'height': 0.4 } }
+let g:fzf_layout = {  'window': { 'yoffset': 0 ,'width': 1, 'height': 0.45 } }
 let g:fzf_preview_window = ''
 let g:fzf_buffers_jump = 1
 let g:fzf_colors =
@@ -221,24 +253,19 @@ nnoremap <silent> <Leader><Enter> :Buffers<CR>
 nnoremap <silent> <Leader>l :Lines<CR>
 
 " --- preservim/nerdtree ---
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <silent> <expr> <C-n> g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
 let g:NERDTreeWinSize = 40
 let g:NERDTreeShowHidden=1
 let g:NERDTreeGitStatusShowIgnored = 1
+let g:NERDTreeShowHidden=1
+let g:NERDTreeAutoDeleteBuffer=1
+let g:NERDTreeQuitOnOpen=0
 
-" --- terryma/vim-multiple-cursors ---
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_start_word_key      = '<C-m>'
-let g:multi_cursor_select_all_word_key = '<A-n>'
-let g:multi_cursor_start_key           = 'g<C-n>'
-let g:multi_cursor_select_all_key      = 'g<A-n>'
-let g:multi_cursor_next_key            = '<C-n>'
-let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
-
-" --- easymotion/easymotion ---
-nmap ss <Leader><Leader>s
+" easymotion/vim-easymotion
+let g:EasyMotion_do_mapping = 0
+nmap ss <Plug>(easymotion-overwin-f)
+nmap s/ <Plug>(easymotion-overwin-f2)
+nmap se<Plug>(easymotion-overwin-line)
 
 " --- iamcco/markdown-preview.nvim ---
 let g:mkdp_auto_close=0
@@ -246,19 +273,26 @@ let g:mkdp_refresh_slow=1
 let g:mkdp_echo_preview_url = 1
 
 " ---neoclide/coc ---
-nnoremap <silent> <Leader>; :<C-u>CocList<cr>
-nnoremap <silent> <space>h :<C-u>call CocAction('doHover')<cr>
-nnoremap <silent> <space>df <Plug>(coc-definition)
-nnoremap <silent> <space>rf <Plug>(coc-references)
-nnoremap <silent> <space>rn <Plug>(coc-rename)
-nnoremap <silent> <space>fmt <Plug>(coc-format)et hls
-nnoremap <silent> <Leader>g :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
+nnoremap <silent> c; :<C-u>CocList<cr>
+nmap <silent> ca :<C-u>call CocAction('doHover')<cr>
+nmap <silent> cd <Plug>(coc-definition)
+nmap <silent> cq  <Plug>(coc-fix-current)
+nmap <silent> ct <Plug>(coc-type-definition)
+nmap <silent> ch <Plug>(coc-references)
+nmap <silent> cr <Plug>(coc-rename)
+nmap <silent> cf <Plug>(coc-format)
+nmap <silent> cg :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
+nmap <silent> cy  :<C-u>CocList -A --normal yank<cr>
+
 highlight CocErrorSign ctermfg=15 ctermbg=196
 highlight CocWarningSign ctermfg=0 ctermbg=172
 
 let g:coc_global_extensions = [
       \  'coc-lists'
+      \, 'coc-pairs'
       \, 'coc-json'
+      \, 'coc-emoji'
+      \, 'coc-word'
       \, 'coc-go'
       \, 'coc-rls'
       \, 'coc-python'
@@ -270,6 +304,7 @@ let g:coc_global_extensions = [
       \, 'coc-toml'
       \, 'coc-eslint'
       \, 'coc-prettier'
+      \, 'coc-yank'
       \ ]
 
 nmap <silent> <Leader>; :<C-u>CocList<cr>
@@ -309,10 +344,25 @@ let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 
-" vimwiki/vimwiki
-
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+augroup GoCommands
+  autocmd!
+  autocmd FileType go nnoremap <silent><LocalLeader>r  <Plug>(go-run)
+  autocmd FileType go nnoremap <silent><LocalLeader>b  <Plug>(go-build)
+  autocmd FileType go nnoremap <silent><LocalLeader>tt <Plug>(go-test)
+  autocmd filetype go nnoremap <silent><localleader>tf <plug>(go-test-func)
+  autocmd filetype go nnoremap <silent><localleader>ts :<c-u>gotests
+  autocmd filetype go nnoremap <silent><localleader>ta :<c-u>gotestsall
+  autocmd FileType go nnoremap <silent><LocalLeader>m  <Plug>(go-imports)
+  autocmd FileType go nnoremap <silent><LocalLeader>i  <Plug>(go-install)
+  autocmd FileType go nnoremap <silent>K               <Plug>(go-doc)
+  autocmd FileType go nnoremap <silent><LocalLeader>d  <Plug>(go-doc-browser)
+  autocmd FileType go nnoremap <silent><LocalLeader>R  <Plug>(go-rename)
+  autocmd FileType go nnoremap <silent><LocalLeader>c  <Plug>(go-coverage-toggle)
+  autocmd FileType go nnoremap <silent><LocalLeader>n  <Plug>(go-referrers)
+  autocmd FileType go nnoremap <silent><LocalLeader>a  <Plug>(go-alternate-edit)
+  autocmd FileType go nnoremap <silent><LocalLeader>e  <Plug>(go-iferr)
+  autocmd FileType go nnoremap <silent><LocalLeader>p  <Plug>(go-implements)
+augroup END
 
 " --- airblade/vim-gitgutter ---
 let g:gitgutter_highlight_lines = 0
@@ -324,7 +374,7 @@ let g:goyo_width = "90%"
 let g:goyo_height = "90%"
 
 " --- vim-airline/vim-airline ---
-let g:airline_theme = 'base16_gruvbox_dark_hard'
+let g:airline_theme='base16_gruvbox_dark_hard'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline_powerline_fonts = 1
@@ -339,51 +389,45 @@ source ~/.cache/calendar.vim/credentials.vim
 " --- maxmellon/vim-jsx-pretty ---
 let g:vim_jsx_pretty_colorful_config = 1
 
-" --- dorkpowers ---
-" source ~/.config/nvim/plugins/defx.rc.vim
-" source ~/.config/nvim/plugins/denite.rc.vim
-" source ~/.config/nvim/plugins/deol.rc.vim
-
-" --- Shougo/denite.nvim ---
-" nnoremap <silent><Leader>a :<C-u>Denite file buffer -split=floating file:new<CR>
-" nnoremap <silent><Leader>b :<C-u>Denite buffer -split=floating file:new<CR>
-" nnoremap <silent><Leader>f :<C-u>Denite file -split=floating file:new<CR>
-" nnoremap <silent><Leader>r :<C-u>Denite file/rec -split=floating file:new<CR>
-" nnoremap <silent><Leader>gr :<C-u>Denite grep -buffer-name=search<CR>
-" nnoremap <silent><Leader>, :<C-u>DeniteCursorWord grep -buffer-name=search line<CR>
-" nnoremap <silent><Leader>gs :<C-u>Denite -resume -buffer-name=search<CR>
-" nnoremap <silent><Leader>c :<C-u>Denite command_history -split=floating<CR>
-
-" --- Shougo/defx.nvim ---
-" autocmd VimEnter * execute 'Defx'
-" nnoremap <silent><Leader>s :<C-u>Defx -listed -resume
-"       \ -columns=git:indent:mark:icon:icons:filename:git:size
-"       \ -buffer-name=tab`tabpagenr()`
-"       \ `expand('%:p:h')` -search=`expand('%:p')`<CR>
-
 " --- junegunn/vim-easyclip ---
 nnoremap <silent> <Leader>y :Yanks<CR>
-nnoremap <silent> sy :Registers<CR>
 let g:EasyClipAutoFormat = 1
 let g:EasyClipYankHistorySize = 20
 let g:EasyClipShareYanks = 1
 
-function! s:get_registers() abort
-  redir => l:regs
-  silent registers
-  redir END
-
-  return split(l:regs, '\n')[1:]
-endfunction
-
-function! s:registers(...) abort
-  let l:opts = {
-        \ 'source': s:get_registers(),
-        \ 'sink': {x -> feedkeys(matchstr(x, '\v^\S+\ze.*') . (a:1 ? 'P' : 'p'), 'x')},
-        \ 'options': '--prompt="Reg> "'
-        \ }
-  call fzf#run(fzf#wrap(l:opts))
-endfunction
-
 " --- rhysd/vim-grammarous ---
 let g:grammarous#enable_spell_check=1
+
+" --- liuchengxu/vim-which-key
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+nnoremap <silent> s :WhichKey 's'<CR>
+nnoremap <silent> c :WhichKey 'c'<CR>
+set timeoutlen=1500
+
+"  evanleck/vim-svelte
+let g:svelte_indent_script=0
+let g:svelte_indent_style=0
+
+" ---  alvan/vim-closetag ---
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.svelte,*.vue"
+
+" --- vimwiki/vimwiki ---
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                  \ 'syntax': 'markdown', 'ext': '.md',
+                  \ 'nested_syntaxes': {'python': 'python', 'go': 'go', 'js': 'javascript', 'ts': 'typescript'}}]
+
+" --- vim-markdown ---
+let g:markdown_syntax_conceal = 0
+
+" --- vim-undotree ---
+nnoremap su :UndotreeToggle<cr>
+
+" unblevable/quick-scope
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+" stefandtw/quickfix-reflector.vim
+let g:qf_modifiable = 1
+let g:qf_write_changes = 1
+
+" mhinz/vim-grepper
+nnoremap <Leader>g :Grepper<CR>

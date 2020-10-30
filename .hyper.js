@@ -5,8 +5,8 @@
 module.exports = {
   config: {
     hyperBorder: {
-      borderColors: ['black', 'black'],
-      borderWidth: '0px',
+      borderColors: ['#706859', '#706859'],
+      borderWidth: '2px',
     },
     // materialBox: {
     //   scheme: 'gruvbox-dark-hard',
@@ -20,8 +20,8 @@ module.exports = {
     //   scheme: 'nord'
     // },
     opacity: {
-     focus: 0.96,
-     blur: 0.82,
+     focus: 0.80,
+     blur: 0.70,
     },
     // vibrancy: 'dark',
 
@@ -70,8 +70,8 @@ module.exports = {
     selectionColor: '#bdae93',
 
     // border color (window, tabs)
-    borderColor: '#bdae93',
-    // borderColor: '#bdae93',
+    borderColor: '#706859',
+    // borderColor: 'white',
     // custom CSS to embed in the main window
     css: '',
 
@@ -88,7 +88,7 @@ module.exports = {
     showWindowControls: '',
 
     // custom padding (CSS format, i.e.: `top right bottom left`)
-    padding: '4px 8px',
+    padding: '2px',
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
