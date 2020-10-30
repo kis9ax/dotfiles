@@ -4,8 +4,6 @@
 
 module.exports = {
   config: {
-<<<<<<< HEAD
-=======
     hyperBorder: {
       borderColors: ['black', 'black'],
       borderWidth: '3px',
@@ -23,7 +21,6 @@ module.exports = {
     // opacity: 0.9,
     // vibrancy: 'dark',
 
->>>>>>> '
     // choose either `'stable'` for receiving highly polished,
     // or `'canary'` for less polished but more frequent updates
     updateChannel: 'stable',
@@ -69,12 +66,6 @@ module.exports = {
     selectionColor: '#bdae93',
 
     // border color (window, tabs)
-<<<<<<< HEAD
-    borderColor: '#bdae93',
-=======
-    // borderColor: '#bdae93',
->>>>>>> '
-
     // custom CSS to embed in the main window
     css: '',
 
@@ -170,9 +161,6 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-<<<<<<< HEAD
-  plugins: ["hyper-gruvbox", "hyper", "hyperminimal", "hyper-hide-scroll"],
-=======
   plugins: [
     "hyper-gruvbox",
     "hyper",
@@ -184,8 +172,6 @@ module.exports = {
     // "hyper-pokemon",
   // "hyper-material-box"
     // "hyper-gruvbox",
->>>>>>> '
-
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
   // to load it and avoid it being `npm install`ed

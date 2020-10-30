@@ -14,7 +14,10 @@ setopt hist_ignore_space
 setopt hist_reduce_blanks
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> '
 
 # fbr - checkout git branch (including remote branches)
 fbr() {
@@ -31,4 +34,7 @@ fd() {
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
+<<<<<<< HEAD
+>>>>>>> '
+=======
 >>>>>>> '

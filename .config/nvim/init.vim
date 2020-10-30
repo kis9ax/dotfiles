@@ -13,9 +13,8 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 set splitright
-set clipboard=unnamed  
-set tags=./tags;$HOME
 set clipboard=unnamed
+set tags=./tags;$HOME
 set background=dark
 set nocompatible
 syntax on
@@ -30,6 +29,7 @@ nnoremap s "_s
 " color
 
 colorscheme gruvbox 
+noremap <S-e>   $
 noremap <S-b>   ^
 nnoremap <CR> A<CR><ESC>
 nnoremap == gg=G''
@@ -51,7 +51,6 @@ highlight Normal ctermbg=none
 highlight LineNr ctermbg=none
 highlight Folded ctermbg=none
 highlight EndOfBuffer ctermbg=none 
-highlight EndOfBuffer ctermbg=none
 highlight StatusLine ctermbg=NONE cterm=NONE
 
 "" toggle statusline
@@ -63,19 +62,19 @@ set noshowcmd
 
 let s:hidden_all = 1
 function! ToggleHiddenAll()
-  if s:hidden_all  == 0
-    let s:hidden_all = 1
-    set noshowmode
-    set noruler
-    set laststatus=0
-    set noshowcmd
-  else
-    let s:hidden_all = 0
-    set showmode
-    set ruler
-    set laststatus=2
-    set showcmd
-  endif
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
 endfunction
 
 nnoremap <S-q> :call ToggleHiddenAll()<CR>
@@ -153,7 +152,6 @@ nnoremap <silent> <expr> <C-C> g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : buf
 highlight CocErrorSign ctermfg=15 ctermbg=196
 highlight CocWarningSign ctermfg=0 ctermbg=172
 
-nmap <silent> ;; :<C-u>CocList<cr>
 let g:coc_global_extensions = [
       \  'coc-lists'
       \, 'coc-json'

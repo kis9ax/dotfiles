@@ -20,9 +20,6 @@ zinit load junegunn/fzf-bin
 
 zinit wait lucid atload"zicompinit; zicdreplay" blockf for zsh-users/zsh-completions
 
-<<<<<<< HEAD
-=======
-
 # gcloud
 
 # The next line updates PATH for the Google Cloud SDK.
@@ -31,8 +28,6 @@ if [ -f '/Users/kaitomori/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kaito
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/kaitomori/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kaitomori/google-cloud-sdk/completion.zsh.inc'; fi
 
-
->>>>>>> '
 # powerlevel10k
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
