@@ -4,14 +4,13 @@
 
 module.exports = {
   config: {
-<<<<<<< HEAD
-=======
     hyperBorder: {
-      borderColors: ['black', 'black'],
-      borderWidth: '3px',
-      borderRadiusOuter: '0px',
-      borderRadiusInner: '0px',
+      borderColors: ['#706859', '#706859'],
+      borderWidth: '2px',
     },
+    // materialBox: {
+    //   scheme: 'gruvbox-dark-hard',
+    // },
     frame: false,
     minimizable: false,
     maximizable: false,
@@ -20,10 +19,12 @@ module.exports = {
     // materialBox: {
     //   scheme: 'nord'
     // },
-    // opacity: 0.9,
+    opacity: {
+     focus: 0.98,
+     blur: 0.94,
+    },
     // vibrancy: 'dark',
 
->>>>>>> '
     // choose either `'stable'` for receiving highly polished,
     // or `'canary'` for less polished but more frequent updates
     updateChannel: 'stable',
@@ -32,7 +33,7 @@ module.exports = {
     fontSize: 12,
 
     // font family with optional fallbacks
-    fontFamily: 'Victor Mono, Consolas, "Lucida Console", monospace',
+    fontFamily: '"Victor Mono", Hack Nerd Font',
 
     // default font weight: 'normal' or 'bold'
     fontWeight: 'normal',
@@ -69,12 +70,8 @@ module.exports = {
     selectionColor: '#bdae93',
 
     // border color (window, tabs)
-<<<<<<< HEAD
-    borderColor: '#bdae93',
-=======
-    // borderColor: '#bdae93',
->>>>>>> '
-
+    borderColor: '#706859',
+    // borderColor: 'white',
     // custom CSS to embed in the main window
     css: '',
 
@@ -91,7 +88,7 @@ module.exports = {
     showWindowControls: '',
 
     // custom padding (CSS format, i.e.: `top right bottom left`)
-    padding: '12px 14px',
+    padding: '2px',
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
@@ -170,22 +167,17 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-<<<<<<< HEAD
-  plugins: ["hyper-gruvbox", "hyper", "hyperminimal", "hyper-hide-scroll"],
-=======
   plugins: [
-    "hyper-gruvbox",
+    "hyper-opacity",
     "hyper",
     "hyperminimal",
     "hyper-hide-scroll",
-    "hyperborder",
     "hypercwd",
+    "hyperborder",
+    "hyper-gruvbox",
   ],
-    // "hyper-pokemon",
-  // "hyper-material-box"
+  // "hyper-pokemon",
     // "hyper-gruvbox",
->>>>>>> '
-
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
   // to load it and avoid it being `npm install`ed
@@ -195,4 +187,4 @@ module.exports = {
     // Example
     // 'window:devtools': 'cmd+alt+o',
   },
-};
+}

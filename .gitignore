@@ -1,8 +1,6 @@
 .DS_Store
 *~
 !.zsh/history/
-.config/fish
-.config/coc
-.config/antidote/state.json
-.config/configstore
 .tmux/*
+.config/coc
+.config/nvim/netrwhist
