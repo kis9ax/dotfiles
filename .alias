@@ -1,38 +1,73 @@
-# alias
-
-alias v='nvim'
-alias v.='nvim .'
-alias emacs='vim'
-alias vr='cd ~/.config/nvim; v init.vim'
-alias vimrc='vim ~/.vimrc'
-alias zshrc-='v ~/.zshrc'
-alias t='tmux -u new -s $(pwd)'
-alias ta='tmux a'
-alias tat='tmux a -t'
-alias tk='tmux kill-server'
-alias tl='tmux list-session'
-alias trc='v ~/.tmux.conf'
-alias ide='sh ~/bin/ide.sh'
-alias e='emacs'
-
-alias note='cd ~/notes/; nvim .'
-alias day='cd ~/notes/dairy; nvim $(date +%F).md'
-alias days='cd ~/notes/dairy/dairy; nvim .'
-alias todo='cd ~/notes/todo; nvim $(date +%Y-%m).md'
-alias todos='cd ~/notes/todo; nvim .'
-alias pomo='termdown -f mini -s 25m; terminal-notifier -message "stop task and break" -sound default; termdown -f mini -s 5m; terminal-notifier -sound default -message "break stop"'
-
+# directory
 alias ..='cd ..'
 alias ...='cd ../..'
+alias ....= 'cd ../../..'
+alias a='nvim ~/.alias'
+alias d='cd ~/dev/;'
+alias zsr='nvim ~/.zshrc'
+alias zse='nvim ~/zshenv'
+alias hyp='nvim ~/.hyper.js'
+alias n='cd ~/notes/; nvim .'
+alias j='cd ~/notes/todo; nvim $(date +%Y-%m).md'
+alias vr='cd ~/.config/nvim; v init.vim'
+alias tr='nvim ~/.tmux.conf'
+alias dot='cd ~/.dotfiles; nvim .'
+alias mk=mk
+function mk() { mkdir $1; cd $1; }
+
+# ls
 alias sl='lsd -la'
 alias ls='ls -AGF'
 alias lsc='cowsay $(ls)'
-alias te='trans {en=ja}'
-alias tj='trans {ja=en}'
+
+# vim
+alias v='nvim'
+
+# tmux
+alias t='tmux -u new -s $(pwd)'
+alias ta='tmux a'
+alias tkw='tmux kill-server'
+alias tks='tmux kill-session'
+alias tl='tmux list-session'
+
+# git
 alias g='git'
 alias ga='git add'
-alias ga.='git add .'
 alias gc='git commit'
-alias gca='git commit --amend'
-alias f='fzf'
-alias bgm="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
+alias gca='git commit --am'
+alias gac='git add . && git commit -am'
+alias gp='git push'
+alias gf='git fetch'
+alias gb='git branch'
+alias gd='git diff'
+alias gco='git checkout'
+alias gst='git status'
+alias gl='git log --graph --oneline --decorate --all'
+
+# sh
+alias ide='sh ~/bin/ide.sh' # pipe
+alias -g A='| awk'
+alias -g C='| pbcopy'
+alias -g C='| wc -l'
+alias -g G='| grep --color=auto'
+alias -g H='| head'
+alias -g L='| less -R'
+alias -g X='| xargs'
+alias -g C='| pbcopy'
+
+# other
+alias o='open'
+alias x='exit'
+alias te='trans {en=ja}'
+alias tj='trans {ja=en}'
+alias tree='tree -I "node_modules"'
+alias lofi="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
+alias pomo='termdown -f mini -s 25m; terminal-notifier -message "stop task and break" -sound default; termdown -f mini -s 5m; terminal-notifier -sound default -message "break stop"'
+
+# search
+alias /go='search google'
+alias /dd='search duckduckgo'
+alias /gh='search github'
+alias /yt='search youtube'
+alias /qi='search qiita'
+alias /de='search devto'

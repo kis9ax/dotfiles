@@ -3,12 +3,12 @@ syntax on
 filetype plugin on
 let mapleader="\<Space>"
 let maplocalleader="\,"
-set number
 set number relativenumber
 set encoding=UTF-8
 set hidden
 set cursorline
 set autoindent
+set autochdir
 set tabstop=2
 set shiftwidth=2
 set timeoutlen=1000
@@ -49,8 +49,8 @@ nnoremap <C-s> :w<cr>
 nnoremap z0 zt
 nnoremap ; :
 nnoremap : ;
-nnoremap <C-j><C-j> <C-W>\| <C-W>_
-nnoremap <C-j><C-k> <C-w>=
+nnoremap <C-j><C-k> <C-W>\| <C-W>_
+nnoremap <C-j><C-j> <C-w>=
 nnoremap <C-w>> 20<C-w>>
 nnoremap <C-w>< 20<C-w><
 nnoremap <C-w>+ 10<C-w>+
@@ -82,7 +82,6 @@ imap <C-e> <Esc>ea
 imap <C-d> <Esc><C-d>i
 imap <C-c> <Del>
 imap <C-u> <Esc><C-u>i
-imap <C-r> <Esc><C-r>i
 imap <C-i> <Esc>I
 imap <C-]> <Esc>A
 imap <C-f>d <Esc>dd<BS>A
@@ -93,7 +92,8 @@ imap <C-f>p <Esc>pi
 imap <C-f>y <Esc>yyi
 imap <C-f>u <Esc>ui
 imap <C-f>r <Esc><C-r>i
-imap <C-f>w <Esc>diw
+imap <C-f>w <Esc>diwi
+imap <C-r> <Esc><Plug>(easymotion-overwin-f)
 "vmap
 vnoremap <C-k> "zx<Up>"zP`[V`]
 vnoremap <C-j> "zx"zp`[V`]
@@ -157,14 +157,13 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'terryma/vim-expand-region'
   Plug 'szw/vim-tags'
   Plug 'preservim/tagbar'
+  Plug 'kassio/neoterm'
+  Plug 'roxma/vim-tmux-clipboard'
 
 " themes
   Plug 'morhetz/gruvbox'
-  Plug 'junegunn/goyo.vim'
   Plug 'Yggdroot/indentLine'
   Plug 'ryanoasis/vim-devicons'
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
 
 " edit
   Plug 'tpope/vim-surround'
@@ -331,9 +330,9 @@ augroup GoCommands
   autocmd FileType go nnoremap <silent><LocalLeader>r  <Plug>(go-run)
   autocmd FileType go nnoremap <silent><LocalLeader>b  <Plug>(go-build)
   autocmd FileType go nnoremap <silent><LocalLeader>tt <Plug>(go-test)
-  autocmd filetype go nnoremap <silent><localleader>tf <plug>(go-test-func)
-  autocmd filetype go nnoremap <silent><localleader>ts :<c-u>gotests
-  autocmd filetype go nnoremap <silent><localleader>ta :<c-u>gotestsall
+  autocmd Filetype go nnoremap <silent><localleader>tf <plug>(go-test-func)
+  autocmd Filetype go nnoremap <silent><localleader>ts :<c-u>gotests
+  autocmd Filetype go nnoremap <silent><localleader>ta :<c-u>gotestsall
   autocmd FileType go nnoremap <silent><LocalLeader>m  <Plug>(go-imports)
   autocmd FileType go nnoremap <silent><LocalLeader>i  <Plug>(go-install)
   autocmd FileType go nnoremap <silent>K               <Plug>(go-doc)
@@ -350,22 +349,11 @@ augroup END
 let g:gitgutter_highlight_lines = 0
 set updatetime=250
 
-" --- junegunn/goyo.vim ---
-nnoremap <silent> <Leader>k gg:Goyo<CR>
-let g:goyo_width = "90%"
-let g:goyo_height = "90%"
-
-" --- vim-airline/vim-airline ---
-let g:airline_theme='base16_gruvbox_dark_hard'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline_powerline_fonts = 1
-
 " --- itchyny/calendar.vim ---
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
-let g:calendar_view = "day"
-let g:calendar_views = ['year', 'month', 'week', 'day', 'clock' ]
+let g:calendar_view = "day_4"
+let g:calendar_views = ['year', 'month', 'week', 'day_4','day' ]
 source ~/.cache/calendar.vim/credentials.vim
 
 " --- maxmellon/vim-jsx-pretty ---
@@ -413,3 +401,10 @@ nnoremap <Leader>g :Grepper<CR>
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" neoterm
+let g:neoterm_autoinsert = 1
+let g:neoterm_size = 15
+nnoremap tt :sp<CR><C-w>j:Ttoggle<CR>
+inoremap tt <esc>:Ttoggle<CR>
+tnoremap tt <C-\><C-n>:Ttoggle<CR>
