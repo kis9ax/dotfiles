@@ -12,6 +12,8 @@ setopt EXTENDED_HISTORY
 autoload -Uz colors && colors
 autoload -Uz compinit && compinit
 unsetopt PROMPT_SP
+export LANG=en_US.UTF-8
+export LANG=ja_JP.UTF-8
 export HISTSIZE=100
 export HISTFILE=${HOME}/.zsh_history
 export LANG=ja_JP.UTF-n

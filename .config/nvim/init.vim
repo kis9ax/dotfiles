@@ -5,6 +5,8 @@ let mapleader="\<Space>"
 let maplocalleader="\,"
 set number relativenumber
 set encoding=UTF-8
+set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set fileformats=unix,dos,mac
 set hidden
 set cursorline
 set autoindent
@@ -79,21 +81,18 @@ imap <C-x> <End><CR>
 imap <C-o> <Home><CR><Up>
 imap <C-b> <Esc>bi
 imap <C-e> <Esc>ea
-imap <C-d> <Esc><C-d>i
 imap <C-c> <Del>
+imap <C-d> <Esc><C-d>i
 imap <C-u> <Esc><C-u>i
-imap <C-i> <Esc>I
-imap <C-]> <Esc>A
+imap <C-f>i <Esc>I
+imap <C-f>a <Esc>A
 imap <C-f>d <Esc>dd<BS>A
 imap <C-f>h <Esc>HI
 imap <C-f>l <Esc>LI
 imap <C-f>m <Esc>MI
 imap <C-f>p <Esc>pi
 imap <C-f>y <Esc>yyi
-imap <C-f>u <Esc>ui
-imap <C-f>r <Esc><C-r>i
 imap <C-f>w <Esc>diwi
-imap <C-r> <Esc><Plug>(easymotion-overwin-f)
 "vmap
 vnoremap <C-k> "zx<Up>"zP`[V`]
 vnoremap <C-j> "zx"zp`[V`]
@@ -192,6 +191,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-rhubarb'
   Plug 'junegunn/gv.vim'
+  Plug 'iberianpig/tig-explorer.vim'
 
 " golang
   Plug 'fatih/vim-go', { 'autoload': {'filetypes': 'go'}}
@@ -214,6 +214,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'ElmCast/elm-vim', { 'for': 'elm' }
   Plug 'evanleck/vim-svelte', {'branch': 'main'}
   Plug 'leafgarland/typescript-vim'
+  Plug 'puremourning/vimspector'
 call plug#end()
 
 " --- junegunn/fzf.vim ---
@@ -406,5 +407,5 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:neoterm_autoinsert = 1
 let g:neoterm_size = 15
 nnoremap tt :sp<CR><C-w>j:Ttoggle<CR>
-inoremap tt <esc>:Ttoggle<CR>
+" inoremap tt <esc>:Ttoggle<CR>
 tnoremap tt <C-\><C-n>:Ttoggle<CR>
