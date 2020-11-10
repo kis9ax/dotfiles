@@ -275,7 +275,7 @@ nmap <silent> cr <Plug>(coc-rename)
 nmap <silent> cf <Plug>(coc-format)
 nnoremap <silent> cg :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
 nnoremap <silent> cy  :<C-u>CocList -A --normal yank<cr>
-nnoremap <silent> ce :CocCommand explorer<CR>
+nnoremap <silent> <C-n> :CocCommand explorer<CR>
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
 highlight CocErrorSign ctermfg=15 ctermbg=196
