@@ -1,5 +1,4 @@
-" --- setting ---
-syntax on
+" --- setting --- syntax on
 set synmaxcol=200
 filetype plugin on
 let mapleader="\<Space>"
@@ -19,13 +18,21 @@ set ttimeoutlen=0
 set expandtab
 set splitright
 set clipboard=unnamed
+set clipboard+=unnamedplus
 set tags=./tags;$HOME
 set background=dark
 set noswapfile
 set modifiable
+set ignorecase
 
 " --- color setting ---
 colorscheme gruvbox
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+highlight LineNr ctermbg=none
+highlight Folded ctermbg=none
+highlight EndOfBuffer ctermbg=none
+highlight StatusLine ctermbg=NONE cterm=NONE
 
 " --- 0 keymapping ---
 " nnoremap
@@ -292,6 +299,7 @@ let g:coc_global_extensions = [
       \, 'coc-snippets'
       \, 'coc-toml'
       \, 'coc-eslint'
+      \, 'coc-prettier'
       \, 'coc-explorer'
       \ ]
 
