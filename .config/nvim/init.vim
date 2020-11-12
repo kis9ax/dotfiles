@@ -1,5 +1,4 @@
-" --- setting ---
-syntax on
+" --- setting --- syntax on
 set synmaxcol=200
 filetype plugin on
 let mapleader="\<Space>"
@@ -19,13 +18,21 @@ set ttimeoutlen=0
 set expandtab
 set splitright
 set clipboard=unnamed
+set clipboard+=unnamedplus
 set tags=./tags;$HOME
 set background=dark
 set noswapfile
 set modifiable
+set ignorecase
 
 " --- color setting ---
 colorscheme gruvbox
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+highlight LineNr ctermbg=none
+highlight Folded ctermbg=none
+highlight EndOfBuffer ctermbg=none
+highlight StatusLine ctermbg=NONE cterm=NONE
 
 " --- 0 keymapping ---
 " nnoremap
@@ -275,7 +282,7 @@ nmap <silent> cr <Plug>(coc-rename)
 nmap <silent> cf <Plug>(coc-format)
 nnoremap <silent> cg :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
 nnoremap <silent> cy  :<C-u>CocList -A --normal yank<cr>
-nnoremap <silent> ce :CocCommand explorer<CR>
+nnoremap <silent> <C-n> :CocCommand explorer<CR>
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
 highlight CocErrorSign ctermfg=15 ctermbg=196
@@ -292,6 +299,7 @@ let g:coc_global_extensions = [
       \, 'coc-snippets'
       \, 'coc-toml'
       \, 'coc-eslint'
+      \, 'coc-prettier'
       \, 'coc-explorer'
       \ ]
 
