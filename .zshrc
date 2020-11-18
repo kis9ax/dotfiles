@@ -26,6 +26,8 @@ zle -N nvim.
 bindkey '^v' nvim.
 
 bindkey -s "^k" 'ls^M'
+bindkey -s "^j" 'cd ..^M'
+bindkey -s "^h" 'cd ~ ^M'
 
 function search() {
   local open_cmd

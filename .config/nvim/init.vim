@@ -1,6 +1,7 @@
-" --- setting --- syntax on
-set synmaxcol=200
+" --- setting ---
+syntax on
 filetype plugin on
+set synmaxcol=200
 let mapleader="\<Space>"
 let maplocalleader="\,"
 set number relativenumber
@@ -15,6 +16,7 @@ set tabstop=2
 set shiftwidth=2
 set timeoutlen=1000
 set ttimeoutlen=0
+set termguicolors
 set expandtab
 set splitright
 set clipboard=unnamed
@@ -26,13 +28,10 @@ set modifiable
 set ignorecase
 
 " --- color setting ---
+let g:gruvbox_contrast_dark='soft'
+highlight CocErrorSign ctermfg=15 ctermbg=196
+highlight CocWarningSign ctermfg=0 ctermbg=172
 colorscheme gruvbox
-highlight Normal ctermbg=none
-highlight NonText ctermbg=none
-highlight LineNr ctermbg=none
-highlight Folded ctermbg=none
-highlight EndOfBuffer ctermbg=none
-highlight StatusLine ctermbg=NONE cterm=NONE
 
 " --- 0 keymapping ---
 " nnoremap
@@ -73,29 +72,19 @@ nnoremap tl  :tabnext<CR>
 nnoremap td  :tabclose<CR>
 nnoremap tn :tabnew<CR>
 " imap
-imap <C-q> <Esc>
-imap <C-k> <Up>
-imap <C-j> <Down>
-imap <C-h> <Left>
-imap <C-l> <Right>
-imap <C-s> <Esc>:w<cr>
-imap <C-x> <End><CR>
-imap <C-o> <Home><CR><Up>
-imap <C-b> <Esc>bi
-imap <C-e> <Esc>ea
-imap <C-c> <Del>
-imap <C-d> <Esc><C-d>i
-imap <C-u> <Esc><C-u>i
-imap <C-f>b <Esc>I
-imap <C-f>e <Esc>A
-imap <C-f>s <Esc>se
-imap <C-f>d <Esc>dd<BS>A
-imap <C-f>h <Esc>HI
-imap <C-f>l <Esc>LI
-imap <C-f>m <Esc>MI
-imap <C-f>p <Esc>pi
-imap <C-f>y <Esc>yyi
-imap <C-f>w <Esc>diwi
+inoremap <C-q> <Esc>
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+inoremap <C-s> <Esc>:w<cr>
+inoremap <C-x> <End><CR>
+inoremap <C-o> <Home><CR><Up>
+inoremap <C-b> <Esc>bi
+inoremap <C-e> <Esc>ea
+inoremap <C-c> <Del>
+inoremap <C-d> <Esc><C-d>i
+inoremap <C-u> <Esc><C-u>i
 "vmap
 vnoremap <C-k> "zx<Up>"zP`[V`]
 vnoremap <C-j> "zx"zp`[V`]
@@ -114,7 +103,6 @@ let g:loaded_netrw  = 1
 let g:loaded_netrwPlugin = 1
 let g:loaded_netrwSettings = 1
 let g:loaded_netrwFileHandlers = 1
-
 
 " vimquickfix
 function! ToggleQuickfix()
@@ -141,44 +129,65 @@ endif
 " vim-plug
 call plug#begin('~/.local/share/nvim/plugged')
 " plugin
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " unity
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'dense-analysis/ale'
-  Plug 'airblade/vim-rooter'
-  Plug 'junegunn/vim-easy-align'
-  Plug 'itchyny/calendar.vim'
-  Plug 'cespare/vim-toml'
-  Plug 'norcalli/nvim-colorizer.lua'
-  Plug 'Yggdroot/indentLine'
-  Plug 'morhetz/gruvbox'
+
+  " grep
+  Plug 'mhinz/vim-grepper'
+
+  " editting
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-repeat'
   Plug 'alvan/vim-closetag'
-  Plug 'ntpeters/vim-better-whitespace'
-  Plug 'unblevable/quick-scope'
-  Plug 'mhinz/vim-grepper'
+
+  " quickfix
   Plug 'romainl/vim-qf'
   Plug 'stefandtw/quickfix-reflector.vim'
-  Plug 'SirVer/ultisnips'
+
+  " git
   Plug 'tpope/vim-fugitive'
-  Plug 'airblade/vim-gitgutter'
   Plug 'tpope/vim-rhubarb'
+  Plug 'airblade/vim-gitgutter'
   Plug 'iberianpig/tig-explorer.vim'
-  Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+
+  " utils
+  Plug 'itchyny/calendar.vim'
+  Plug 'reireias/vim-cheatsheet'
+  Plug 'airblade/vim-rooter'
+  Plug 'SirVer/ultisnips'
+
+  " visualizer
+  Plug 'morhetz/gruvbox'
+  Plug 'norcalli/nvim-colorizer.lua'
+  Plug 'vim-airline/vim-airline'
+  Plug 'unblevable/quick-scope'
+  Plug 'Yggdroot/indentLine'
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'ntpeters/vim-better-whitespace'
+
+  " documentation
+  Plug 'tpope/vim-markdown'
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-  Plug 'iamcco/mathjax-support-for-mkdp'
-  Plug 'tyru/open-browser.vim'
   Plug 'aklt/plantuml-syntax'
   Plug 'weirongxu/plantuml-previewer.vim'
-  Plug 'tpope/vim-markdown'
+  Plug 'iamcco/mathjax-support-for-mkdp'
+  Plug 'tyru/open-browser.vim'
+
+  " javascript
   Plug 'yuezk/vim-js'
   Plug 'maxmellon/vim-jsx-pretty'
   Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'othree/yajs.vim', { 'for': ['javascript', 'javascript.jsx'] }
   Plug 'HerringtonDarkholme/yats.vim'
   Plug 'leafgarland/typescript-vim'
+
+  " go
+   Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+
 call plug#end()
 
 " --- iamcco/markdown-preview.nvim ---
@@ -201,10 +210,15 @@ let g:go_highlight_methods = 1
 let g:gitgutter_highlight_lines = 0
 set updatetime=250
 
+" --- vim-airline/vim-airline ---
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline_powerline_fonts = 1
+
 " --- itchyny/calendar.vim ---
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
-let g:calendar_view = "day_4"
+let g:calendar_view = "day"
 let g:calendar_views = ['year', 'month', 'week', 'day_4','day' ]
 source ~/.cache/calendar.vim/credentials.vim
 
@@ -236,7 +250,6 @@ nnoremap <silent><Leader>i :<C-u>IndentLinesToggle<CR>
 
 " --- junegunn/fzf.vim ---
 nnoremap <silent> <C-p> :GFiles<CR>
-nnoremap <silent> <S-p> :GFiles?<CR>
 nnoremap <silent> sp :Commands<CR>
 nnoremap <silent> sf :Files<CR>
 nnoremap <silent> sj :Buffers<CR>
@@ -271,8 +284,10 @@ let g:fzf_colors =
       \ 'header':  ['fg', 'Comment'] }
 
 " ---neoclide/coc ---
-nnoremap <silent> c; :<C-u>CocList<cr>
 nnoremap <silent> c: :CocCommand<CR>
+nnoremap <silent> <C-n> :CocCommand explorer<CR>
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> c; :<C-u>CocList<cr>
 nmap <silent> ca :<C-u>call CocAction('doHover')<cr>
 nmap <silent> cd <Plug>(coc-definition)
 nmap <silent> cq  <Plug>(coc-fix-current)
@@ -280,13 +295,17 @@ nmap <silent> ct <Plug>(coc-type-definition)
 nmap <silent> ch <Plug>(coc-references)
 nmap <silent> cr <Plug>(coc-rename)
 nmap <silent> cf <Plug>(coc-format)
-nnoremap <silent> cg :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
-nnoremap <silent> cy  :<C-u>CocList -A --normal yank<cr>
-nnoremap <silent> <C-n> :CocCommand explorer<CR>
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
-highlight CocErrorSign ctermfg=15 ctermbg=196
-highlight CocWarningSign ctermfg=0 ctermbg=172
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
 let g:coc_global_extensions = [
       \  'coc-lists'
@@ -296,10 +315,11 @@ let g:coc_global_extensions = [
       \, 'coc-word'
       \, 'coc-go'
       \, 'coc-tsserver'
-      \, 'coc-snippets'
+     \, 'coc-snippets'
       \, 'coc-toml'
       \, 'coc-eslint'
       \, 'coc-prettier'
       \, 'coc-explorer'
       \ ]
-
+" norcalli/nvim-colorizer.lua
+lua require'colorizer'.setup()
