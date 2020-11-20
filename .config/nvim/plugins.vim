@@ -1,4 +1,4 @@
-" --- vim-plugin install ---
+ " --- vim-plugin install ---
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
   silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim  --create-dirs
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -33,15 +33,12 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'iberianpig/tig-explorer.vim'
 
   " utils
-  Plug 'itchyny/calendar.vim'
   Plug 'reireias/vim-cheatsheet'
   Plug 'airblade/vim-rooter'
   Plug 'SirVer/ultisnips'
 
   " visualizer
-  " Plug 'morhetz/gruvbox'
   Plug 'norcalli/nvim-colorizer.lua'
-  " Plug 'vim-airline/vim-airline'
   Plug 'unblevable/quick-scope'
   Plug 'Yggdroot/indentLine'
   Plug 'ryanoasis/vim-devicons'
@@ -87,18 +84,6 @@ let g:go_highlight_methods = 1
 " --- airblade/vim-gitgutter ---
 let g:gitgutter_highlight_lines = 0
 set updatetime=250
-
-" --- vim-airline/vim-airline ---
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline_powerline_fonts = 1
-
-" --- itchyny/calendar.vim ---
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-let g:calendar_view = "day"
-let g:calendar_views = ['year', 'month', 'week', 'day_4','day' ]
-source ~/.cache/calendar.vim/credentials.vim
 
 " --- maxmellon/vim-jsx-pretty ---
 let g:vim_jsx_pretty_colorful_config = 1
