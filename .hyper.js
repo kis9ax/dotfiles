@@ -9,15 +9,16 @@ module.exports = {
     fontSize: 12,
     fontFamily: ' "Victor Mono", Hack Nerd Font',
     fontWeight: 'normal',
+    borderColor: '#706859',
     fontWeightBold: 'bold',
     lineHeight: 1,
     letterSpacing: 0,
     cursorColor: '<span class="comment">#7294c2</span>',
     cursorShape: 'BLOCK',
     cursorBlink: true,
-    foregroundColor: '#fff',
+    foregroundColor: '#706859',
     backgroundColor: '#000',
-    selectionColor: '#bdae93',
+    selectionColor: '##706859',
     css: '',
     termCSS: '',
     padding: '7px',
@@ -37,7 +38,7 @@ module.exports = {
     },
     gruvboxTheme: {
       style: 'dark', // or 'light'
-      contrast: 'soft' // or 'soft', 'hard'
+      contrast: 'hard' // or 'soft', 'hard'
     },
     env: {
       LANG: "ja_JP.UTF-8",

@@ -24,15 +24,18 @@ set clipboard+=unnamedplus
 set tags=./tags;$HOME
 set background=dark
 set noswapfile
+set nobackup
+set noundofile
 set modifiable
 set ignorecase
 set noshowmode
 set noruler
 set laststatus=0
+set lazyredraw
 set noshowcmd
 
 " --- color setting ---
-let g:gruvbox_contrast_dark='soft'
+let g:gruvbox_contrast_dark='hard'
 highlight CocErrorSign ctermfg=15 ctermbg=196
 highlight CocWarningSign ctermfg=0 ctermbg=172
 colorscheme gruvbox
@@ -41,8 +44,8 @@ colorscheme gruvbox
 " nnoremap
 nnoremap x "_x
 nnoremap s "_s
-nnoremap <S-e>   $
-nnoremap <S-b>   ^
+nnoremap <S-e> $
+nnoremap <S-b> ^
 nnoremap <CR> A<CR><ESC>
 nnoremap == gg=G''
 nnoremap <C-]> g<C-]>zz
@@ -54,6 +57,8 @@ nnoremap <C-c> :bd<cr>
 nnoremap <C-q> :q!<cr>
 nnoremap <C-s> :w<cr>
 nnoremap z0 zt
+nnoremap n nzz
+nnoremap N Nzz
 nnoremap ; :
 nnoremap : ;
 nnoremap <C-j><C-k> <C-W>\| <C-W>_
@@ -123,6 +128,7 @@ nnoremap <script> <silent> <Leader>q :call ToggleQuickfix()<CR>
 
 " --- commands ---
 command! RemoveTrairing :%s/\s\+$//e
+match errorMsg /\s\+$/
 
 " --- plugins ---
 source ~/.config/nvim/plugins.vim
@@ -192,19 +198,19 @@ endfunction
 " statusline
 let s:hidden_all = 0
 function! ToggleHiddenAll()
-    if s:hidden_all  == 0
-        let s:hidden_all = 1
-        set noshowmode
-        set noruler
-        set laststatus=0
-        set noshowcmd
-    else
-        let s:hidden_all = 0
-        set showmode
-        set ruler
-        set laststatus=2
-        set showcmd
-    endif
+  if s:hidden_all  == 0
+    let s:hidden_all = 1
+    set noshowmode
+    set noruler
+    set laststatus=0
+    set noshowcmd
+  else
+    let s:hidden_all = 0
+    set showmode
+    set ruler
+    set laststatus=2
+    set showcmd
+  endif
 endfunction
 
 nnoremap <Leader>s :call ToggleHiddenAll()<CR>

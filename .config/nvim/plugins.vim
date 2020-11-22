@@ -42,13 +42,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'unblevable/quick-scope'
   Plug 'Yggdroot/indentLine'
   Plug 'ryanoasis/vim-devicons'
-  Plug 'ntpeters/vim-better-whitespace'
 
   " documentation
   Plug 'tpope/vim-markdown'
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-  Plug 'aklt/plantuml-syntax'
-  Plug 'weirongxu/plantuml-previewer.vim'
   Plug 'iamcco/mathjax-support-for-mkdp'
   Plug 'tyru/open-browser.vim'
 
@@ -126,7 +123,7 @@ nnoremap <silent> sa :Ag<CR>
 nnoremap <silent> sg :Rg<CR>
 nnoremap <silent> ss :Snippets<CR>
 
-let $FZF_DEFAULT_OPTS="--color=dark --layout=reverse --margin=1,1 --color=fg:15,bg:-1,hl:1,fg+:#ffffff,bg+:0,hl+:1 --color=info:0,pointer:12,marker:4,spinner:11,header:-1"
+let $FZF_DEFAULT_OPTS="--color=dark --layout=reverse --color=border:#706859,fg:15,bg:-1,hl:1,fg+:#706859,bg+:0,hl+:1 --color=info:0,pointer:12,marker:4,spinner:11,header:-1"
 let $FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard || fd --type f --type l --hidden --follow"
 let g:fzf_layout = {  'window': { 'yoffset': 0 ,'width': 1, 'height': 0.45 } }
 let g:fzf_preview_window = ''

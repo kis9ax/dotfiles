@@ -24,41 +24,7 @@ source ~/.alias
 nvim. () { nvim .; zle -R -c }
 zle -N nvim.
 bindkey '^v' nvim.
-
+bindkey "^P" up-line-or-search
 bindkey -s "^k" 'ls^M'
 bindkey -s "^j" 'cd ..^M'
 bindkey -s "^h" 'cd ~ ^M'
-
-function search() {
-  local open_cmd
-  local url
-  url="https://www.$1.com"
-
-  [[ "$OSTYPE" = linux* ]] && open_cmd='xdg-open'
-  [[ "$OSTYPE" = darwin* ]] && open_cmd='open'
-
-  if [[ $# -le 1 ]]; then
-    $open_cmd "$url"
-    return
-  fi
-
-  typeset -A search_syntax=(
-    google     "/search?q="
-    github     "/search?q="
-    duckduckgo "/?q="
-    youtube    "/results?search_query="
-    qiita      "/search?q="
-    devto      "/search?q="
-  )
-
-  url="${url}${search_syntax[$1]}"
-  shift
-
-  while [[ $# -gt 0 ]]; do
-    url="${url}$1+"
-    shift
-  done
-
-  url="${url%?}"
-  nohup $open_cmd "$url" &> /dev/null
-}
