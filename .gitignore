@@ -4,3 +4,4 @@
 .tmux/*
 .config/coc
 .config/nvim/netrwhist
+.config/nvim/plugged/

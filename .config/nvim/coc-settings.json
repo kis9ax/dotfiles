@@ -1,0 +1,10 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": ["json", "css", "markdown"],
+  "explorer.file.showHiddenFiles": true,
+  "tsserver.trace.server": "verbose",
+  "explorer.icon.enableNerdfont": true,
+  "explorer.icon.enableVimDevicons": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.autoFix": true,
+  "tsserver.enableJavascript": false
+}
