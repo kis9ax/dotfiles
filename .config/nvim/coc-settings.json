@@ -1,5 +1,15 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["json", "css", "markdown"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "json",
+    "css",
+    "markdown",
+    "js",
+    "jsx",
+    "ts",
+    "tsx"
+  ],
+  "explorer.previewAction.onHover": false,
+  "explorer.buffer.showHiddenBuffers": true,
   "explorer.file.showHiddenFiles": true,
   "tsserver.trace.server": "verbose",
   "explorer.icon.enableNerdfont": true,

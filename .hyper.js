@@ -7,7 +7,7 @@ module.exports = {
     titleBarStyle: 'customButtonsOnHover',
     updateChannel: 'stable',
     fontSize: 12,
-    fontFamily: ' "Victor Mono", Hack Nerd Font',
+    fontFamily: '"Victor Mono","Noto Color Emoji", "Fira code","DejaVu Sans Mono",Hack Nerd Font',
     fontWeight: 'normal',
     borderColor: '#706859',
     fontWeightBold: 'bold',

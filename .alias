@@ -45,6 +45,8 @@ alias gd='git diff'
 alias gco='git checkout'
 alias gst='git status'
 alias gl='git log --graph --oneline --decorate --all'
+alias gll="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+alias glll="git log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 
 # sh
 alias ide='sh ~/bin/ide.sh'
@@ -65,8 +67,10 @@ alias te='trans {en=ja}'
 alias tj='trans {ja=en}'
 alias tree='tree -I "node_modules"'
 alias lofi="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
-alias lofia="mpv ~/lofi/a.mp3"
-alias lofib="mpv ~/lofi/b.mp3"
+alias lofia="mpv ~/data/lofi/a.mp3"
+alias lofib="mpv ~/data/lofi/b.mp3"
+alias lofic="mpv ~/data/lofi/c.mp3"
+alias lofid="mpv ~/data/lofi/d.mp3"
 alias pomo='termdown -f roman -s 25m; terminal-notifier -message "stop task and break" -sound default; termdown -f roman -s 5m; terminal-notifier -sound default -message "break stop"'
 
 # search
