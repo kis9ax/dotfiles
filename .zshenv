@@ -1,33 +1,35 @@
-export EDITOR="vi"
+# bin
+export PATH=~/bin:"$PATH"
 
 # go
 export GOPATH=$HOME/go
-
-if [ -d "$GOPATH" ]; then
-  export PATH="$GOPATH/bin:$PATH"
-elif [[ $commands[go] ]]; then
-  export PATH="$(go env GOPATH)/bin:$PATH"
-fi
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
 
 # nodebrew
-NODEBREW=$HOME/.nodebrew
-if [ -d $NODEBREW ]; then
-    export PATH=$NODEBREW/current/bin:$PATH
-fi
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # zinit
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && print -P "success" || print -P "fail"
+fi
+
+schedprompt() {
+  zle && zle reset-prompt
+  sched +1 schedprompt
+}
+
+zmodload -i zsh/sched
+schedprompt
+
 source "$HOME/.zinit/bin/zinit.zsh"
 
-autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 zinit light zsh-users/zsh-autosuggestions
-zinit light zdharma/history-search-multi-word
 zinit ice wait'!0'; zinit load zsh-users/zsh-syntax-highlighting
 zinit ice wait'!0'; zinit load zsh-users/zsh-completions
-zinit ice depth=2; zinit light romkatv/powerlevel10k
-
-autoload bashcompinit && bashcompinit
+zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # powerlevel10k
-
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.config/.p10k.zsh ]] || source ~/.config/.p10k.zsh

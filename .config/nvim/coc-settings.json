@@ -16,5 +16,6 @@
   "explorer.icon.enableVimDevicons": true,
   "eslint.autoFixOnSave": true,
   "eslint.autoFix": true,
-  "tsserver.enableJavascript": false
+  "tsserver.enableJavascript": false,
+  "coc.preferences.extensionUpdateCheck": "daily"
 }

@@ -4,23 +4,19 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf.vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'dense-analysis/ale'
-  Plug 'mhinz/vim-grepper'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-commentary'
-  Plug 'tpope/vim-repeat'
   Plug 'alvan/vim-closetag'
   Plug 'simeji/winresizer'
   Plug 'romainl/vim-qf'
   Plug 'stefandtw/quickfix-reflector.vim'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
-  Plug 'airblade/vim-gitgutter'
+  Plug 'tpope/vim-markdown'
   Plug 'airblade/vim-rooter'
   Plug 'SirVer/ultisnips'
-  Plug 'norcalli/nvim-colorizer.lua'
   Plug 'unblevable/quick-scope'
   Plug 'ryanoasis/vim-devicons'
-  Plug 'tpope/vim-markdown'
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
   Plug 'iamcco/mathjax-support-for-mkdp'
   Plug 'tyru/open-browser.vim'
@@ -31,7 +27,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'HerringtonDarkholme/yats.vim'
   Plug 'leafgarland/typescript-vim'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-  " Plug 'dstein64/vim-startuptime'
+  Plug 'dstein64/vim-startuptime'
+  Plug 'kshenoy/vim-signature'
+  Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
+  " Plug 'p00f/nvim-ts-rainbow'
 call plug#end()
 
 " --- iamcco/markdown-preview.nvim ---
@@ -39,8 +38,8 @@ let g:mkdp_auto_close=0
 let g:mkdp_refresh_slow=1
 let g:mkdp_echo_preview_url = 1
 
-" --- vim-markdown ---
-let g:markdown_syntax_conceal = 0
+" " --- vim-markdown ---
+" let g:markdown_syntax_conceal = 0
 
 " --- analysis/ale ---
 let g:ale_lint_on_text_changed = 0
@@ -52,10 +51,6 @@ let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
-
-" --- airblade/vim-gitgutter ---
-let g:gitgutter_highlight_lines = 0
-set updatetime=250
 
 " --- maxmellon/vim-jsx-pretty ---
 let g:vim_jsx_pretty_colorful_config = 1
@@ -69,9 +64,6 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " stefandtw/quickfix-reflector.vim
 let g:qf_modifiable = 1
 let g:qf_write_changes = 1
-
-" mhinz/vim-grepper
-nnoremap <Leader>g :Grepper<CR>
 
 " SirVer/ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -109,7 +101,7 @@ let g:fzf_colors =
 
 " ---neoclide/coc ---
 nnoremap <silent> c: :CocCommand<CR>
-nnoremap <silent> <C-n> :CocCommand explorer --sources=buffer+,file+<CR>
+nnoremap <silent> <C-n> :CocCommand explorer --sources=buffer+,file+ --width=55<CR>
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 nnoremap <silent> c; :<C-u>CocList<cr>
 nmap <silent> cd <Plug>(coc-definition)
@@ -140,7 +132,15 @@ let g:coc_global_extensions = [
       \, 'coc-go'
       \, 'coc-tsserver'
       \, 'coc-json'
-      \ ]
+      \, 'coc-highlight'
+      \, 'coc-git'
+      \, 'coc-neosnippet'
+      \, 'coc-yaml'
+      \, 'coc-dictionary'
+      \, 'coc-markdownlint'
+      \, 'coc-fzf-preview'
+      \, 'coc-vimtex'
+      \, 'coc-vimlsp'
+      \, ]
 
-" --- norcalli/nvim-colorizer.lua ---
-lua require'colorizer'.setup()
+nnoremap <Leader>g :Grepper<CR>

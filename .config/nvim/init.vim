@@ -16,18 +16,19 @@ set ttimeoutlen=0
 set termguicolors
 set expandtab
 set splitright
-set laststatus=0
 set clipboard=unnamed
 set clipboard+=unnamedplus
 set tags=./tags;$HOME
 set background=dark
 set noswapfile
+set laststatus=0
 set nobackup
 set noundofile
 set modifiable
 set lazyredraw
 set noshowcmd
 set ignorecase
+set smartcase
 set noshowmode
 set noruler
 set noerrorbells
@@ -51,7 +52,7 @@ nnoremap <C-]> g<C-]>zz
 nnoremap <C-]> <ESC>g<C-]>
 nnoremap <Leader>- :sp<CR>
 nnoremap <Leader>\ :vsp<CR>
-nnoremap <Leader>r :so %<CR>
+nnoremap <Leader>rl :so %<CR>
 nnoremap <C-c> :bd<cr>
 nnoremap <C-q> :q!<cr>
 nnoremap <C-s> :w<cr>
@@ -60,9 +61,14 @@ nnoremap n nzz
 nnoremap N Nzz
 nnoremap ; :
 nnoremap : ;
-nnoremap <C-j><C-k> <C-W>\| <C-W>_
-nnoremap <C-j><C-j> <C-w>=
+nnoremap <C-j><C-j> <C-W>\| <C-W>_
+nnoremap <C-j><C-k> <C-w>=
+nnoremap <Leader>r :%s///g<Left><Left>
+nnoremap <Leader>rc :%s///gc<Left><Left><Left>
+nnoremap cp :let @+ = expand("%:p")<cr>
 nnoremap <silent> <Leader>h "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
+nnoremap <Leader>j :tabnew<CR>:exe 'e ~/notes/gtd/'.strftime("%Y").'/'.strftime("%m").'.md'<CR>
+nnoremap <Leader>d :tabnew<CR>:e ~/.dotfiles/.config/nvim/init.vim<CR>
 "" vimtab
 nnoremap s1 1gt
 nnoremap s2 2gt
@@ -79,14 +85,17 @@ inoremap <C-j> <Down>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 inoremap <C-s> <Esc>:w<cr>
-inoremap <C-i> <End><CR>
+inoremap <C-x> <End><CR>
 inoremap <C-o> <Home><CR><Up>
 inoremap <C-b> <Esc>bi
 inoremap <C-e> <Esc>ea
 inoremap <C-d> <BS>
+inoremap <C-c> <DEL>
 " vnoremap
 vnoremap <C-k> "zx<Up>"zP`[V`]
 vnoremap <C-j> "zx"zp`[V`]
+vnoremap <silent> // y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
+vnoremap /r "xy:%s/<C-R>=escape(@x, '\\/.*$^~[]')<CR>//gc<Left><Left><Left>
 "cnoremap
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
@@ -98,7 +107,7 @@ cnoremap <C-c> <Del>
 "  --- netrw ---
 let g:loaded_netrwPlugin = 1
 let g:loaded_netrwSettings = 1
-let g:loaded_netrwFileHandlers = 1
+let g:loaded_netrwFileHandlers  = 1
 
 " --- vimquickfix ---
 function! ToggleQuickfix()
@@ -114,7 +123,6 @@ nnoremap <script> <silent> <Leader>q :call ToggleQuickfix()<CR>
 " --- commands ---
 command! RemoveTrairing :%s/\s\+$//e
 command! M :Marks
-command! Gr :Grepper
 match errorMsg /\s\+$/
 
 " --- tabline ---
@@ -142,3 +150,6 @@ function! s:my_tabline()
 endfunction
 
 let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
+
+" --- statusline ---
+let &statusline='%#Gray#'

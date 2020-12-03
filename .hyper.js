@@ -13,12 +13,10 @@ module.exports = {
     fontWeightBold: 'bold',
     lineHeight: 1,
     letterSpacing: 0,
-    cursorColor: '<span class="comment">#7294c2</span>',
+    cursorColor: '#706859',
     cursorShape: 'BLOCK',
     cursorBlink: true,
-    foregroundColor: '#706859',
     backgroundColor: '#000',
-    selectionColor: '##706859',
     css: '',
     termCSS: '',
     padding: '7px',
@@ -37,8 +35,8 @@ module.exports = {
       borderWidth: '2px',
     },
     gruvboxTheme: {
-      style: 'dark', // or 'light'
-      contrast: 'hard' // or 'soft', 'hard'
+      style: 'dark',
+      contrast: 'hard'
     },
     env: {
       LANG: "ja_JP.UTF-8",
