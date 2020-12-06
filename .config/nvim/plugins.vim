@@ -30,6 +30,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'dstein64/vim-startuptime'
   Plug 'kshenoy/vim-signature'
   Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
+  Plug 'jparise/vim-graphql'
   " Plug 'p00f/nvim-ts-rainbow'
 call plug#end()
 
