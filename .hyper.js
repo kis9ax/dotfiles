@@ -9,11 +9,11 @@ module.exports = {
     fontSize: 12,
     fontFamily: '"Victor Mono","Noto Color Emoji", "Fira code","DejaVu Sans Mono",Hack Nerd Font',
     fontWeight: 'normal',
-    borderColor: '#706859',
+    borderColor: '#bdae93',
     fontWeightBold: 'bold',
     lineHeight: 1,
     letterSpacing: 0,
-    cursorColor: '#706859',
+    cursorColor: '#bdae93',
     cursorShape: 'BLOCK',
     cursorBlink: true,
     backgroundColor: '#000',
@@ -24,7 +24,7 @@ module.exports = {
     showWindowControls: '',
     shell: '',
     shellArgs: ['--login'],
-    bell: 'SOUND',
+    bell: 'NONE',
     copyOnSelect: false,
     defaultSSHApp: true,
     quickEdit: false,
@@ -34,10 +34,6 @@ module.exports = {
       borderColors: ['black', 'black'],
       borderWidth: '2px',
     },
-    gruvboxTheme: {
-      style: 'dark',
-      contrast: 'hard'
-    },
     env: {
       LANG: "ja_JP.UTF-8",
       LC_ALL: "ja_JP.UTF-8"
@@ -46,11 +42,8 @@ module.exports = {
   plugins: [
     "hyper",
     "hyperminimal",
-    "hypercwd",
     "hyperborder",
-    "hyperemoji",
-    "hyper-gruvbox",
   ],
-  localPlugins: [],
+  localPlugins: ["gruvbox"],
   keymaps: {},
 }

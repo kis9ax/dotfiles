@@ -3,7 +3,6 @@ export PATH=~/bin:"$PATH"
 
 # direnv
 export EDITOR=nvim
-eval "$(direnv hook zsh)"
 
 # go
 export GOPATH=$HOME/go

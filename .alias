@@ -106,3 +106,7 @@ alias gre=gre
 function gre () {
     grep -E $1 -rl $2
 }
+
+# ps aux | sort -n -k 6 | tail -n 10 # memory hight work
+# lsof -Pan -i tcp -i udp # ports
+# lsof -i :8080 | awk '{l=$2} END {print l}' | xargs kill # kill port

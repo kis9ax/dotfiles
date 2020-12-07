@@ -83,7 +83,7 @@ nnoremap <silent> sm :Marks<CR>
 nnoremap <silent> sg :Rg<CR>
 nnoremap <silent> ss :Snippets<CR>
 
-let $FZF_DEFAULT_OPTS="--color=dark --layout=reverse --color=border:#706859,fg:15,bg:-1,hl:1,fg+:#706859,bg+:0,hl+:1 --color=info:0,pointer:12,marker:4,spinner:11,header:-1"
+let $FZF_DEFAULT_OPTS="--color=dark --layout=reverse --color=border:#bdae93,fg:15,bg:-1,hl:1,fg+:#bdae93,bg+:0,hl+:1 --color=info:0,pointer:12,marker:4,spinner:11,header:-1"
 let g:fzf_layout = {  'window': { 'yoffset': 0 ,'width': 1, 'height': 0.45 } }
 let g:fzf_buffers_jump = 1
 let g:fzf_colors =
