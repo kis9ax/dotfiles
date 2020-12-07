@@ -4,7 +4,7 @@ let maplocalleader="\,"
 set number relativenumber
 set encoding=UTF-8
 set hidden
-set bg=dark
+set background=dark
 set cursorline
 set autoindent
 set autochdir
@@ -19,7 +19,6 @@ set splitright
 set clipboard=unnamed
 set clipboard+=unnamedplus
 set tags=./tags;$HOME
-set background=dark
 set noswapfile
 set laststatus=0
 set nobackup
