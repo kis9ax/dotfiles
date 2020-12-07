@@ -1,12 +1,3 @@
-
-let g:gruvbox_improved_strings=1
-let g:gruvbox_contrast_dark='medium'
-let s:bold = 'bold,'
-let s:italic = 'italic,'
-let s:underline = 'underline,'
-let s:undercurl = 'undercurl,'
-let s:inverse = 'inverse,'
-
 let s:gb = {}
 let s:gb.dark0_hard  = ['#1d1d1d', 234]
 let s:gb.dark0       = ['#282828', 235]
@@ -87,25 +78,30 @@ let s:gb.purple = s:purple
 let s:gb.aqua   = s:aqua
 let s:gb.orange = s:orange
 
-if has('nvim')
-  let g:terminal_color_0 = s:bg0[0]
-  let g:terminal_color_8 = s:gray[0]
-  let g:terminal_color_1 = s:gb.neutral_red[0]
-  let g:terminal_color_9 = s:red[0]
-  let g:terminal_color_2 = s:gb.neutral_green[0]
-  let g:terminal_color_10 = s:green[0]
-  let g:terminal_color_3 = s:gb.neutral_yellow[0]
-  let g:terminal_color_11 = s:yellow[0]
-  let g:terminal_color_4 = s:gb.neutral_blue[0]
-  let g:terminal_color_12 = s:blue[0]
-  let g:terminal_color_5 = s:gb.neutral_purple[0]
-  let g:terminal_color_13 = s:purple[0]
-  let g:terminal_color_6 = s:gb.neutral_aqua[0]
-  let g:terminal_color_14 = s:aqua[0]
-  let g:terminal_color_7 = s:fg4[0]
-  let g:terminal_color_15 = s:fg1[0]
-endif
+" Neovim: {{{
+let g:terminal_color_0 = s:bg0[0]
+let g:terminal_color_8 = s:gray[0]
+let g:terminal_color_1 = s:gb.neutral_red[0]
+let g:terminal_color_9 = s:red[0]
+let g:terminal_color_2 = s:gb.neutral_green[0]
+let g:terminal_color_10 = s:green[0]
+let g:terminal_color_3 = s:gb.neutral_yellow[0]
+let g:terminal_color_11 = s:yellow[0]
+let g:terminal_color_4 = s:gb.neutral_blue[0]
+let g:terminal_color_12 = s:blue[0]
+let g:terminal_color_5 = s:gb.neutral_purple[0]
+let g:terminal_color_13 = s:purple[0]
+let g:terminal_color_6 = s:gb.neutral_aqua[0]
+let g:terminal_color_14 = s:aqua[0]
+let g:terminal_color_7 = s:fg4[0]
+let g:terminal_color_15 = s:fg1[0]
+" }}}
 
+let s:bold = 'bold,'
+let s:italic = 'italic,'
+let s:underline = 'underline,'
+let s:undercurl = 'undercurl,'
+let s:inverse = 'inverse,'
 let s:hls_cursor = s:orange
 let s:number_column = s:none
 let s:sign_column = s:bg1
@@ -145,6 +141,75 @@ function! s:HL(group, fg, ...) " Arguments: group, guifg, guibg, gui, guisp
   execute join(histring, ' ')
 endfunction
 
+" Version_700: {{{
+call s:HL('CursorLine',   s:none, s:bg1)
+hi! link CursorColumn CursorLine
+call s:HL('TabLineFill', s:bg4, s:bg1, s:invert_tabline)
+call s:HL('TabLineSel', s:green, s:bg1, s:invert_tabline)
+hi! link TabLine TabLineFill
+call s:HL('MatchParen', s:none, s:bg3, s:bold)
+call s:HL('Pmenu', s:fg1, s:bg2)
+call s:HL('PmenuSel', s:bg2, s:blue, s:bold)
+call s:HL('PmenuSbar', s:none, s:bg2)
+call s:HL('PmenuThumb', s:none, s:bg4)
+" }}}
+
+" Version_703: {{{
+call s:HL('ColorColumn',  s:none, s:color_column)
+call s:HL('Conceal', s:blue, s:none)
+call s:HL('CursorLineNr', s:yellow, s:bg1)
+" }}}
+
+hi! link NonText GruvboxBg2
+hi! link SpecialKey GruvboxBg2
+hi! link VisualNOS Visual
+hi! link Directory GruvboxGreenBold
+hi! link Title GruvboxGreenBold
+hi! link MoreMsg GruvboxYellowBold
+hi! link ModeMsg GruvboxYellowBold
+hi! link Question GruvboxOrangeBold
+hi! link WarningMsg GruvboxRedBold
+hi! link vCursor Cursor
+hi! link iCursor Cursor
+hi! link lCursor Cursor
+hi! link Statement GruvboxRed
+hi! link Conditional GruvboxRed
+hi! link Repeat GruvboxRed
+hi! link Label GruvboxRed
+hi! link Exception GruvboxRed
+hi! link Operator Normal
+hi! link Keyword GruvboxRed
+hi! link Identifier GruvboxBlue
+hi! link Function GruvboxGreenBold
+hi! link PreProc GruvboxAqua
+hi! link Include GruvboxAqua
+hi! link Define GruvboxAqua
+hi! link Macro GruvboxAqua
+hi! link PreCondit GruvboxAqua
+hi! link Constant GruvboxPurple
+hi! link Character GruvboxPurple
+hi! link Boolean GruvboxPurple
+hi! link Number GruvboxPurple
+hi! link Float GruvboxPurple
+hi! link Type GruvboxYellow
+hi! link StorageClass GruvboxOrange
+hi! link Structure GruvboxAqua
+hi! link Typedef GruvboxYellow
+hi! link CocErrorSign GruvboxRedSign
+hi! link CocWarningSign GruvboxOrangeSign
+hi! link CocInfoSign GruvboxYellowSign
+hi! link CocHintSign GruvboxBlueSign
+hi! link CocErrorFloat GruvboxRed
+hi! link CocWarningFloat GruvboxOrange
+hi! link CocInfoFloat GruvboxYellow
+hi! link CocHintFloat GruvboxBlue
+hi! link CocDiagnosticsError GruvboxRed
+hi! link CocDiagnosticsWarning GruvboxOrange
+hi! link CocDiagnosticsInfo GruvboxYellow
+hi! link CocDiagnosticsHint GruvboxBlue
+hi! link CocSelectedText GruvboxRed
+hi! link CocCodeLens GruvboxGray
+
 call s:HL('GruvboxFg0', s:fg0)
 call s:HL('GruvboxFg1', s:fg1)
 call s:HL('GruvboxFg2', s:fg2)
@@ -178,28 +243,7 @@ call s:HL('GruvboxPurpleSign', s:purple, s:sign_column, s:invert_signs)
 call s:HL('GruvboxAquaSign', s:aqua, s:sign_column, s:invert_signs)
 call s:HL('GruvboxOrangeSign', s:orange, s:sign_column, s:invert_signs)
 call s:HL('Normal', s:fg1, s:bg0)
-
-set background=dark
-
-if version >= 700
-  call s:HL('CursorLine',   s:none, s:bg1)
-  call s:HL('TabLineFill', s:bg4, s:bg1, s:invert_tabline)
-  call s:HL('TabLineSel', s:green, s:bg1, s:invert_tabline)
-  call s:HL('MatchParen', s:none, s:bg3, s:bold)
-  hi! link CursorColumn CursorLine
-  hi! link TabLine TabLineFill
-endif
-
-if version >= 703
-  call s:HL('ColorColumn',  s:none, s:color_column)
-  call s:HL('Conceal', s:blue, s:none)
-  call s:HL('CursorLineNr', s:yellow, s:bg1)
-endif
-
-hi! link NonText GruvboxBg2
-hi! link SpecialKey GruvboxBg2
 call s:HL('Visual',    s:none,  s:bg3, s:invert_selection)
-hi! link VisualNOS Visual
 call s:HL('Search',    s:yellow, s:bg0, s:inverse)
 call s:HL('IncSearch', s:hls_cursor, s:bg0, s:inverse)
 call s:HL('Underlined', s:blue, s:none, s:underline)
@@ -207,92 +251,21 @@ call s:HL('StatusLine',   s:bg2, s:fg1, s:inverse)
 call s:HL('StatusLineNC', s:bg1, s:fg4, s:inverse)
 call s:HL('VertSplit', s:bg3, s:vert_split)
 call s:HL('WildMenu', s:blue, s:bg2, s:bold)
-hi! link Directory GruvboxGreenBold
-hi! link Title GruvboxGreenBold
 call s:HL('ErrorMsg',   s:bg0, s:red, s:bold)
-hi! link MoreMsg GruvboxYellowBold
-hi! link ModeMsg GruvboxYellowBold
-hi! link Question GruvboxOrangeBold
-hi! link WarningMsg GruvboxRedBold
-
 call s:HL('LineNr', s:bg4, s:number_column)
 call s:HL('SignColumn', s:none, s:sign_column)
 call s:HL('Folded', s:gray, s:bg1, s:italic)
 call s:HL('FoldColumn', s:gray, s:bg1)
-
 call s:HL('Cursor', s:none, s:none, s:inverse)
-hi! link vCursor Cursor
-hi! link iCursor Cursor
-hi! link lCursor Cursor
-
-if g:gruvbox_improved_strings == 0
-  hi! link Special GruvboxOrange
-else
-  call s:HL('Special', s:orange, s:bg1, s:italicize_strings)
-endif
-
+call s:HL('Special', s:orange, s:bg1, s:italicize_strings)
 call s:HL('Comment', s:gray, s:none, s:italicize_comments)
 call s:HL('Todo', s:vim_fg, s:vim_bg, s:bold . s:italic)
 call s:HL('Error', s:red, s:vim_bg, s:bold . s:inverse)
-
-hi! link Statement GruvboxRed
-hi! link Conditional GruvboxRed
-hi! link Repeat GruvboxRed
-hi! link Label GruvboxRed
-hi! link Exception GruvboxRed
-hi! link Operator Normal
-hi! link Keyword GruvboxRed
-hi! link Identifier GruvboxBlue
-hi! link Function GruvboxGreenBold
-hi! link PreProc GruvboxAqua
-hi! link Include GruvboxAqua
-hi! link Define GruvboxAqua
-hi! link Macro GruvboxAqua
-hi! link PreCondit GruvboxAqua
-hi! link Constant GruvboxPurple
-hi! link Character GruvboxPurple
-if g:gruvbox_improved_strings == 0
-  call s:HL('String',  s:green, s:none, s:italicize_strings)
-else
-  call s:HL('String',  s:fg1, s:bg1, s:italicize_strings)
-endif
-
-hi! link Boolean GruvboxPurple
-hi! link Number GruvboxPurple
-hi! link Float GruvboxPurple
-hi! link Type GruvboxYellow
-hi! link StorageClass GruvboxOrange
-hi! link Structure GruvboxAqua
-hi! link Typedef GruvboxYellow
-
-if version >= 700
-  call s:HL('Pmenu', s:fg1, s:bg2)
-  call s:HL('PmenuSel', s:bg2, s:blue, s:bold)
-  call s:HL('PmenuSbar', s:none, s:bg2)
-  call s:HL('PmenuThumb', s:none, s:bg4)
-endif
-
+call s:HL('String',  s:fg1, s:bg1, s:italicize_strings)
 call s:HL('DiffDelete', s:red, s:bg0, s:inverse)
 call s:HL('DiffAdd',    s:green, s:bg0, s:inverse)
-" call s:HL('DiffChange', s:bg0, s:blue)
-" call s:HL('DiffText',   s:bg0, s:yellow)
 call s:HL('DiffChange', s:aqua, s:bg0, s:inverse)
 call s:HL('DiffText',   s:yellow, s:bg0, s:inverse)
-
-hi! link CocErrorSign GruvboxRedSign
-hi! link CocWarningSign GruvboxOrangeSign
-hi! link CocInfoSign GruvboxYellowSign
-hi! link CocHintSign GruvboxBlueSign
-hi! link CocErrorFloat GruvboxRed
-hi! link CocWarningFloat GruvboxOrange
-hi! link CocInfoFloat GruvboxYellow
-hi! link CocHintFloat GruvboxBlue
-hi! link CocDiagnosticsError GruvboxRed
-hi! link CocDiagnosticsWarning GruvboxOrange
-hi! link CocDiagnosticsInfo GruvboxYellow
-hi! link CocDiagnosticsHint GruvboxBlue
-hi! link CocSelectedText GruvboxRed
-hi! link CocCodeLens GruvboxGray
 call s:HL('CocErrorHighlight', s:none, s:none, s:undercurl, s:red)
 call s:HL('CocWarningHighlight', s:none, s:none, s:undercurl, s:orange)
 call s:HL('CocInfoHighlight', s:none, s:none, s:undercurl, s:yellow)
