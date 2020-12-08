@@ -20,7 +20,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'unblevable/quick-scope'
   Plug 'ryanoasis/vim-devicons'
   Plug 'kshenoy/vim-signature'
-  Plug 'rhysd/vim-grammarous'
   Plug 'liuchengxu/vista.vim'
   Plug 'cespare/vim-toml', { 'for': 'toml' }
   Plug 'alvan/vim-closetag', { 'for': ['html', 'jsx', 'tsx', 'vue', 'markdown'] }
@@ -38,6 +37,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'jparise/vim-graphql', { 'for': 'graphql' }
   Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
 call plug#end()
+
 
 " --- iamcco/markdown-preview.nvim ---
 let g:mkdp_auto_close=0

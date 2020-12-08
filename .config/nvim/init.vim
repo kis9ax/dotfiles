@@ -1,7 +1,7 @@
 " --- setting ---
 let mapleader="\<Space>"
 let maplocalleader="\,"
-set number relativenumber
+set relativenumber
 set encoding=UTF-8
 set hidden
 set background=dark
@@ -24,6 +24,7 @@ set laststatus=0
 set nobackup
 set noundofile
 set modifiable
+set regexpengine=1
 set lazyredraw
 set noshowcmd
 set ignorecase
@@ -67,7 +68,7 @@ nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap cp :let @+ = expand("%:p")<cr>
 nnoremap <silent> <Leader>h "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
 nnoremap <Leader>j :tabnew<CR>:exe 'e ~/notes/gtd/'.strftime("%Y").'/'.strftime("%m").'.md'<CR>
-nnoremap <Leader>d :tabnew<CR>:e ~/.dotfiles/.config/nvim/init.vim<CR>
+nnoremap <Leader>d :tabnew<CR>:e ~/dotfiles/.config/nvim/init.vim<CR>
 "" vimtab
 nnoremap s1 1gt
 nnoremap s2 2gt

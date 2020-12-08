@@ -11,9 +11,9 @@ alias hyp='nvim ~/.hyper.js'
 alias n='cd ~/notes/'
 alias np='cd ~/pnotes'
 alias j='nvim ~/notes/gtd/$(date +%Y)/$(date +%m).md'
-alias vr='v ~/.dotfiles/.config/nvim/init.vim'
+alias vr='v ~/dotfiles/.config/nvim/init.vim'
 alias trc='nvim ~/.tmux.conf'
-alias dot='cd ~/.dotfiles;'
+alias dot='cd ~/dotfiles;'
 alias mk=mk
 function mk() { mkdir $1; cd $1; }
 

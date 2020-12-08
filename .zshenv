@@ -35,4 +35,4 @@ zinit ice wait'!0'; zinit load zsh-users/zsh-completions
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # powerlevel10k
-[[ ! -f ~/.config/.p10k.zsh ]] || source ~/.config/.p10k.zsh
+source ~/.p10k.zsh
