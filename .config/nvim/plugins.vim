@@ -8,6 +8,8 @@ endif
 call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
+  Plug 'tpope/vim-repeat'
+  Plug 'zsugabubus/vim-jumpmotion'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-commentary'
@@ -59,9 +61,15 @@ let g:vim_jsx_pretty_colorful_config = 1
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.vue,*,tsx"
 
 " unblevable/quick-scope
-highlight QuickScopePrimary guifg='red' gui=underline ctermfg=155 cterm=underline
-highlight QuickScopeSecondary guifg='cyan' gui=underline ctermfg=81 cterm=underline
+highlight QuickScopePrimary guifg='#fb4934' gui=underline ctermfg=167 cterm=underline
+highlight QuickScopeSecondary guifg='#8ec07c' gui=underline ctermfg=108 cterm=underline
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+" zsugabubus/vim- jumpmotion
+nnoremap <Leader>g :Grepper<CR>
+map <LocalLeader> <Plug>(JumpMotion)
+highlight JumpMotion cterm=bold ctermfg=196 ctermbg=226 gui=bold guifg=#cc241d guibg=#ebcdb2
+highlight JumpMotionTail cterm=NONE ctermfg=196 ctermbg=226 gui=NONE guifg=#cc241d guibg=#ebcdb2
 
 " stefandtw/quickfix-reflector.vim
 let g:qf_modifiable = 1
@@ -144,5 +152,3 @@ let g:coc_global_extensions = [
       \, 'coc-vimtex'
       \, 'coc-vimlsp'
       \, ]
-
-nnoremap <Leader>g :Grepper<CR>
