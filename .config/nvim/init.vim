@@ -65,7 +65,7 @@ nnoremap <C-j><C-j> <C-W>\| <C-W>_
 nnoremap <C-j><C-k> <C-w>=
 nnoremap <Leader>r :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
-nnoremap cp :let @+ = expand("%:p")<cr>
+nnoremap su :let @+ = expand("%:p")<cr>
 nnoremap <silent> <Leader>h "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
 nnoremap <Leader>j :tabnew<CR>:call TaskOpen()<CR>
 nnoremap <Leader>d :tabnew<CR>:e ~/dotfiles/.config/nvim/init.vim<CR>

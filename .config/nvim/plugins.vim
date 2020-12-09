@@ -21,8 +21,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'SirVer/ultisnips'
   Plug 'unblevable/quick-scope'
   Plug 'ryanoasis/vim-devicons'
-  Plug 'kshenoy/vim-signature'
-  Plug 'liuchengxu/vista.vim'
   Plug 'cespare/vim-toml', { 'for': 'toml' }
   Plug 'alvan/vim-closetag', { 'for': ['html', 'jsx', 'tsx', 'vue', 'markdown'] }
   Plug 'tpope/vim-markdown', { 'for': 'markdown' }
@@ -83,13 +81,10 @@ nnoremap <silent> <C-p> :GFiles<CR>
 nnoremap <silent> sp :Commands<CR>
 nnoremap <silent> sf :Files<CR>
 nnoremap <silent> sj :Buffers<CR>
-nnoremap <silent> sh :History<CR>
-nnoremap <silent> s; :History:<CR>
 nnoremap <silent> sl :Lines<CR>
 nnoremap <silent> sc :Commits<CR>
 nnoremap <silent> sm :Marks<CR>
 nnoremap <silent> sg :Rg<CR>
-nnoremap <silent> ss :Snippets<CR>
 
 let $FZF_DEFAULT_OPTS="--color=dark --layout=reverse --color=border:#bdae93,fg:15,bg:-1,hl:1,fg+:#bdae93,bg+:0,hl+:1 --color=info:0,pointer:12,marker:4,spinner:11,header:-1"
 let g:fzf_layout = {  'window': { 'yoffset': 0 ,'width': 1, 'height': 0.45 } }
@@ -110,16 +105,15 @@ let g:fzf_colors =
       \ 'header':  ['fg', 'Comment'] }
 
 " ---neoclide/coc ---
-nnoremap <silent> c: :CocCommand<CR>
+nnoremap <silent> s: :CocCommand<CR>
 nnoremap <silent> <C-n> :CocCommand explorer --sources=buffer+,file+ --width=50<CR>
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-nnoremap <silent> c; :<C-u>CocList<cr>
-nmap <silent> cd <Plug>(coc-definition)
-nmap <silent> cq <Plug>(coc-fix-current)
-nmap <silent> ct <Plug>(coc-type-definition)
-nmap <silent> ch <Plug>(coc-references)
-nmap <silent> cr <Plug>(coc-rename)
-nmap <silent> cf <Plug>(coc-format)
+nnoremap <silent> s; :<C-u>CocList<cr>
+nmap <silent> sd <Plug>(coc-definition)
+nmap <silent> sq <Plug>(coc-fix-current)
+nmap <silent> st <Plug>(coc-type-definition)
+nmap <silent> sh <Plug>(coc-references)
+nmap <silent> sr <Plug>(coc-rename)
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 
 function! s:show_documentation()
@@ -148,7 +142,6 @@ let g:coc_global_extensions = [
       \, 'coc-yaml'
       \, 'coc-dictionary'
       \, 'coc-markdownlint'
-      \, 'coc-fzf-preview'
       \, 'coc-vimtex'
       \, 'coc-vimlsp'
       \, ]
