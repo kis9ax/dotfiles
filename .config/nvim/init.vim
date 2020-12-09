@@ -67,8 +67,17 @@ nnoremap <Leader>r :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap cp :let @+ = expand("%:p")<cr>
 nnoremap <silent> <Leader>h "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
-nnoremap <Leader>j :tabnew<CR>:exe 'e ~/notes/gtd/'.strftime("%Y").'/'.strftime("%m").'.md'<CR>
+nnoremap <Leader>j :tabnew<CR>:call TaskOpen()<CR>
 nnoremap <Leader>d :tabnew<CR>:e ~/dotfiles/.config/nvim/init.vim<CR>
+
+function! TaskOpen()
+  if strftime("%d") < 15
+    :exe 'e ~/notes/tasks/'.strftime("%Y").'/'.strftime("%m").'a.md'
+  else
+    :exe 'e ~/notes/tasks/'.strftime("%Y").'/'.strftime("%m").'b.md'
+  endif
+endfunction
+
 "" vimtab
 nnoremap s1 1gt
 nnoremap s2 2gt
