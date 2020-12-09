@@ -1,7 +1,7 @@
 # directory
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ....= 'cd ../../..'
+alias ....='cd ../../..'
 alias a='nvim ~/.alias'
 alias d='cd ~/dev/'
 alias h='cd ~/'
@@ -65,16 +65,6 @@ alias glll="git log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%
 
 # sh
 alias ide='sh ~/bin/ide.sh'
-# pipe
-alias -g A='| awk'
-alias -g C='| pbcopy'
-alias -g C='| wc -l'
-alias -g G='| grep --color=auto'
-alias -g H='| head'
-alias -g L='| less -R'
-alias -g X='| xargs'
-alias -g C='| pbcopy'
-alias -g F='| fzf'
 
 # other
 alias o='open'
@@ -89,14 +79,6 @@ alias lofic="mpv ~/data/lofi/c.mp3"
 alias lofid="mpv ~/data/lofi/d.mp3"
 alias pomo='termdown -f roman -s 25m; terminal-notifier -message "stop task and break" -sound default; termdown -f roman -s 5m; terminal-notifier -sound default -message "break stop"'
 
-# search
-alias /go='search google'
-alias /dd='search duckduckgo'
-alias /gh='search github'
-alias /yt='search youtube'
-alias /qi='search qiita'
-alias /de='search devto'
-
 alias pss=pss
 function pss () {
     ps aux | grep -E "PID|$1" | grep -v grep
@@ -106,7 +88,3 @@ alias gre=gre
 function gre () {
     grep -E $1 -rl $2
 }
-
-# ps aux | sort -n -k 6 | tail -n 10 # memory hight work
-# lsof -Pan -i tcp -i udp # ports
-# lsof -i :8080 | awk '{l=$2} END {print l}' | xargs kill # kill port

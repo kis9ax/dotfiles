@@ -22,6 +22,16 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
 export FZF_DEFAULT_OPTS='--height 30% --reverse --color=info:#79740e,prompt:#79740e,spinner:#79740e,pointer:#cc241d,marker:#458588'
 KEYTIMEOUT=1
 
+alias -g A='| awk'
+alias -g C='| pbcopy'
+alias -g C='| wc -l'
+alias -g G='| grep --color=auto'
+alias -g H='| head'
+alias -g L='| less -R'
+alias -g X='| xargs'
+alias -g C='| pbcopy'
+alias -g F='| fzf'
+
 source ~/.alias
 
 nvim. () { nvim .; zle -R -c }
@@ -31,14 +41,19 @@ bindkey "^P" up-line-or-search
 bindkey -s "^k" 'ls -la^M'
 bindkey -s "^j" 'cd ..^M'
 
+function tb() {
+  declare -i date_day="$(expr $(date +'%d'))"
+  declare -i split_day=15
+}
+
 function fzf-history() {
   BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
   CURSOR=$#BUFFER
 }
+
 zle -N fzf-history
 bindkey '^r' fzf-history
 
-# fbr - checkout git branch
 fbr() {
   local branches branch
   branches=$(git branch -vv) &&
@@ -46,7 +61,6 @@ fbr() {
   git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 
-# fshow - git commit browser
 fshow() {
   git log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |

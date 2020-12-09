@@ -1,7 +1,7 @@
 " --- setting ---
 let mapleader="\<Space>"
 let maplocalleader="\,"
-set relativenumber
+set number relativenumber
 set encoding=UTF-8
 set hidden
 set background=dark
