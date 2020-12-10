@@ -18,8 +18,8 @@ call plug#begin('~/.config/nvim/plugged')
     highlight JumpMotion cterm=bold ctermfg=196 ctermbg=226 gui=bold guifg=#cc241d guibg=#ebcdb2
     highlight JumpMotionTail cterm=NONE ctermfg=196 ctermbg=226 gui=NONE guifg=#cc241d guibg=#ebcdb2
 
-
   Plug 'tpope/vim-commentary', { 'on': 'Commentary' }
+    vnoremap gc :Commentary<CR>
   Plug 'tpope/vim-fugitive', { 'on': [ 'G', 'Ge', 'Gstatus', 'Gdiff', 'Glog', 'Gblame' ] }
   Plug 'cespare/vim-toml', { 'for': 'toml' }
   Plug 'alvan/vim-closetag', { 'for': ['html', 'jsx', 'tsx', 'vue', 'markdown'] }
@@ -35,6 +35,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'yuezk/vim-js', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
   Plug 'maxmellon/vim-jsx-pretty', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
     let g:vim_jsx_pretty_colorful_config = 1
+  Plug 'posva/vim-vue', { 'for': 'vue' }
 
   Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'ts', 'tsx'] }
   Plug 'leafgarland/typescript-vim', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
@@ -52,11 +53,15 @@ call plug#begin('~/.config/nvim/plugged')
     nnoremap <Leader>g :Grepper
 
   Plug 'jparise/vim-graphql', { 'for': 'graphql' }
+  Plug 'towolf/vim-helm', { 'for': 'helm' }
   Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
+  Plug 'tbastos/vim-lua', { 'for': 'lua' }
 
+  Plug 'kshenoy/vim-signature', { 'for': 'M' }
+  Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
-  Plug 'stefandtw/quickfix-reflector.vim'
+  Plug 'stefandtw/quickfix-reflector.vim', { 'for': 'qf' }
     let g:qf_modifiable = 1
     let g:qf_write_changes = 1
 
