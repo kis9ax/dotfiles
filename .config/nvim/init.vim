@@ -1,6 +1,4 @@
 " --- setting ---
-let mapleader="\<Space>"
-let maplocalleader="\,"
 set number relativenumber
 set encoding=UTF-8
 set hidden
@@ -35,6 +33,24 @@ set noerrorbells
 set novisualbell
 set shada="NONE"
 set viminfo="NONE"
+set switchbuf+=newtab
+let mapleader="\<Space>"
+let maplocalleader="\,"
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
+let g:loaded_netrwSettings = 1
+let g:loaded_netrwFileHandlers  = 1
+let g:loaded_gzip = 1
+let g:loaded_tar = 1
+let g:loaded_tarPlugin = 1
+let g:loaded_zip = 1
+let g:loaded_zipPlugin = 1
+let g:loaded_rrhelper = 1
+let g:loaded_2html_plugin = 1
+let g:loaded_vimball = 1
+let g:loaded_vimballPlugin = 1
+let g:loaded_getscript = 1
+let g:loaded_getscriptPlugin = 1
 
 " --- plugins ---
 source ~/.config/nvim/plugins.vim
@@ -68,6 +84,7 @@ nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap su :let @+ = expand("%:p")<cr>
 nnoremap <silent> <Leader>h "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
 nnoremap <Leader>j :tabnew<CR>:call TaskOpen()<CR>
+nnoremap <Leader>c :tabnew<CR>:e ~/notes/memos/vim.md<CR>
 nnoremap <Leader>d :tabnew<CR>:e ~/dotfiles/.config/nvim/init.vim<CR>
 
 function! TaskOpen()
@@ -105,6 +122,7 @@ vnoremap <C-k> "zx<Up>"zP`[V`]
 vnoremap <C-j> "zx"zp`[V`]
 vnoremap <silent> // y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
 vnoremap /r "xy:%s/<C-R>=escape(@x, '\\/.*$^~[]')<CR>//gc<Left><Left><Left>
+vnoremap gc :Commentary<CR>
 "cnoremap
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
@@ -113,12 +131,7 @@ cnoremap <C-l> <Right>
 cnoremap <C-d> <BS>
 cnoremap <C-c> <Del>
 
-"  --- netrw ---
-let g:loaded_netrwPlugin = 1
-let g:loaded_netrwSettings = 1
-let g:loaded_netrwFileHandlers  = 1
-
-" --- vimquickfix ---
+"  --- vimquickfix ---
 function! ToggleQuickfix()
   let l:nr = winnr('$')
   cwindow

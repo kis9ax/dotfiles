@@ -1,18 +1,9 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": [
-    "json",
-    "css",
-    "markdown",
-    "js",
-    "jsx",
-    "ts",
-    "tsx"
-  ],
   "explorer.previewAction.onHover": false,
   "explorer.buffer.showHiddenBuffers": true,
   "explorer.file.showHiddenFiles": true,
+  "explorer.icon.enableNerdfont": true,
   "tsserver.trace.server": "verbose",
-  "explorer.icon.enableVimDevicons": true,
   "tsserver.enableJavascript": false,
   "coc.preferences.extensionUpdateCheck": "daily"
 }
