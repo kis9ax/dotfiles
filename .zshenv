@@ -19,3 +19,4 @@ export PATH=$PATH:$GOPATH/bin
 
 # nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+source "$HOME/.cargo/env"
