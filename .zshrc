@@ -7,36 +7,36 @@ setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt hist_reduce_blanks
 setopt share_history
-setopt print_eight_bit
-setopt EXTENDED_HISTORY
-autoload -Uz _zinit
-autoload -Uz colors && colors
-autoload -Uz compinit && compinit
 unsetopt PROMPT_SP
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export HISTSIZE=100
-export HISTFILE=${HOME}/.zsh_history
-export LANG=ja_JP.UTF-n
-export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
-export FZF_DEFAULT_OPTS='--height 30% --reverse --color=info:#79740e,prompt:#79740e,spinner:#79740e,pointer:#cc241d,marker:#458588'
-KEYTIMEOUT=1
+disable r
 
-alias -g A='| awk'
-alias -g C='| pbcopy'
-alias -g C='| wc -l'
-alias -g G='| grep --color=auto'
-alias -g H='| head'
-alias -g L='| less -R'
-alias -g X='| xargs'
-alias -g C='| pbcopy'
-alias -g F='| fzf'
+# zinit
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && print -P "success" || print -P "fail"
+fi
 
-source ~/.alias
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
 
-nvim. () { nvim .; zle -R -c }
-zle -N nvim.
-bindkey '^v' nvim.
+(( ${+_comps} )) && _comps[zinit]=_zinit
+zinit light zsh-users/zsh-autosuggestions
+zinit ice wait'!0'; zinit load zsh-users/zsh-syntax-highlighting
+zinit ice wait'!0'; zinit load zsh-users/zsh-completions
+
+# prompt
+autoload -Uz vcs_info
+setopt prompt_subst
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+zstyle ':vcs_info:*' formats "%F{green}%c%u%b%f"
+zstyle ':vcs_info:*' actionformats '%b|%a'
+precmd () { vcs_info; precmd() { echo } }
+PROMPT='%F{cyan}%~%f ${vcs_info_msg_0_} %F{cyan}>%f '
+
+# functions
+bindkey -s '^v' 'nvim .^M'
 bindkey "^P" up-line-or-search
 bindkey -s "^k" 'ls -la^M'
 bindkey -s "^j" 'cd ..^M'
@@ -61,33 +61,21 @@ function fzf-history() {
 zle -N fzf-history
 bindkey '^r' fzf-history
 
-fbr() {
-  local branches branch
-  branches=$(git branch -vv) &&
-  branch=$(echo "$branches" | fzf +m) &&
-  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
-}
-
-fshow() {
-  git log --graph --color=always \
-      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
-      --bind "ctrl-m:execute:
-                (grep -o '[a-f0-9]\{7\}' | head -1 |
-                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
-                {}
-FZF-EOF"
-}
-
-ff() {
-  local dir
-  dir=$(fd -p ~/dev -t d | fzf)
-  echo $dir
-  cd ~/dev/$dir
-}
-
 f() {
   local dir
   dir=$(fd -t d | fzf)
   cd $dir
 }
+
+# alias
+source ~/.alias;
+
+alias -g A='| awk'
+alias -g C='| pbcopy'
+alias -g C='| wc -l'
+alias -g G='| grep --color=auto'
+alias -g H='| head'
+alias -g L='| less -R'
+alias -g X='| xargs'
+alias -g C='| pbcopy'
+alias -g F='| fzf'
