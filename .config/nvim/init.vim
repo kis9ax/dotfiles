@@ -20,7 +20,6 @@ set tags=./tags;$HOME
 set noswapfile
 set laststatus=2
 set nobackup
-set noundofile
 set modifiable
 set regexpengine=1
 set lazyredraw
@@ -82,11 +81,9 @@ nnoremap <C-j><C-k> <C-w>=
 nnoremap <Leader>r :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap su :let @+ = expand("%:p")<cr>
-nnoremap <silent> <Leader>h "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
 nnoremap <Leader>j :tabnew<CR>:e $TASK<CR>
 nnoremap <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
 nnoremap <Leader>b :tabnew<CR>:e $BOOKMARKS<CR>
-
 "" vimtab
 nnoremap <Leader>1 1gt
 nnoremap <Leader>2 2gt
@@ -115,7 +112,7 @@ vnoremap <C-j> "zx"zp`[V`]
 vnoremap <silent> // y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
 vnoremap /r "xy:%s/<C-R>=escape(@x, '\\/.*$^~[]')<CR>//gc<Left><Left><Left>
 vnoremap gc :Commentary<CR>
-"cnoremap
+" cnoremap
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>
 cnoremap <C-h> <Left>

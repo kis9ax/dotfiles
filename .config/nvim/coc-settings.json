@@ -6,5 +6,6 @@
   "tsserver.trace.server": "verbose",
   "tsserver.enableJavascript": false,
   "coc.preferences.extensionUpdateCheck": "daily",
-  "coc.preferences.jumpCommand": "drop"
+  "coc.preferences.jumpCommand": "drop",
+  "smartf.timeout": 10000
 }

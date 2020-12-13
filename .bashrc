@@ -1,4 +1,5 @@
 source ~/.alias
+source ~/.shellenv
 
 case $- in
   *i*) ;;

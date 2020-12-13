@@ -32,7 +32,7 @@ module.exports = {
     webGLRenderer: true,
     hyperBorder: {
       borderColors: ['black', 'black'],
-      borderWidth: '2px',
+      borderWidth: '0px',
     },
     env: {
       LANG: "ja_JP.UTF-8",

@@ -3,7 +3,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias h='cd ~/'
-alias d='cd ~/dev/'
+alias d='cd ~/d/'
 alias n='cd ~/notes/'
 alias p='cd ~/pnotes'
 alias .='cd ~/dotfiles;'
@@ -11,7 +11,7 @@ alias .='cd ~/dotfiles;'
 alias mk=mk
 function mk() { mkdir $1; cd $1; }
 
-alias b=bat
+alias pp=pbpaste
 alias path='echo $PATH | tr ":" "\n"'
 
 # rm, mv, cp
@@ -30,6 +30,7 @@ alias lsc='cowsay $(ls)'
 # vim
 alias v='nvim'
 alias vi='nvim'
+alias j='nvim $TASK'
 
 # tmux
 

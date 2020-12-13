@@ -16,6 +16,7 @@ if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && print -P "success" || print -P "fail"
 fi
 
+source "$HOME/.shellenv"
 source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 
