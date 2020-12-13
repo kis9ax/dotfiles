@@ -39,19 +39,8 @@ add-zsh-hook precmd _vcs_precmd
 PROMPT='%F{142}< %~%f${vcs_info_msg_0_} %F{142}>%f '
 
 # functions
-bindkey -s '^v' 'nvim .^M'
+bindkey -s '^v' 'nvim^M'
 bindkey "^P" up-line-or-search
-
-function task_open() {
-  declare -i date_day="$(expr $(date +'%d'))"
-  declare -i split_day=15
-
-  if [ $date_day -lt $split_day ]; then
-    nvim ~/notes/tasks/$(date +%Y)/$(date +%m)a.md
-  else
-    nvim ~/notes/tasks/$(date +%Y)/$(date +%m)b.md
-  fi
-}
 
 function fzf-history() {
   BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")

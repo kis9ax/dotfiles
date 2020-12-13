@@ -83,24 +83,16 @@ nnoremap <Leader>r :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap su :let @+ = expand("%:p")<cr>
 nnoremap <silent> <Leader>h "zyiw:let @/ = '\<' . @z . '\>'<CR>:set hlsearch<CR>
-nnoremap <Leader>j :tabnew<CR>:call TaskOpen()<CR>
-nnoremap <Leader>c :tabnew<CR>:e ~/notes/memos/vim.md<CR>
-nnoremap <Leader>d :tabnew<CR>:e ~/dotfiles/.config/nvim/init.vim<CR>
-
-function! TaskOpen()
-  if strftime("%d") < 15
-    :exe 'e ~/notes/tasks/'.strftime("%Y").'/'.strftime("%m").'a.md'
-  else
-    :exe 'e ~/notes/tasks/'.strftime("%Y").'/'.strftime("%m").'b.md'
-  endif
-endfunction
+nnoremap <Leader>j :tabnew<CR>:e $TASK<CR>
+nnoremap <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
+nnoremap <Leader>b :tabnew<CR>:e $BOOKMARKS<CR>
 
 "" vimtab
-nnoremap s1 1gt
-nnoremap s2 2gt
-nnoremap s3 3gt
-nnoremap s4 4gt
-nnoremap s5 5gt
+nnoremap <Leader>1 1gt
+nnoremap <Leader>2 2gt
+nnoremap <Leader>3 3gt
+nnoremap <Leader>4 4gt
+nnoremap <Leader>5 5gt
 nnoremap <C-h> :tabprevious<CR>
 nnoremap <C-l> :tabnext<CR>
 nnoremap <C-w>d :tabclose<CR>
@@ -152,7 +144,7 @@ if $TMUX != ""
   augroup END
 endif
 command! RemoveTrairing :%s/\s\+$//e
-command! M :Marks
+command! M :SignatureListGlobalMarks
 match errorMsg /\s\+$/
 
 " --- tabline ---
@@ -161,23 +153,22 @@ function! s:SID_PREFIX()
 endfunction
 
 function! s:my_tabline()
-    let s= '%#TabLineSel#< %{getcwd()} > '
-    for i in range(1, tabpagenr('$'))
-        let bufnrs = tabpagebuflist(i)
-        let bufnr = bufnrs[tabpagewinnr(i) - 1]
-        let no = i
-        let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
-        let title = fnamemodify(bufname(bufnr), ':t')
-        let title = title
-        let s .= '%'.i.'T'
-        let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
-        let s .= no . ': ' . title
-        let s .= mod
-        let s .= '%#TabLineFill# '
-
-    endfor
-    let s .= '%#TabLineFill#%T%=%#TabLine#'
-    return s
+  let s= '%#TabLineSel#< %{getcwd()} > '
+  for i in range(1, tabpagenr('$'))
+    let bufnrs = tabpagebuflist(i)
+    let bufnr = bufnrs[tabpagewinnr(i) - 1]
+    let no = i
+    let mod = getbufvar(bufnr, '&modified') ? '!' : ' '
+    let title = fnamemodify(bufname(bufnr), ':t')
+    let title = title
+    let s .= '%'.i.'T'
+    let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
+    let s .= no . ': ' . title
+    let s .= mod
+    let s .= '%#TabLineFill# '
+  endfor
+  let s .= '%#TabLineFill#%T%=%#TabLine#'
+  return s
 endfunction
 
 let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'

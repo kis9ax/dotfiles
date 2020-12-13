@@ -8,7 +8,6 @@ endif
 " --- vim-plug plugins ---
 call plug#begin('~/.config/nvim/plugged')
 
-
   Plug 'simeji/winresizer', { 'on': [ 'WinResizerStartFocus', 'WinResizerStartResize'] }
     let g:winresizer_start_key = '<Leader>e'
     nnoremap <Leader>e :WinResizerStartResize<CR>
@@ -20,7 +19,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'tpope/vim-commentary', { 'on': 'Commentary' }
     vnoremap gc :Commentary<CR>
-  Plug 'tpope/vim-fugitive', { 'on': [ 'G', 'Ge', 'Gstatus', 'Commits', 'BCommits', 'Gdiff', 'Glog', 'Gblame' ] }
+  Plug 'tpope/vim-fugitive'
   Plug 'cespare/vim-toml', { 'for': 'toml' }
   Plug 'alvan/vim-closetag', { 'for': ['html', 'jsx', 'tsx', 'vue', 'markdown'] }
     let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.vue,*,tsx"
@@ -36,11 +35,10 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'maxmellon/vim-jsx-pretty', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
     let g:vim_jsx_pretty_colorful_config = 1
   Plug 'posva/vim-vue', { 'for': 'vue' }
-
-  Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'ts', 'tsx'] }
-  Plug 'leafgarland/typescript-vim', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
-  Plug 'othree/yajs.vim', { 'for': ['js', 'jsx', 'ts', 'tsx'] }
-  Plug 'HerringtonDarkholme/yats.vim', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
+  Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'ts', 'tsx', 'vue'] }
+  Plug 'leafgarland/typescript-vim', { 'for': ['js', 'ts', 'jsx', 'tsx', 'vue'] }
+  Plug 'othree/yajs.vim', { 'for': ['js', 'jsx', 'ts', 'tsx', 'vue'] }
+  Plug 'HerringtonDarkholme/yats.vim', { 'for': ['js', 'ts', 'jsx', 'tsx', 'vue'] }
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
     let g:go_fmt_autosave = 1
     let g:go_def_mapping_enabled = 0
@@ -64,6 +62,7 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'justmao945/vim-clang', { 'for': 'c' }
 
   Plug 'kshenoy/vim-signature'
+    nnoremap <Leader>m :SignatureListGlobalMarks<CR>
   Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
@@ -81,16 +80,16 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'airblade/vim-rooter'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim', { 'on': [ 'Files', 'GFiles', 'Commands', 'Commits', 'Rg', 'Buffers', 'Maps', 'Marks' ] }
-    nnoremap <silent> <C-p> :GFiles<CR>
-    nnoremap <silent> sp :Commands<CR>
-    nnoremap <silent> sf :Files<CR>
-    nnoremap <silent> sj :Buffers<CR>
-    nnoremap <silent> sl :Lines<CR>
-    nnoremap <silent> sc :Commits<CR>
-    nnoremap <silent> sm :Marks<CR>
-    nnoremap <silent> sg :Rg<CR>
+    nnoremap <silent> <C-p> :GFiles!<CR>
+    nnoremap <silent> sp :Commands!<CR>
+    nnoremap <silent> sf :Files!<CR>
+    nnoremap <silent> sj :Buffers!<CR>
+    nnoremap <silent> sl :Lines!<CR>
+    nnoremap <silent> sc :Commits!<CR>
+    nnoremap <silent> sm :Marks!<CR>
+    nnoremap <silent> sg :Rg!<CR>
 
-    let g:fzf_layout = {  'window': { 'yoffset': 0 ,'width': 1, 'height': 0.45 } }
+    let g:fzf_layout = {  'window': { 'yoffset': 0.05 , 'width': 1, 'height': 0.4 } }
     let g:fzf_buffers_jump = 1
     let g:fzf_colors =
           \ { 'fg':      ['fg', 'Normal'],
@@ -109,8 +108,8 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
     nnoremap <silent> s: :CocCommand<CR>
-    nnoremap <silent> <C-n> :CocCommand explorer --sources=buffer+,file+ --width=50<CR>
-    nnoremap <silent> <Leader>n :CocCommand explorer --sources=buffer+,file+ --position=tab<CR>
+    nnoremap <silent> <C-n> :CocCommand explorer --sources=buffer+,file+ --width=70<CR>
+    nnoremap <silent> <Leader>n :CocCommand explorer --position=tab<CR>
     nnoremap <silent> K :call <SID>show_documentation()<CR>
     nnoremap <silent> s; :<C-u>CocList<cr>
     nmap <silent> sd <Plug>(coc-definition)

@@ -1,6 +1,11 @@
 # general
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+export NOTES=~/notes
+export DOTFILES=~/dotfiles
+export BOOKMARKS=~/dotfiles/.config/nvim/bookmarks.md
+export MYVIMRC=~/dotfiles/.config/nvim/init.vim
+export TASK=$(task-file)
 export EDITOR=nvim
 export KEYTIMEOUT=1
 export HISTSIZE=1000

@@ -1,19 +1,13 @@
-# directory
+# cd
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias a='nvim ~/.alias'
-alias d='cd ~/dev/'
 alias h='cd ~/'
-alias zsr='nvim ~/.zshrc'
-alias zse='nvim ~/.zshenv'
-alias hyp='nvim ~/.hyper.js'
+alias d='cd ~/dev/'
 alias n='cd ~/notes/'
-alias np='cd ~/pnotes'
-alias j='task_open'
-alias vr='v ~/dotfiles/.config/nvim/init.vim'
-alias trc='nvim ~/.tmux.conf'
-alias dot='cd ~/dotfiles;'
+alias p='cd ~/pnotes'
+alias .='cd ~/dotfiles;'
+
 alias mk=mk
 function mk() { mkdir $1; cd $1; }
 
@@ -42,14 +36,13 @@ alias vi='nvim'
 alias t='tmux -u new -s $(basename `pwd`)'
 alias ta='tmux a'
 alias tkw='tmux kill-server'
-alias tks='tmux kill-session'
-alias tl='tmux list-session'
 
 # git
 alias g='git'
 alias ga='git add'
 alias ga.='git add .'
 alias gc='git commit'
+alias gcm='git commit -m'
 alias gca='git commit --am'
 alias gch='git checkout'
 alias gac='git add . && git commit -am'
@@ -61,10 +54,6 @@ alias gd%='git diff%'
 alias gst='git status'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 alias gll='git log --graph --oneline --decorate --all'
-alias glll="git log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
-
-# sh
-alias ide='sh ~/bin/ide.sh'
 
 # other
 alias o='open'
@@ -72,11 +61,8 @@ alias x='exit'
 alias te='trans {en=ja}'
 alias tj='trans {ja=en}'
 alias tree='tree -I "node_modules"'
-alias lofi="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
 alias lofia="mpv ~/data/lofi/a.mp3"
-alias lofib="mpv ~/data/lofi/b.mp3"
-alias lofic="mpv ~/data/lofi/c.mp3"
-alias lofid="mpv ~/data/lofi/d.mp3"
+alias lofi="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
 alias pomo='termdown -f roman -s 25m; terminal-notifier -message "stop task and break" -sound default; termdown -f roman -s 5m; terminal-notifier -sound default -message "break stop"'
 
 alias pss=pss
