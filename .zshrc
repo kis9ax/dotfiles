@@ -26,20 +26,21 @@ zinit ice wait'!0'; zinit load zsh-users/zsh-completions
 
 # prompt
 autoload -Uz vcs_info
+autoload -Uz add-zsh-hook
 setopt prompt_subst
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
 zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
-zstyle ':vcs_info:*' formats "%F{green}%c%u%b%f"
+zstyle ':vcs_info:*' formats "%F{green} %c%u%b%f"
 zstyle ':vcs_info:*' actionformats '%b|%a'
 precmd () { vcs_info; precmd() { echo } }
-PROMPT='%F{cyan}%~%f ${vcs_info_msg_0_} %F{cyan}>%f '
+_vcs_precmd () { vcs_info }
+add-zsh-hook precmd _vcs_precmd
+PROMPT='%F{142}< %~%f${vcs_info_msg_0_} %F{142}>%f '
 
 # functions
 bindkey -s '^v' 'nvim .^M'
 bindkey "^P" up-line-or-search
-bindkey -s "^k" 'ls -la^M'
-bindkey -s "^j" 'cd ..^M'
 
 function task_open() {
   declare -i date_day="$(expr $(date +'%d'))"
@@ -51,7 +52,6 @@ function task_open() {
     nvim ~/notes/tasks/$(date +%Y)/$(date +%m)b.md
   fi
 }
-
 
 function fzf-history() {
   BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")

@@ -18,7 +18,7 @@ set clipboard=unnamed
 set clipboard+=unnamedplus
 set tags=./tags;$HOME
 set noswapfile
-set laststatus=0
+set laststatus=2
 set nobackup
 set noundofile
 set modifiable
@@ -103,8 +103,8 @@ nnoremap s4 4gt
 nnoremap s5 5gt
 nnoremap <C-h> :tabprevious<CR>
 nnoremap <C-l> :tabnext<CR>
-nnoremap sd :tabclose<CR>
-nnoremap sn :tabnew<CR>
+nnoremap <C-w>d :tabclose<CR>
+nnoremap <C-w>n :tab split<CR>
 " inoremap
 inoremap <C-k> <Up>
 inoremap <C-j> <Down>
@@ -143,6 +143,14 @@ endfunction
 nnoremap <script> <silent> <Leader>q :call ToggleQuickfix()<CR>
 
 " --- commands ---
+if $TMUX != ""
+  augroup titlesettings
+    autocmd!
+    autocmd BufEnter * call system("tmux rename-window " . "'[vim] " . expand("%:t") . "'")
+    autocmd VimLeave * call system("tmux rename-window zsh")
+    autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
+  augroup END
+endif
 command! RemoveTrairing :%s/\s\+$//e
 command! M :Marks
 match errorMsg /\s\+$/
@@ -153,7 +161,7 @@ function! s:SID_PREFIX()
 endfunction
 
 function! s:my_tabline()
-    let s= ''
+    let s= '%#TabLineSel#< %{getcwd()} > '
     for i in range(1, tabpagenr('$'))
         let bufnrs = tabpagebuflist(i)
         let bufnr = bufnrs[tabpagewinnr(i) - 1]
@@ -163,9 +171,10 @@ function! s:my_tabline()
         let title = title
         let s .= '%'.i.'T'
         let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
-        let s .= no . ':' . title
+        let s .= no . ': ' . title
         let s .= mod
         let s .= '%#TabLineFill# '
+
     endfor
     let s .= '%#TabLineFill#%T%=%#TabLine#'
     return s
@@ -174,4 +183,4 @@ endfunction
 let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 
 " --- statusline ---
-let &statusline='%#Gray#'
+let &statusline=':['.'%!buffer('%')'.']'.' < %F >'

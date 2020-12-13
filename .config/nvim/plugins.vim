@@ -20,7 +20,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'tpope/vim-commentary', { 'on': 'Commentary' }
     vnoremap gc :Commentary<CR>
-  Plug 'tpope/vim-fugitive', { 'on': [ 'G', 'Ge', 'Gstatus', 'Gdiff', 'Glog', 'Gblame' ] }
+  Plug 'tpope/vim-fugitive', { 'on': [ 'G', 'Ge', 'Gstatus', 'Commits', 'BCommits', 'Gdiff', 'Glog', 'Gblame' ] }
   Plug 'cespare/vim-toml', { 'for': 'toml' }
   Plug 'alvan/vim-closetag', { 'for': ['html', 'jsx', 'tsx', 'vue', 'markdown'] }
     let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.vue,*,tsx"
@@ -56,8 +56,14 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'towolf/vim-helm', { 'for': 'helm' }
   Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
   Plug 'tbastos/vim-lua', { 'for': 'lua' }
+  " Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
+  " Plug 'gaalcaras/ncm-R', { 'for': 'r' }
+  " Plug 'vim-pandoc/vim-pandoc', { 'for': 'rmd' }
+  " Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'rmd'}
+  " Plug 'vim-pandoc/vim-rmarkdown', { 'for': 'rmd' }
+  " Plug 'justmao945/vim-clang', { 'for': 'c' }
 
-  Plug 'kshenoy/vim-signature', { 'for': 'M' }
+  Plug 'kshenoy/vim-signature'
   Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-surround'
@@ -104,6 +110,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
     nnoremap <silent> s: :CocCommand<CR>
     nnoremap <silent> <C-n> :CocCommand explorer --sources=buffer+,file+ --width=50<CR>
+    nnoremap <silent> <Leader>n :CocCommand explorer --sources=buffer+,file+ --position=tab<CR>
     nnoremap <silent> K :call <SID>show_documentation()<CR>
     nnoremap <silent> s; :<C-u>CocList<cr>
     nmap <silent> sd <Plug>(coc-definition)

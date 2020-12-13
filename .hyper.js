@@ -36,7 +36,8 @@ module.exports = {
     },
     env: {
       LANG: "ja_JP.UTF-8",
-      LC_ALL: "ja_JP.UTF-8"
+      LC_ALL: "ja_JP.UTF-8",
+      TERM: "xterm-256color"
     },
   },
   plugins: [
