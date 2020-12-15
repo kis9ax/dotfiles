@@ -17,14 +17,14 @@ let s:gb.light2      = ['#d5c4a1', 250]
 let s:gb.light3      = ['#bdae93', 248]
 let s:gb.light4      = ['#a89984', 246]
 let s:gb.light4_256  = ['#a89984', 246]
-let s:gb.bright_red     = ['#fb4934', 167]
+let s:gb.bright_red     = ['#df5f5f', 167]
 let s:gb.bright_green   = ['#b8bb26', 142]
 let s:gb.bright_yellow  = ['#fabd2f', 214]
 let s:gb.bright_blue    = ['#83a598', 109]
 let s:gb.bright_purple  = ['#d3869b', 175]
 let s:gb.bright_aqua    = ['#8ec07c', 108]
 let s:gb.bright_orange  = ['#fe8019', 208]
-let s:gb.neutral_red    = ['#cc241d', 124]
+let s:gb.neutral_red    = ['#af0000', 124]
 let s:gb.neutral_green  = ['#98971a', 106]
 let s:gb.neutral_yellow = ['#d79921', 172]
 let s:gb.neutral_blue   = ['#458588', 66]
@@ -60,6 +60,7 @@ let s:blue   = s:gb.bright_blue
 let s:purple = s:gb.bright_purple
 let s:aqua   = s:gb.bright_aqua
 let s:orange = s:gb.bright_orange
+let s:pow    = s:gb.neutral_red
 let s:gb.bg0 = s:bg0
 let s:gb.bg1 = s:bg1
 let s:gb.bg2 = s:bg2
@@ -72,13 +73,6 @@ let s:gb.fg2 = s:fg2
 let s:gb.fg3 = s:fg3
 let s:gb.fg4 = s:fg4
 let s:gb.fg4_256 = s:fg4_256
-let s:gb.red    = s:red
-let s:gb.green  = s:green
-let s:gb.yellow = s:yellow
-let s:gb.blue   = s:blue
-let s:gb.purple = s:purple
-let s:gb.aqua   = s:aqua
-let s:gb.orange = s:orange
 
 " Neovim: {{{
 let g:terminal_color_0 = s:bg0[0]
@@ -146,6 +140,8 @@ endfunction
 " Version_700: {{{
 call s:HL('CursorLine',   s:none, s:bg1)
 hi! link CursorColumn CursorLine
+" call s:HL('TabLineFill', s:pow, s:bg1, s:invert_tabline)
+" call s:HL('TabLineSel', s:red, s:bg1, s:invert_tabline)
 call s:HL('TabLineFill', s:bg4, s:bg1, s:invert_tabline)
 call s:HL('TabLineSel', s:green, s:bg1, s:invert_tabline)
 hi! link TabLine TabLineFill
@@ -249,6 +245,8 @@ call s:HL('Visual',    s:none,  s:bg3, s:invert_selection)
 call s:HL('Search',    s:yellow, s:bg0, s:inverse)
 call s:HL('IncSearch', s:hls_cursor, s:bg0, s:inverse)
 call s:HL('Underlined', s:blue, s:none, s:underline)
+" call s:HL('StatusLine',   s:bg0, s:red, s:inverse)
+" call s:HL('StatusLineNC', s:bg0, s:fg4, s:inverse)
 call s:HL('StatusLine',   s:bg1, s:green, s:inverse)
 call s:HL('StatusLineNC', s:bg1, s:fg4, s:inverse)
 call s:HL('VertSplit', s:bg3, s:vert_split)
