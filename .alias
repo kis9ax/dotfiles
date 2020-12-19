@@ -7,8 +7,7 @@ alias d='cd ~/d/'
 alias n='cd ~/notes/'
 alias p='cd ~/pnotes'
 alias .='cd ~/dotfiles;'
-alias v='~/nvim-osx64/bin/nvim'
-alias nvim='~/nvim-osx64/bin/nvim'
+alias v='nvim'
 
 alias mk=mk
 function mk() { mkdir $1; cd $1; }
@@ -50,15 +49,23 @@ alias gs='git status'
 alias gd='git diff'
 alias gd@='git diff @'
 
+# git sttash
+alias gst='git stash'
+alias gstl='git stash list'
+alias gsts='git stash save'
+alias gsta='git stash apply'
+
 # git commit
 alias gc='git commit'
 alias gcm='git commit -m'
 alias gca='git commit --am'
 
 # git other
+alias gr='git reset'
 alias gch='git checkout'
 alias gac='git add . && git commit -am'
 alias gp='git push'
+alias gpf='git push -f'
 alias gf='git fetch'
 alias gb='git branch'
 

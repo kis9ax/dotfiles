@@ -7,12 +7,13 @@ endif
 
 " --- vim-plug plugins ---
 call plug#begin('~/.config/nvim/plugged')
+  Plug 'kis9a/coc-hello', {'do': 'yarn install --frozen-lockfile && yarn build'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim', { 'on': [ 'Files', 'GFiles', 'Commands', 'Commits', 'Rg', 'Buffers', 'Maps', 'Marks' ] }
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   " git
   Plug 'lambdalisue/gina.vim', { 'on': 'Gina' }
-  Plug 'tpope/vim-fugitive', { 'on': ['G', 'Gstatus', 'Git'] }
+  Plug 'tpope/vim-fugitive'
   Plug 'jreybert/vimagit', { 'on': 'Magit' }
 
   " window
@@ -32,7 +33,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'kshenoy/vim-signature'
   Plug 'stefandtw/quickfix-reflector.vim', { 'for': 'qf' }
   Plug 'voldikss/vim-translator', { 'on': [ 'Translate', 'TranslateV', 'TranslateW', 'TranslateWV' ] }
-  Plug 'SirVer/ultisnips'
+  " Plug 'SirVer/ultisnips'
   Plug 'airblade/vim-rooter'
   Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
   Plug 't9md/vim-quickhl'
@@ -44,21 +45,21 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'cocopon/colorswatch.vim', { 'on': 'ColorSwatchGenerate' }
 
   " markdown/documentation
-  Plug 'tpope/vim-markdown', { 'for': 'markdown' }
-  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+  " Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
   Plug 'iamcco/mathjax-support-for-mkdp', { 'for': 'markdown' }
   Plug 'aklt/plantuml-syntax', { 'for': 'uml' }
   Plug 'scrooloose/vim-slumlord', { 'for': 'uml' }
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  " Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
   " javascript/typescript
   " Plug 'yuezk/vim-js', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
   " Plug 'maxmellon/vim-jsx-pretty', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
   " Plug 'posva/vim-vue', { 'for': 'vue' }
-  Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'ts', 'tsx'] }
-  Plug 'leafgarland/typescript-vim', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
-  Plug 'othree/yajs.vim', { 'for': ['js', 'jsx', 'ts', 'tsx'] }
-  Plug 'HerringtonDarkholme/yats.vim', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
+  " Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'ts', 'tsx'] }
+  " Plug 'leafgarland/typescript-vim', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
+  " Plug 'othree/yajs.vim', { 'for': ['js', 'jsx', 'ts', 'tsx'] }
+  " Plug 'HerringtonDarkholme/yats.vim', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
 
   " golang
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
@@ -116,7 +117,7 @@ nnoremap <silent>s; :<C-u>CocList<cr>
 nnoremap <silent>K :call <SID>show_documentation()<CR>
 nnoremap <silent>su :UndotreeToggle<CR>
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-nnoremap <silent>ss :CocCommand prettier.formatFile<CR>
+nnoremap <silent>sk :CocCommand prettier.formatFile<CR>
 nmap sd <Plug>(coc-definition)
 nmap sq <Plug>(coc-fix-current)
 nmap st <Plug>(coc-type-definition)
@@ -134,7 +135,9 @@ vmap <silent> <Leader>t <Plug>TranslateV
 nmap <silent> <Leader>w <Plug>TranslateW
 vmap <silent> <Leader>w <Plug>TranslateWV
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
-nmap , <Leader><Leader>s
+nmap , <Leader><Leader>
+nmap ,, <ESC><Plug>(easymotion-overwin-f)
+nmap ,/ <ESC><Plug>(easymotion-overwin-f2)
 
 " ---- plugin valiables
 let g:undotree_WindowLayout = 2
@@ -143,6 +146,8 @@ let g:undotree_DiffpanelHeight = 10
 let g:winresizer_start_key = '<Leader>e'
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.vue,*,tsx"
 let g:mkdp_echo_preview_url = 1
+let g:go_fmt_command = "gofmt"
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:go_fmt_autosave = 1
 let g:go_def_mapping_enabled = 0
 let g:go_highlight_types = 1
@@ -153,7 +158,6 @@ let g:qf_modifiable = 1
 let g:qf_write_changes = 1
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:translator_target_lang='ja'
-let g:UltiSnipsExpandTrigger="<tab>"
 let g:vim_jsx_pretty_colorful_config = 1
 let g:mkdp_auto_close=0
 let g:mkdp_refresh_slow=1
@@ -185,17 +189,18 @@ let g:coc_global_extensions = [
       \, 'coc-json'
       \, 'coc-toml'
       \, 'coc-yaml'
-      \, 'coc-markdownlint'
       \, 'coc-go'
       \, 'coc-tsserver'
+      \, 'coc-vetur'
+      \, 'coc-react-refactor'
       \, ]
 
 " treesitter
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  highlight = {
-    enable = true
-  },
-}
-EOF
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+"   highlight = {
+"     enable = true
+"   },
+" }
+" EOF

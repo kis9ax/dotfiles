@@ -1,6 +1,8 @@
 " --- setting ---
 set number relativenumber
 set encoding=UTF-8
+set synmaxcol=200
+set redrawtime=10000
 set hidden
 set background=dark
 set cursorline
@@ -12,6 +14,7 @@ set shiftwidth=2
 set timeoutlen=1000
 set ttimeoutlen=0
 set termguicolors
+set modifiable
 set expandtab
 set splitright
 set clipboard=unnamed
@@ -20,7 +23,6 @@ set tags=./tags;$HOME
 set noswapfile
 set laststatus=2
 set nobackup
-set modifiable
 set regexpengine=1
 set lazyredraw
 set noshowcmd
@@ -56,7 +58,7 @@ let g:loaded_getscriptPlugin = 1
 source ~/.config/nvim/plugins.vim
 
 " --- color setting ---
-colorscheme gruvbox
+colorscheme gruvbox 
 
 " --- 0 keymapping ---
 " nnoremap
@@ -66,9 +68,9 @@ nnoremap <CR> A<CR><ESC>
 nnoremap == gg=G''
 nnoremap <C-]> g<C-]>zz
 nnoremap <C-]> <ESC>g<C-]>
-nnoremap sd :sp<CR>
+nnoremap ss :sp<CR>
 nnoremap sv :vsp<CR>
-nnoremap <Leader>rl :so %<CR>
+nnoremap <Leader>rl :so ~/.config/nvim/init.vim<CR>
 nnoremap <C-c> :bd<cr>
 nnoremap <C-q> :q!<cr>
 nnoremap <C-s> :w<cr>
@@ -82,7 +84,7 @@ nnoremap <C-j><C-k> <C-w>=
 nnoremap <Leader>r :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap su :let @+ = expand("%:p")<cr>
-nnoremap <Leader>j :tabnew<CR>:e $TASK<CR>
+nnoremap <Leader>j :tabnew<CR>:e $TASK<CR>:vsp<CR>:e $BOX<CR>
 nnoremap <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
 nnoremap <Leader>b :tabnew<CR>:e $BOOKMARKS<CR>
 "" vimtab
@@ -110,8 +112,8 @@ inoremap <C-c> <DEL>
 " vnoremap
 vnoremap <C-k> "zx<Up>"zP`[V`]
 vnoremap <C-j> "zx"zp`[V`]
-vnoremap <silent> // y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
-vnoremap /r "xy:%s/<C-R>=escape(@x, '\\/.*$^~[]')<CR>//gc<Left><Left><Left>
+vnoremap <Leader>r y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
+vnoremap <Leader>/ "xy:%s/<C-R>=escape(@x, '\\/.*$^~[]')<CR>//gc<Left><Left><Left>
 vnoremap gc :Commentary<CR>
 " cnoremap
 cnoremap <C-k> <Up>
@@ -172,4 +174,4 @@ endfunction
 let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 
 " --- statusline ---
-let &statusline=':['.'%!buffer('%')'.']'.' < %F >'
+let &statusline=':%n %y %f %q '
