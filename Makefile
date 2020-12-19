@@ -3,16 +3,14 @@ CANDIDATES := $(wildcard .??*) bin
 EXCLUSIONS := .DS_Store .git .gitmodules .travis.yml .gitignore
 DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
-.DEFAULT_GOAL := help
-
 all:
 
-list: ## Show dot files in this repo
+list:
 	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
 
-install: ## Create symlink to home directory
+install:
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
 
-clean: ## Remove the dot files and this repo
+clean:
 	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
 	-rm -rf $(DOTPATH)
