@@ -3,6 +3,7 @@
   "explorer.buffer.showHiddenBuffers": true,
   "explorer.file.showHiddenFiles": true,
   "explorer.icon.enableNerdfont": true,
+  "explorer.floating.border.enable": false,
   "tsserver.trace.server": "verbose",
   "tsserver.enableJavascript": false,
   "coc.preferences.extensionUpdateCheck": "daily",

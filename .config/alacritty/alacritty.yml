@@ -1,0 +1,99 @@
+env:
+  TERM: xterm-256color
+  WINIT_X11_SCALE_FACTOR: "1.0"
+window:
+  dimensions:
+    columns: 0
+    lines: 1
+  padding:
+    x: 8
+    y: 4
+
+  dynamic_padding: false
+  decorations: none
+  startup_mode: Windowed
+
+font:
+  normal:
+    family: "Hack"
+  # bold:
+  #   family: "RobotoMono Nerd Font"
+  #   style: Bold
+  # italic:
+  #   family: "RobotoMono Nerd Font"
+  #   style: Italic
+  size: 12
+  offset:
+    x: 1
+    y: 8
+
+scrolling:
+  history: 10000
+
+  multiplier: 3
+  use_thin_strokes: true
+  draw_bold_text_with_bright_colors: true
+
+colors:
+  primary:
+    background: '0x1d2021'
+    foreground: '0xd4be98'
+
+  normal:
+    black:   '0x665c54'
+    red:     '0xea6962'
+    green:   '0xa9b665'
+    yellow:  '0xd8a657'
+    blue:    '0x7daea3'
+    magenta: '0xd3869b'
+    cyan:    '0x89b482'
+    white:   '0xd4be98'
+
+  bright:
+    black:   '0x928374'
+    red:     '0xea6962'
+    green:   '0xa9b665'
+    yellow:  '0xd8a657'
+    blue:    '0x7daea3'
+    magenta: '0xd3869b'
+    cyan:    '0x89b482'
+    white:   '0xd4be98'
+
+bell:
+  animation: EaseOutExpo
+  duration: 0
+  color: '0xffffff'
+
+background_opacity: 1.0
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>="
+
+  save_to_clipboard: false
+
+cursor:
+  style: Block
+  blinking: Off
+  unfocused_hollow: true
+live_config_reload: true
+working_directory: None
+winpty_backend: false
+alt_send_esc: true
+
+mouse:
+  double_click: { threshold: 300 }
+  triple_click: { threshold: 300 }
+
+  hide_when_typing: false
+
+  url:
+   modifiers: Control
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+debug:
+  render_timer: false
+  persistent_logging: false
+  log_level: Warn
+  print_events: false
+  ref_test: false

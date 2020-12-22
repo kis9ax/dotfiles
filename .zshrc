@@ -40,8 +40,26 @@ add-zsh-hook precmd _vcs_precmd
 PROMPT='%F{142}< %~%f${vcs_info_msg_0_} %F{142}>%f '
 
 # functions
+zmodload zsh/complist
 bindkey -s '^v' 'nvim^M'
 bindkey "^P" up-line-or-search
+bindkey "^N" down-line-or-search
+bindkey '^r' fzf-history
+bindkey "^P" up-line-or-search
+bindkey '^i'	menu-expand-or-complete
+bindkey -v '^a' beginning-of-line
+bindkey -v '^b' backward-char
+bindkey -v '^e' end-of-line
+bindkey -v '^f' forward-char
+bindkey -v '^h' backward-delete-char
+bindkey -v '^i' expand-or-complete
+bindkey -M menuselect '^g' .send-break
+bindkey -M menuselect '^i' forward-char
+bindkey -M menuselect '^j' .accept-line
+bindkey -M menuselect '^k' accept-and-infer-next-history
+bindkey -M menuselect '^n' down-line-or-history
+bindkey -M menuselect '^p' up-line-or-history
+bindkey -M menuselect '^r' history-incremental-search-forward
 
 function fzf-history() {
   BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
@@ -59,13 +77,3 @@ f() {
 
 # alias
 source ~/.alias;
-
-alias -g A='| awk'
-alias -g C='| pbcopy'
-alias -g C='| wc -l'
-alias -g G='| grep --color=auto'
-alias -g H='| head'
-alias -g L='| less -R'
-alias -g X='| xargs'
-alias -g C='| pbcopy'
-alias -g F='| fzf'

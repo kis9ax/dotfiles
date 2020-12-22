@@ -13,7 +13,9 @@ set showtabline=2
 set shiftwidth=2
 set timeoutlen=1000
 set ttimeoutlen=0
-set termguicolors
+set signcolumn=yes
+set updatetime=300
+set shortmess+=c
 set modifiable
 set expandtab
 set splitright
@@ -35,13 +37,10 @@ set novisualbell
 set shada="NONE"
 set viminfo="NONE"
 set switchbuf+=newtab
+set virtualedit=block
 let mapleader="\<Space>"
 let maplocalleader="\,"
 let g:netrw_browsex_viewer="open"
-let g:loaded_netrw = 1
-let g:loaded_netrwPlugin = 1
-let g:loaded_netrwSettings = 1
-let g:loaded_netrwFileHandlers  = 1
 let g:loaded_gzip = 1
 let g:loaded_tar = 1
 let g:loaded_tarPlugin = 1
@@ -57,8 +56,17 @@ let g:loaded_getscriptPlugin = 1
 " --- plugins ---
 source ~/.config/nvim/plugins.vim
 
-" --- color setting ---
-colorscheme gruvbox 
+" " --- color setting ---
+" colorscheme gruvbox
+" true color
+if exists("&termguicolors") && exists("&winblend")
+  let g:neosolarized_termtrans=1
+  runtime ./colors/gruvbox.vim
+  set termguicolors
+  set winblend=0
+  set wildoptions=pum
+  set pumblend=5
+endif
 
 " --- 0 keymapping ---
 " nnoremap
@@ -84,19 +92,23 @@ nnoremap <C-j><C-k> <C-w>=
 nnoremap <Leader>r :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap su :let @+ = expand("%:p")<cr>
-nnoremap <Leader>j :tabnew<CR>:e $TASK<CR>:vsp<CR>:e $BOX<CR>
+nnoremap <Leader>j :tabnew<CR>:e $TASK<CR>:tabnew<CR>:e $BOX<CR>
 nnoremap <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
 nnoremap <Leader>b :tabnew<CR>:e $BOOKMARKS<CR>
 "" vimtab
-nnoremap g1 1gt
-nnoremap g2 2gt
-nnoremap g3 3gt
-nnoremap g4 4gt
-nnoremap g5 5gt
+nnoremap ,1 1gt
+nnoremap ,2 2gt
+nnoremap ,3 3gt
+nnoremap ,4 4gt
+nnoremap ,5 5gt
+nnoremap ,6 3gt
+nnoremap ,7 4gt
+nnoremap ,8 5gt
 nnoremap <C-h> :tabprevious<CR>
 nnoremap <C-l> :tabnext<CR>
 nnoremap <C-w>d :tabclose<CR>
 nnoremap <C-w>n :tab split<CR>
+nnoremap <C-w>c :tabnew<CR>
 " inoremap
 inoremap <C-k> <Up>
 inoremap <C-j> <Down>
@@ -109,7 +121,22 @@ inoremap <C-b> <Esc>bi
 inoremap <C-e> <Esc>ea
 inoremap <C-d> <BS>
 inoremap <C-c> <DEL>
+inoremap <C-f>i <Esc>I
+inoremap <C-f>a <Esc>A
+inoremap <C-f>d <Esc>dd<BS>A
+inoremap <C-f>h <Esc>HI
+inoremap <C-f>l <Esc>LI
+inoremap <C-f>m <Esc>MI
+inoremap <C-f>p <Esc>pi
+inoremap <C-f>y <Esc>yyi
+inoremap <C-f>w <Esc>diwi
+inoremap <C-f>y <Esc>yyi
+inoremap <C-f>w <Esc>diwi
+inoremap <C-f>u <Esc>ui
+inoremap <C-f>w <Esc><C-r>i
 " vnoremap
+vnoremap ; :
+vnoremap : ;
 vnoremap <C-k> "zx<Up>"zP`[V`]
 vnoremap <C-j> "zx"zp`[V`]
 vnoremap <Leader>r y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>

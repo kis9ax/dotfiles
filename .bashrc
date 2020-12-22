@@ -18,3 +18,4 @@ esac
 export PS1="\n\[\e[32m\]\w\[\e[m\] \$(git-ps) > "
 
 source ~/.zshenv
+source "$HOME/.cargo/env"

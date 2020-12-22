@@ -1,94 +1,217 @@
-# cd
+# unix
+alias a='alias'
+alias c='cat'
+alias h='cd ~/'
+alias d='cd ~/d/'
+alias n='cd $NOTESs'
+alias p='cd ~/pnotes'
+alias s='sudo'
+alias o='open'
+alias x='exit'
+alias v='nvim'
+alias y='yarn'
+alias j='nvim $TASK'
+alias .='cd $DOTFILES;'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias h='cd ~/'
-alias d='cd ~/d/'
-alias n='cd ~/notes/'
-alias p='cd ~/pnotes'
-alias .='cd ~/dotfiles;'
-alias v='nvim'
-
-alias mk=mk
-function mk() { mkdir $1; cd $1; }
-
+alias mem="top -l 1 | grep Mem"
+alias tree='tree -a -I ".svn|.git|.hg|.idea"'
+alias tree2='tree -L 2'
+alias tree3='tree -L 3'
 alias pp=pbpaste
 alias path='echo $PATH | tr ":" "\n"'
-
-# rm, mv, cp
 alias rmi='rm -i'
 alias rmf='rm -fr'
-
-# docker
 alias do='docker'
 alias dc='docker-compose'
-
-# ls
-alias sl='ls -al -GF'
+alias sl='ls -lag'
 alias ls='ls -a -GF'
 alias lsc='cowsay $(ls)'
-
-# vim
-alias v='nvim'
-alias vi='nvim'
-alias j='nvim $TASK'
-
-# tmux
-
 alias t='tmux -u new -s $(basename `pwd`)'
 alias ta='tmux a'
 alias tkw='tmux kill-server'
+alias tzsh='time  zsh -i -c exit'
+alias te='trans {en=ja}'
+alias tj='trans {ja=en}'
+alias lofia="mpv ~/data/lofi/a.mp3"
+alias lofi="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
+alias pomo='termdown -f roman -s 25m; terminal-notifier -message "stop task and break" -sound default; termdown -f roman -s 5m; terminal-notifier -sound default -message "break stop"'
+alias port='lsof -Pan -i tcp -i udp'
+alias pshttpd='ps aux | grep httpd'
+alias pkill=pkill
+function pkill () {
+  lsof -i :$1 | awk '{l=$2} END {print l}' | xargs kill
+}
+alias pss=pss
+function pss () {
+  ps aux | grep -E "PID|$1" | grep -v grep
+}
+alias gre=gre
+function gre () {
+  grep -E $1 -rl $2
+}
+alias mk=mk
+function mk() {
+  mkdir $1; cd $1;
+}
 
 # git
 alias g='git'
 alias ga='git add'
 alias ga.='git add .'
 alias gs='git status'
-
-# git diff
 alias gd='git diff'
 alias gd@='git diff @'
-
-# git sttash
 alias gst='git stash'
 alias gstl='git stash list'
 alias gsts='git stash save'
 alias gsta='git stash apply'
-
-# git commit
 alias gc='git commit'
 alias gcm='git commit -m'
 alias gca='git commit --am'
-
-# git other
 alias gr='git reset'
 alias gch='git checkout'
 alias gac='git add . && git commit -am'
 alias gp='git push'
 alias gpf='git push -f'
+alias gpl='git pull'
 alias gf='git fetch'
 alias gb='git branch'
-
-# git log
+alias gcl='git clone'
+alias gclr='git clone --recurse-submodules'
+alias gupd='git update'
+alias gg='git graph'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 alias gll='git log --graph --oneline --decorate --all'
+alias ggpusht='git push origin $(git_current_branch) --tags'
+alias ggpushf='git push origin $(git_current_branch) --force'
+alias ggpushtf='git push origin $(git_current_branch) --tags --force'
+alias ggpushft='git push origin $(git_current_branch) --tags --force'
+alias ggpull='git pull --rebase origin $(git_current_branch)'
+alias ggpp='git pull --rebase origin $(git_current_branch) && git push origin $(git_current_branch)'
+alias gcob='git checkout -b'
+alias gsts='git stash save'
+alias grget='git remote get-url origin'
+alias gpr='hub pull-request'
+alias gci='hub issue create'
+alias hcl='hub clone'
 
-# other
-alias o='open'
-alias x='exit'
-alias te='trans {en=ja}'
-alias tj='trans {ja=en}'
-alias tree='tree -I "node_modules"'
-alias lofia="mpv ~/data/lofi/a.mp3"
-alias lofi="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
-alias pomo='termdown -f roman -s 25m; terminal-notifier -message "stop task and break" -sound default; termdown -f roman -s 5m; terminal-notifier -sound default -message "break stop"'
+# docker
+alias dk='docker'
+alias dkp='docker ps'
+alias dkpa='docker ps -a'
+alias dkpaq='docker ps -a -q'
+alias dkb='docker build -t'
+alias dkbnc='docker build --no-cache -t'
+alias dkr='docker run --rm'
+alias dkrti='docker run --rm -ti'
+alias dkrd='docker run -d'
+alias dkrp8='docker run --rm -p 8080:8080'
+alias dkrp9='docker run --rm -p 9080:9080'
+alias dks='docker start'
+alias dkt='docker stop'
+alias dktt='docker stop $(docker ps -q)'
+alias dkk='docker kill'
+alias dkkk='docker kill $(docker ps -q)'
+alias dkrm='docker rm'
+alias dkri='docker rmi'
+alias dke='docker exec -ti'
+alias dkl='docker logs -f'
+alias dki='docker images'
+alias dkpu='docker pull'
+alias dkph='docker push'
+alias dkin='docker inspect'
+alias dkn='docker network'
+alias dkc='docker-compose'
+alias dkcu='docker-compose up'
+alias dkclean='docker ps -q -a -f status=exited | xargs -r docker rm && docker images -q -f dangling=true | xargs -r docker rmi'
 
-alias pss=pss
-function pss () {
-    ps aux | grep -E "PID|$1" | grep -v grep
-}
 
-alias gre=gre
-function gre () {
-    grep -E $1 -rl $2
-}
+# kubernetes
+alias kc='kubectl'
+alias kcg='kubectl get'
+alias kcgn='kubectl get --namespace'
+alias kcd='kubectl describe'
+alias kcdn='kubectl describe --namespace'
+alias kcdl='kubectl delete'
+alias kcdln='kubectl delete --namespace'
+alias kcdlp='kubectl-delete-pod'
+alias kcgno='kubectl get nodes'
+alias kcgp='kubectl get pods'
+alias kcgpn='kubectl get pods --namespace'
+alias kcgpp='kubectl get pods --all-namespaces'
+alias kcgd='kubectl get deployments'
+alias kcgdn='kubectl get deployments --namespace'
+alias kcgdd='kubectl get deployments --all-namespaces'
+alias kcgs='kubectl get services'
+alias kcgsn='kubectl get services --namespace'
+alias kcgss='kubectl get services --all-namespaces'
+alias kcgi='kubectl get ingresses'
+alias kcgin='kubectl get ingresses --namespace'
+alias kcgii='kubectl get ingresses --all-namespaces'
+alias kcgc='kubectl get configmaps'
+alias kcgcn='kubectl get configmaps --namespace'
+alias kcgcc='kubectl get configmaps --all-namespaces'
+alias kcgv='kubectl get virtualservices'
+alias kcgvn='kubectl get virtualservices --namespace'
+alias kcgvv='kubectl get virtualservices --all-namespaces'
+alias kcgdr='kubectl get destinationrules'
+alias kcgdrn='kubectl get destinationrules --namespace'
+alias kcgdrr='kubectl get destinationrules --all-namespaces'
+alias kcgg='kubectl get gateways'
+alias kcggn='kubectl get gateways --namespace'
+alias kcggg='kubectl get gateways --all-namespaces'
+alias kcgse='kubectl get serviceentries'
+alias kcgsen='kubectl get serviceentries --namespace'
+alias kcgsee='kubectl get serviceentries --all-namespaces'
+alias kcgr='kubectl get routerules'
+alias kcgrn='kubectl get routerules --namespace'
+alias kcgrr='kubectl get routerules --all-namespaces'
+alias kcgdp='kubectl get destinationpolicies'
+alias kcgdpn='kubectl get destinationpolicies --namespace'
+alias kcgdpp='kubectl get destinationpolicies --all-namespaces'
+alias kcge='kubectl get events --sort-by=".lastTimestamp" --all-namespaces --watch'
+alias kcc='kubectl create'
+alias kccn='kubectl create --namespace'
+alias kca='kubectl apply -f'
+alias kcan='kubectl apply -f --namespace'
+alias kce='kubectl exec -t -i'
+alias kcen='kubectl exec -t -i --namespace'
+alias kcl='kubectl logs -f'
+alias kcll='kubectl-logs'
+alias kcln='kubectl logs -f --namespace'
+alias kcgx='kubectl config get-contexts'
+alias kcux='kubectl config use-context'
+alias kcxsn='kubectl config set-context $(kubectl config current-context) --namespace'
+alias kcpf='kubectl port-forward'
+alias kcpfn='kubectl port-forward --namespace'
+alias kcpfg='kubectl-port-forward-grafana'
+alias kcpfj='kubectl-port-forward-jaeger'
+alias kcpfk='kubectl-port-forward-kiali'
+alias kcpfp='kubectl-port-forward-prometheus'
+alias kcpfpf='kubectl-port-forward-prometheus-federation'
+alias kcpfz='kubectl-port-forward-zipkin'
+alias kcdldr='kubectl-delete-default-resources'
+alias kcii='kubectl-ingress-ip-address'
+alias kcni='kubectl-nginx-ip-address'
+alias kcigip='kubectl-istio-gateway-ip-address'
+alias kcignp='kubectl-istio-gateway-http-nodeport'
+
+# global alias
+alias -g A='| awk'
+alias -g C='| pbcopy'
+alias -g C='| wc -l'
+alias -g G='| grep --color=auto'
+alias -g H='| head'
+alias -g L='| less -R'
+alias -g X='| xargs'
+alias -g C='| pbcopy'
+alias -g F='| fzf'
+alias -g cpjson="-XPOST -H 'Content-Type: application/json' -d '{}'"
+alias -g cptext="-XPOST -H 'Content-Type: text/plain' -d"
+alias -g On="--output name"
+alias -g Oj="--output json"
+alias -g Oy="--output yaml"
+alias -g Ow="--output wide"
+alias -g Ot="--template"

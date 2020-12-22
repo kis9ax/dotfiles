@@ -7,12 +7,12 @@ endif
 
 " --- vim-plug plugins ---
 call plug#begin('~/.config/nvim/plugged')
-  Plug 'kis9a/coc-hello', {'do': 'yarn install --frozen-lockfile && yarn build'}
+  " Plug 'kis9a/coc-hello', {'do': 'yarn install --frozen-lockfile && yarn build'}
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim', { 'on': [ 'Files', 'GFiles', 'Commands', 'Commits', 'Rg', 'Buffers', 'Maps', 'Marks' ] }
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   " git
-  Plug 'lambdalisue/gina.vim', { 'on': 'Gina' }
+  Plug 'lambdalisue/gina.vim'
   Plug 'tpope/vim-fugitive'
   Plug 'jreybert/vimagit', { 'on': 'Magit' }
 
@@ -30,9 +30,13 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
   " utiles
+  Plug 'luochen1990/rainbow'
+  Plug 'terryma/vim-expand-region'
   Plug 'kshenoy/vim-signature'
   Plug 'stefandtw/quickfix-reflector.vim', { 'for': 'qf' }
   Plug 'voldikss/vim-translator', { 'on': [ 'Translate', 'TranslateV', 'TranslateW', 'TranslateWV' ] }
+  Plug 'thinca/vim-quickrun'
+  Plug 'tyru/open-browser.vim'
   " Plug 'SirVer/ultisnips'
   Plug 'airblade/vim-rooter'
   Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
@@ -45,7 +49,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'cocopon/colorswatch.vim', { 'on': 'ColorSwatchGenerate' }
 
   " markdown/documentation
-  " Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+  Plug 'tpope/vim-markdown', { 'for': 'markdown' }
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
   Plug 'iamcco/mathjax-support-for-mkdp', { 'for': 'markdown' }
   Plug 'aklt/plantuml-syntax', { 'for': 'uml' }
@@ -53,11 +57,11 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
   " javascript/typescript
-  " Plug 'yuezk/vim-js', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
+  Plug 'yuezk/vim-js', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
+  Plug 'leafgarland/typescript-vim', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
+  Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'ts', 'tsx'] }
   " Plug 'maxmellon/vim-jsx-pretty', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
   " Plug 'posva/vim-vue', { 'for': 'vue' }
-  " Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'ts', 'tsx'] }
-  " Plug 'leafgarland/typescript-vim', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
   " Plug 'othree/yajs.vim', { 'for': ['js', 'jsx', 'ts', 'tsx'] }
   " Plug 'HerringtonDarkholme/yats.vim', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
 
@@ -77,13 +81,15 @@ call plug#begin('~/.config/nvim/plugged')
 
   " clang
   Plug 'justmao945/vim-clang', { 'for': 'c' }
+  Plug 'idanarye/vim-smile', { 'on': 'Smile' }
+  Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 call plug#end()
 
 " --- pluggin highlight ----
 highlight QuickScopePrimary guifg='#fb4934' gui=underline ctermfg=167 cterm=underline
 highlight QuickScopeSecondary guifg='#8ec07c' gui=underline ctermfg=108 cterm=underline
-highlight CocExplorerNormalFloat ctermbg=black
-highlight CocExplorerNormalFloatBorder ctermbg=black guifg=black
+highlight CocExplorerNormalFloat ctermbg=0 guibg=0
+highlight CocExplorerNormalFloatBorder ctermfg=0 ctermbg=0 guifg=0 guibg=0
 
 " --- function ---
 function! s:show_documentation()
@@ -96,12 +102,17 @@ function! s:show_documentation()
   endif
 endfunction
 
+function! Wait(mil)
+    let timetowait = a:mil . " m"
+    exe 'sleep '.timetowait
+endfunction
+
 " --- plugin mapping
 nnoremap <silent> ge :WinResizerStartResize<CR>
-nnoremap <silent>gr :Grepper<CR>
-nnoremap <silent>gc :Grepper-cd 
 nnoremap <silent>gm :SignatureListGlobalMarks<CR>
 nnoremap <silent>ga :Magit<CR>
+nnoremap <silent>gr :Grepper<CR>
+nnoremap gc :Grepper-cd 
 nnoremap <silent><C-p> :GFiles!<CR>
 nnoremap <silent>sp :Commands!<CR>
 nnoremap <silent>sf :Files!<CR>
@@ -112,7 +123,7 @@ nnoremap <silent>sl :Lines!<CR>
 nnoremap <silent>sc :Commits!<CR>
 nnoremap <silent>s: :CocCommand<CR>
 nnoremap <silent>sn :CocCommand explorer --sources=buffer+,file+ --width=60<CR>
-nnoremap <silent><C-n> :CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width=400 --floating-height=200<CR>
+nnoremap <silent><C-n> :CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width=1000 --floating-height=1000<CR>
 nnoremap <silent>s; :<C-u>CocList<cr>
 nnoremap <silent>K :call <SID>show_documentation()<CR>
 nnoremap <silent>su :UndotreeToggle<CR>
@@ -124,20 +135,27 @@ nmap st <Plug>(coc-type-definition)
 nmap sh <Plug>(coc-references)
 nmap sr <Plug>(coc-rename)
 nmap sk <Plug>(coc-format)
+let g:netrw_nogx = 1
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
 vnoremap gc :Commentary<CR>
-nnorema <Leader>gn :Gina 
+nnoremap <Leader>gn :Gina 
 nmap <Leader>h <Plug>(quickhl-manual-this)
 xmap <Leader>h <Plug>(quickhl-manual-this)
 nmap <Leader>H <Plug>(quickhl-manual-reset)
 xmap <Leader>H <Plug>(quickhl-manual-reset)
-nmap <silent> <Leader>t <Plug>Translate
-vmap <silent> <Leader>t <Plug>TranslateV
-nmap <silent> <Leader>w <Plug>TranslateW
-vmap <silent> <Leader>w <Plug>TranslateWV
+nnoremap <silent> <Leader>t <Plug>Translate
+vnoremap <silent> <Leader>t <Plug>TranslateV
+nnoremap <silent> <Leader>w <Plug>TranslateW
+vnoremap <silent> <Leader>w <Plug>TranslateWV
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 nmap , <Leader><Leader>
 nmap ,, <ESC><Plug>(easymotion-overwin-f)
 nmap ,/ <ESC><Plug>(easymotion-overwin-f2)
+autocmd CursorHold * silent call CocActionAsync('highlight')
+command! -nargs=0 Format :call CocAction('format')
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+command! -nargs=0 OR   :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " ---- plugin valiables
 let g:undotree_WindowLayout = 2
@@ -163,21 +181,6 @@ let g:mkdp_auto_close=0
 let g:mkdp_refresh_slow=1
 let g:fzf_layout = {  'window': { 'yoffset': 0.05 , 'width': 1, 'height': 0.4 } }
 let g:fzf_buffers_jump = 1
-let g:fzf_colors =
-      \ { 'fg':      ['fg', 'Normal'],
-      \ 'bg':      ['bg', 'Normal'],
-      \ 'hl':      ['fg', 'Comment'],
-      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-      \ 'hl+':     ['fg', 'Statement'],
-      \ 'info':    ['fg', 'PreProc'],
-      \ 'border':  ['fg', 'Ignore'],
-      \ 'prompt':  ['fg', 'Conditional'],
-      \ 'pointer': ['fg', 'Exception'],
-      \ 'marker':  ['fg', 'Keyword'],
-      \ 'spinner': ['fg', 'Label'],
-      \ 'header':  ['fg', 'Comment'] }
-
 let g:coc_global_extensions = [
       \  'coc-git'
       \, 'coc-pairs'

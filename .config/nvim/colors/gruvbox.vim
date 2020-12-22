@@ -1,3 +1,16 @@
+if version > 580
+  hi clear
+  if exists("syntax_on")
+    syntax reset
+  endif
+endif
+
+if !(has('termguicolors') && &termguicolors) && !has('gui_running') && &t_Co != 256
+  finish
+endif
+
+let g:colors_name='gruvbox'
+
 let s:gb = {}
 " let s:gb.dark0_hard  = ['#1d1d1d', 234]
 let s:gb.dark0_hard  = ['black', 0]
