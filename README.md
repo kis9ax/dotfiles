@@ -1,2 +1,9 @@
-![IMG_2545](https://user-images.githubusercontent.com/65019715/101445548-0a2af680-3965-11eb-8dd4-af5a74a00ceb.jpeg)
+### Installation
 
+⚠️ Always in progress  
+⚠️ Combined with [kis9a/notes](https://github.com/kis9a/notes)  
+⚠️ May destroy your environment
+
+```
+curl -L https://git.io/kis9adot | sh
+```
