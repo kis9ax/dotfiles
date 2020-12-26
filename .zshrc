@@ -44,7 +44,6 @@ zmodload zsh/complist
 bindkey -s '^v' 'nvim^M'
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
-bindkey '^r' fzf-history
 bindkey "^P" up-line-or-search
 bindkey '^i'	menu-expand-or-complete
 bindkey -v '^a' beginning-of-line
@@ -60,20 +59,12 @@ bindkey -M menuselect '^k' accept-and-infer-next-history
 bindkey -M menuselect '^n' down-line-or-history
 bindkey -M menuselect '^p' up-line-or-history
 bindkey -M menuselect '^r' history-incremental-search-forward
-
 function fzf-history() {
   BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
   CURSOR=$#BUFFER
 }
-
 zle -N fzf-history
 bindkey '^r' fzf-history
-
-f() {
-  local dir
-  dir=$(fd -t d | fzf)
-  cd $dir
-}
 
 # alias
 source ~/.alias;

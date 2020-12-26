@@ -56,6 +56,9 @@ function mk() {
   mkdir $1; cd $1;
 }
 
+# bin
+alias f='source f'
+
 # git
 alias g='git'
 alias ga='git add'

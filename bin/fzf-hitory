@@ -1,4 +1,0 @@
-#!/bin/bash
-
-BUFFER=$(history -n -r 1 | fzf --no-sort +m)
-CURSOR=$#BUFFER
