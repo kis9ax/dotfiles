@@ -220,6 +220,10 @@ hi! link CocDiagnosticsInfo GruvboxYellow
 hi! link CocDiagnosticsHint GruvboxBlue
 hi! link CocSelectedText GruvboxRed
 hi! link CocCodeLens GruvboxGray
+hi! link QuickScopePrimary GruvboxRed
+hi! link QuickScopeSecondary GruvboxGreen
+hi! link CocExplorerNormalFloat GruvboxFg0
+hi! link CocExplorerNormalFloatBorder GruvboxFg0
 
 call s:HL('GruvboxFg0', s:fg0)
 call s:HL('GruvboxFg1', s:fg1)

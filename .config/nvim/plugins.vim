@@ -85,12 +85,6 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 call plug#end()
 
-" --- pluggin highlight ----
-highlight QuickScopePrimary guifg='#fb4934' gui=underline ctermfg=167 cterm=underline
-highlight QuickScopeSecondary guifg='#8ec07c' gui=underline ctermfg=108 cterm=underline
-highlight CocExplorerNormalFloat ctermbg=0 guibg=0
-highlight CocExplorerNormalFloatBorder ctermfg=0 ctermbg=0 guifg=0 guibg=0
-
 " --- function ---
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
