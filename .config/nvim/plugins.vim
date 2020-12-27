@@ -34,7 +34,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'terryma/vim-expand-region'
   Plug 'kshenoy/vim-signature'
   Plug 'stefandtw/quickfix-reflector.vim', { 'for': 'qf' }
-  Plug 'voldikss/vim-translator', { 'on': [ 'Translate', 'TranslateV', 'TranslateW', 'TranslateWV' ] }
+  Plug 'voldikss/vim-translator'
   Plug 'thinca/vim-quickrun'
   Plug 'tyru/open-browser.vim'
   " Plug 'SirVer/ultisnips'
@@ -138,10 +138,12 @@ nmap <Leader>h <Plug>(quickhl-manual-this)
 xmap <Leader>h <Plug>(quickhl-manual-this)
 nmap <Leader>H <Plug>(quickhl-manual-reset)
 xmap <Leader>H <Plug>(quickhl-manual-reset)
-nnoremap <silent> <Leader>t <Plug>Translate
-vnoremap <silent> <Leader>t <Plug>TranslateV
-nnoremap <silent> <Leader>w <Plug>TranslateW
-vnoremap <silent> <Leader>w <Plug>TranslateWV
+nmap <silent> <Leader>t <Plug>Translate
+vmap <silent> <Leader>t <Plug>TranslateV
+nmap <silent> <Leader>w <Plug>TranslateW
+vmap <silent> <Leader>w <Plug>TranslateWV
+nmap <silent> <Leader>l <Plug>TranslateR
+vmap <silent> <Leader>l <Plug>TranslateRV
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 nmap , <Leader><Leader>
 nmap ,, <ESC><Plug>(easymotion-overwin-f)
