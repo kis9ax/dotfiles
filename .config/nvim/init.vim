@@ -32,9 +32,9 @@ set ignorecase
 set smartcase
 set noshowmode
 set noruler
+set shellcmdflag=-ic
 set noerrorbells
 set novisualbell
-set shada="NONE"
 set viminfo="NONE"
 set switchbuf+=newtab
 set virtualedit=block
