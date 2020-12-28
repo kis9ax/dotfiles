@@ -32,7 +32,7 @@ set ignorecase
 set smartcase
 set noshowmode
 set noruler
-set shellcmdflag=-ic
+set shell=zsh\ -i
 set noerrorbells
 set novisualbell
 set viminfo="NONE"
@@ -201,4 +201,4 @@ endfunction
 let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 
 " --- statusline ---
-let &statusline=':%n %y %f %q '
+let &statusline=':%n %f %q %y'
