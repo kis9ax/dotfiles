@@ -14,7 +14,7 @@ export HISTSIZE=1000
 export HISTFILE=${HOME}/.zsh_history
 export LANG=ja_JP.UTF-n
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
-export FZF_DEFAULT_OPTS='--height 100% --reverse' 
+export FZF_DEFAULT_OPTS='--height 100% --reverse'
 
 # bin
 export PATH=~/bin:"$PATH"
@@ -26,3 +26,6 @@ export PATH=$PATH:$GOPATH/bin
 
 # nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+# java
+export PATH="/usr/local/opt/openjdk@11/bin:$PATH"

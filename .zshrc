@@ -19,6 +19,12 @@ fi
 source "$HOME/.shellenv"
 source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
+autoload -Uz run-help
+autoload -Uz add-zsh-hook
+autoload -Uz colors && colors
+autoload -Uz compinit && compinit -u
+autoload -Uz is-at-least
+autoload zsh/complist
 
 (( ${+_comps} )) && _comps[zinit]=_zinit
 zinit light zsh-users/zsh-autosuggestions
@@ -40,7 +46,6 @@ add-zsh-hook precmd _vcs_precmd
 PROMPT='%F{142}< %~%f${vcs_info_msg_0_} %F{142}>%f '
 
 # functions
-zmodload zsh/complist
 bindkey -s '^v' 'nvim^M'
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
@@ -52,13 +57,7 @@ bindkey -v '^e' end-of-line
 bindkey -v '^f' forward-char
 bindkey -v '^h' backward-delete-char
 bindkey -v '^i' expand-or-complete
-bindkey -M menuselect '^g' .send-break
-bindkey -M menuselect '^i' forward-char
-bindkey -M menuselect '^j' .accept-line
-bindkey -M menuselect '^k' accept-and-infer-next-history
-bindkey -M menuselect '^n' down-line-or-history
-bindkey -M menuselect '^p' up-line-or-history
-bindkey -M menuselect '^r' history-incremental-search-forward
+
 function fzf-history() {
   BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
   CURSOR=$#BUFFER
@@ -67,4 +66,5 @@ zle -N fzf-history
 bindkey '^r' fzf-history
 
 # alias
+setopt aliases
 source ~/.alias;

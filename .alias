@@ -1,9 +1,10 @@
 # unix
 alias a='alias'
 alias c='cat'
+alias b='bat'
 alias h='cd ~/'
 alias d='cd ~/d/'
-alias n='cd $NOTESs'
+alias n='cd $NOTES'
 alias p='cd ~/pnotes'
 alias s='sudo'
 alias o='open'
@@ -27,6 +28,7 @@ alias do='docker'
 alias dc='docker-compose'
 alias sl='ls -lag'
 alias ls='ls -a -GF'
+alias lsg='ls | fzf | pbcopy'
 alias lsc='cowsay $(ls)'
 alias t='tmux -u new -s $(basename `pwd`)'
 alias ta='tmux a'
@@ -36,7 +38,7 @@ alias te='trans {en=ja}'
 alias tj='trans {ja=en}'
 alias lofia="mpv ~/data/lofi/a.mp3"
 alias lofi="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
-alias pomo='termdown -f roman -s 25m; terminal-notifier -message "stop task and break" -sound default; termdown -f roman -s 5m; terminal-notifier -sound default -message "break stop"'
+alias pomo='termdown -f univers -s 25m; terminal-notifier -message "stop task and break" -sound default; termdown -f univers -s 5m; terminal-notifier -sound default -message "break stop"'
 alias port='lsof -Pan -i tcp -i udp'
 alias pshttpd='ps aux | grep httpd'
 alias pkill=pkill
@@ -52,8 +54,34 @@ function gre () {
   grep -E $1 -rl $2
 }
 alias mk=mk
-function mk() {
+function mk () {
   mkdir $1; cd $1;
+}
+
+# search
+alias /g=search_google
+function search_google () {
+  open "https://www.google.com/search?q=$1"
+}
+
+alias /gy=search_google_last_year
+function search_google_last_year () {
+  open "https://www.google.com/search?q=%$1&tbs=qdr:y"
+}
+
+alias /q=search_qiita
+function search_qiita () {
+  open "https://qiita.com/search?q=$1"
+}
+
+alias /h=search_github
+function search_github () {
+  open "https://github.com/search?q=$1"
+}
+
+alias /z=search_zenn
+function search_zenn () {
+   open "https://zenn.dev/search?q=$1"
 }
 
 # bin
@@ -66,10 +94,11 @@ alias ga.='git add .'
 alias gs='git status'
 alias gd='git diff'
 alias gd@='git diff @'
-alias gst='git stash'
-alias gstl='git stash list'
-alias gsts='git stash save'
-alias gsta='git stash apply'
+alias gsta='git stash'
+alias gstal='git stash list'
+alias gstas='git stash save'
+alias gstaa='git stash apply'
+alias gsu='git submodules'
 alias gc='git commit'
 alias gcm='git commit -m'
 alias gca='git commit --am'
@@ -91,6 +120,11 @@ alias ggpusht='git push origin $(git_current_branch) --tags'
 alias ggpushf='git push origin $(git_current_branch) --force'
 alias ggpushtf='git push origin $(git_current_branch) --tags --force'
 alias ggpushft='git push origin $(git_current_branch) --tags --force'
+alias gst-staged="git status --short | grep '^\w.'"
+alias gst-unstaged="git status  --short | grep '^\W.'"
+alias gst-unstaged-tracked="git status  --short | grep '^\s.'"
+alias gst-untracked="git status --short | grep '^??'"
+alias gste="gst-staged | awk '{ print $2}' | xargs nvim -p"
 alias ggpull='git pull --rebase origin $(git_current_branch)'
 alias ggpp='git pull --rebase origin $(git_current_branch) && git push origin $(git_current_branch)'
 alias gcob='git checkout -b'

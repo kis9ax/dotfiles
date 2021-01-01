@@ -21,7 +21,6 @@ set expandtab
 set splitright
 set clipboard=unnamed
 set clipboard+=unnamedplus
-set tags=./tags;$HOME
 set noswapfile
 set laststatus=2
 set nobackup
@@ -32,7 +31,8 @@ set ignorecase
 set smartcase
 set noshowmode
 set noruler
-set shell=zsh\ -i
+set tabpagemax=100
+" set shell=zsh\ -i
 set noerrorbells
 set novisualbell
 set viminfo="NONE"
@@ -92,7 +92,7 @@ nnoremap <C-j><C-k> <C-w>=
 nnoremap <Leader>r :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap su :let @+ = expand("%:p")<cr>
-nnoremap <Leader>j :tabnew<CR>:e $TASK<CR>:tabnew<CR>:e $BOX<CR>
+nnoremap <Leader>j :tabnew<CR>:e $TASK<CR>
 nnoremap <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
 nnoremap <Leader>b :tabnew<CR>:e $BOOKMARKS<CR>
 "" vimtab
@@ -109,6 +109,7 @@ nnoremap <C-l> :tabnext<CR>
 nnoremap <C-w>d :tabclose<CR>
 nnoremap <C-w>n :tab split<CR>
 nnoremap <C-w>c :tabnew<CR>
+nnoremap gF <C-w>gF
 " inoremap
 inoremap <C-k> <Up>
 inoremap <C-j> <Down>
@@ -167,7 +168,6 @@ if $TMUX != ""
     autocmd!
     autocmd BufEnter * call system("tmux rename-window " . "'[vim] " . expand("%:t") . "'")
     autocmd VimLeave * call system("tmux rename-window zsh")
-    autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
   augroup END
 endif
 command! RemoveTrairing :%s/\s\+$//e

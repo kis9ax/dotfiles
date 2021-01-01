@@ -12,7 +12,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'junegunn/fzf.vim', { 'on': [ 'Files', 'GFiles', 'Commands', 'Commits', 'Rg', 'Buffers', 'Maps', 'Marks' ] }
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
   " git
-  Plug 'lambdalisue/gina.vim'
+  " Plug 'lambdalisue/gina.vim'
   Plug 'tpope/vim-fugitive'
   Plug 'jreybert/vimagit', { 'on': 'Magit' }
 
@@ -28,21 +28,24 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'tpope/vim-commentary', { 'on': 'Commentary' }
   Plug 'alvan/vim-closetag', { 'for': ['html', 'jsx', 'tsx', 'vue', 'markdown'] }
   Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
+  " Plug 'vimwiki/vimwiki'
 
   " utiles
-  Plug 'luochen1990/rainbow'
-  Plug 'terryma/vim-expand-region'
-  Plug 'kshenoy/vim-signature'
+  Plug 'junegunn/limelight.vim', { 'on': [ 'Limelight', 'Limelight!', 'Limelight!!' ] }
+  " Plug 'luochen1990/rainbowl'
+  " Plug 'terryma/vim-expand-region'
+  " Plug 'kshenoy/vim-signature'
   Plug 'stefandtw/quickfix-reflector.vim', { 'for': 'qf' }
   Plug 'voldikss/vim-translator'
-  Plug 'thinca/vim-quickrun'
-  Plug 'tyru/open-browser.vim'
+  " Plug 'thinca/vim-quickrun'
+  " Plug 'tyru/open-browser.vim'
   " Plug 'SirVer/ultisnips'
+  " Plug 'embear/vim-localvimrc'
   Plug 'airblade/vim-rooter'
   Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
   Plug 't9md/vim-quickhl'
-  Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-  Plug 'easymotion/vim-easymotion'
+  " Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+  " Plug 'easymotion/vim-easymotion'
 
   " color
   Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
@@ -83,6 +86,9 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'justmao945/vim-clang', { 'for': 'c' }
   Plug 'idanarye/vim-smile', { 'on': 'Smile' }
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+
+  Plug 'vim-scripts/dbext.vim'
+  Plug '/tpope/vim-dadbod'
 call plug#end()
 
 " --- function ---
@@ -107,14 +113,15 @@ nnoremap <silent>gm :SignatureListGlobalMarks<CR>
 nnoremap <silent>ga :Magit<CR>
 nnoremap <silent>gr :Grepper<CR>
 nnoremap gc :Grepper-cd 
-nnoremap <silent><C-p> :GFiles!<CR>
-nnoremap <silent>sp :Commands!<CR>
-nnoremap <silent>sf :Files!<CR>
-nnoremap <silent>sm :Marks!<CR>
+nnoremap <silent><C-p> :GFiles<CR>
+nnoremap <silent>gdi :Gdiffsplit@<CR>
+nnoremap <silent>sp :Commands<CR>
+nnoremap <silent>sf :Files<CR>
+nnoremap <silent>sm :Marks<CR>
 nnoremap <silent>sg :Rg!<CR>
-nnoremap <silent>sj :Buffers!<CR>
-nnoremap <silent>sl :Lines!<CR>
-nnoremap <silent>sc :Commits!<CR>
+nnoremap <silent>sj :Buffers<CR>
+nnoremap <silent>sl :Lines<CR>
+nnoremap <silent>sc :Commits<CR>
 nnoremap <silent>s: :CocCommand<CR>
 nnoremap <silent>sn :CocCommand explorer --sources=buffer+,file+ --width=60<CR>
 nnoremap <silent><C-n> :CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width=1000 --floating-height=1000<CR>
@@ -129,9 +136,9 @@ nmap st <Plug>(coc-type-definition)
 nmap sh <Plug>(coc-references)
 nmap sr <Plug>(coc-rename)
 nmap sk <Plug>(coc-format)
-let g:netrw_nogx = 1
-nmap gx <Plug>(openbrowser-smart-search)
-vmap gx <Plug>(openbrowser-smart-search)
+" let g:netrw_nogx = 1
+" nmap gx <Plug>(openbrowser-smart-search)
+" vmap gx <Plug>(openbrowser-smart-search)
 vnoremap gc :Commentary<CR>
 nnoremap <Leader>gn :Gina 
 nmap <Leader>h <Plug>(quickhl-manual-this)
@@ -142,8 +149,9 @@ nmap <silent> <Leader>t <Plug>Translate
 vmap <silent> <Leader>t <Plug>TranslateV
 nmap <silent> <Leader>w <Plug>TranslateW
 vmap <silent> <Leader>w <Plug>TranslateWV
-nmap <silent> <Leader>l <Plug>TranslateR
-vmap <silent> <Leader>l <Plug>TranslateRV
+" nmap <silent> <Leader>l <Plug>TranslateR
+" vmap <silent> <Leader>l <Plug>TranslateRV
+nnoremap <silent> <Leader>l :Limelight!!<CR>
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 nmap , <Leader><Leader>
 nmap ,, <ESC><Plug>(easymotion-overwin-f)
@@ -175,7 +183,7 @@ let g:translator_target_lang='ja'
 let g:vim_jsx_pretty_colorful_config = 1
 let g:mkdp_auto_close=0
 let g:mkdp_refresh_slow=1
-let g:fzf_layout = {  'window': { 'yoffset': 0.05 , 'width': 1, 'height': 0.4 } }
+let g:fzf_layout = {  'window': { 'yoffset': 0.05 , 'width': 1, 'height': 0.6 } }
 let g:fzf_buffers_jump = 1
 let g:coc_global_extensions = [
       \  'coc-git'

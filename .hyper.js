@@ -36,11 +36,12 @@ module.exports = {
     },
     opacity: {
       focus: 0.98,
-      blur: 0.84,
+      blur: 0.90,
     },
   },
   plugins: [
     "hyper",
+    "hyperfull",
     "hyperminimal",
     "hyper-opacity"
   ],
