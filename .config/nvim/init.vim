@@ -31,6 +31,7 @@ set ignorecase
 set smartcase
 set noshowmode
 set noruler
+set spelllang=en_us
 set tabpagemax=100
 " set shell=zsh\ -i
 set noerrorbells
@@ -202,3 +203,16 @@ let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 
 " --- statusline ---
 let &statusline=':%n %f %q %y'
+
+
+" --- Toggle spell checking ---
+function! ToggleSpellCheck()
+  set spell!
+  if &spell
+    echo "Spellcheck ON"
+  else
+    echo "Spellcheck OFF"
+  endif
+endfunction
+
+nnoremap <silent> <Leader>o :call ToggleSpellCheck()<CR>

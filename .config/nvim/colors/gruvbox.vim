@@ -171,6 +171,26 @@ call s:HL('Conceal', s:blue, s:none)
 call s:HL('CursorLineNr', s:yellow, s:bg1)
 " }}}
 
+" Spelling: {{{
+" call s:HL('SpellCap',   s:none, s:none, s:undercurl, s:red)
+" call s:HL('SpellBad',   s:none, s:none, s:undercurl, s:blue)
+" call s:HL('SpellLocal', s:none, s:none, s:undercurl, s:aqua)
+" call s:HL('SpellRare',  s:none, s:none, s:undercurl, s:purple)
+hi SpellBad ctermfg=Red ctermbg=00 guifg=#ff0000 guibg=#000000
+" }}}
+
+" Asynchronous Lint Engine: {{{
+
+call s:HL('ALEError', s:none, s:none, s:undercurl, s:red)
+call s:HL('ALEWarning', s:none, s:none, s:undercurl, s:yellow)
+call s:HL('ALEInfo', s:none, s:none, s:undercurl, s:blue)
+
+hi! link ALEErrorSign GruvboxRedSign
+hi! link ALEWarningSign GruvboxYellowSign
+hi! link ALEInfoSign GruvboxBlueSign
+
+" }}}
+
 hi! link NonText GruvboxBg2
 hi! link SpecialKey GruvboxBg2
 hi! link VisualNOS Visual

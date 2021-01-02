@@ -37,6 +37,11 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'kshenoy/vim-signature'
   Plug 'stefandtw/quickfix-reflector.vim', { 'for': 'qf' }
   Plug 'voldikss/vim-translator'
+  Plug 'dense-analysis/ale'
+  Plug 'dhruvasagar/vim-table-mode'
+  " Plug 'rhysd/vim-grammarous', { 'for': ['markdown', 'txt'] }
+  Plug 'reedes/vim-wordy'
+
   " Plug 'thinca/vim-quickrun'
   " Plug 'tyru/open-browser.vim'
   " Plug 'SirVer/ultisnips'
@@ -211,3 +216,133 @@ let g:coc_global_extensions = [
 "   },
 " }
 " EOF
+
+" call ale#linter#Define('text', {
+" \   'name': 'proselint',
+" \   'executable': 'proselint',
+" \   'command': 'proselint %t',
+" \   'callback': 'ale#handlers#unix#HandleAsWarning',
+" \})
+
+" call ale#linter#Define('markdown', {
+" \   'name': 'proselint',
+" \   'executable': 'proselint',
+" \   'command': 'proselint %t',
+" \   'callback': 'ale#handlers#unix#HandleAsWarning',
+" \})
+
+
+" " 保存時のみ実行する
+" let g:ale_lint_on_text_changed = 0
+" " 表示に関する設定
+" let g:ale_sign_error = ''
+" let g:ale_sign_warning = ''
+" let g:airline#extensions#ale#open_lnum_symbol = '('
+" let g:airline#extensions#ale#close_lnum_symbol = ')'
+" let g:ale_echo_msg_format = '[%linter%]%code: %%s'
+" highlight link ALEErrorSign Tag
+" highlight link ALEWarningSign StorageClass
+" " Ctrl + kで次の指摘へ、Ctrl + jで前の指摘へ移動
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
+"   autocmd User ALELintPre  hi Statusline ctermfg=darkgrey
+"   autocmd User ALELintPost hi Statusline ctermfg=NONE
+
+
+  " ALE Plugin
+"
+let g:ale_sign_info = ''
+let g:ale_sign_error = ''
+let g:ale_sign_warning = ''
+let g:ale_sign_priority = 4
+let g:ale_open_list = 0
+let g:ale_echo_msg_format = '%severity% [%linter%] (%code%) - %s'
+let g:ale_echo_msg_info_str = ''
+let g:ale_echo_msg_error_str = ''
+let g:ale_echo_msg_warning_str = ''
+let g:ale_writegood_options = '--no-passive'
+let g:ale_virtualtext_cursor = 1
+let g:ale_virtualtext_prefix = ' '
+
+let g:ale_fixers = {
+  \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \   'bib': ['bibclean'],
+  \   'python': ['yapf'],
+  \   'openapi': ['prettier'],
+  \   'yaml': ['prettier'],
+  \   'ruby': ['rubocop'],
+  \   'kotlin': ['ktlint']
+\}
+
+  " \   'markdown': ['markdownlint', 'vale'],
+let g:ale_linters = {
+  \   'asciidoc': ['vale'],
+  \   'markdown': ['proselint'],
+  \   'dockerfile': ['dockerfile_lint'],
+  \   'bib': ['bibclean'],
+  \   'go': ['gofmt', 'golint', 'go vet', 'golangserver'],
+  \   'latex': ['proselint', 'chktex', 'lacheck'],
+  \   'tex': ['proselint', 'chktex', 'lacheck'],
+  \   'plaintex': ['proselint', 'chktex', 'lacheck'],
+  \   'help': [],
+  \   'python': ['flake8', 'pylint', 'pyright'],
+  \   'ruby': ['solargraph', 'rubocop', 'ruby'],
+  \   'groovy': ['android'],
+  \   'xml': ['android'],
+  \   'java': ['android', 'checkstyle', 'javalsp'],
+  \   'kotlin': ['ktlint', 'languageserver'],
+  \   'javascript': ['eslint'],
+  \   'text': ['proselint', 'write-good'],
+  \   'vim': ['vint'],
+  \   'yaml': ['yamllint'],
+  \   'openapi': ['yamllint', 'ibm-validator'],
+  \   'mail': ['proselint', 'write-good']
+\}
+
+let g:ale_pattern_options = {
+\   '.gitlab-ci\.yml$': {
+\       'ale_linters': ['gitlablint', 'yamllint'],
+\   },
+\}
+
+let g:ale_linter_aliases = {
+      \ 'asciidoctor': 'asciidoc'
+      \}
+
+let g:ale_kotlin_languageserver_executable = '/home/ryujin/Apps/KotlinLanguageServer/server/build/install/server/bin/kotlin-language-server'
+let g:ale_java_javalsp_executable = '/home/ryujin/Apps/java-language-server/dist/lang_server_linux.sh'
+let g:ale_sh_bashate_options = '-i E003 --max-lin-length 100'
+let g:ale_reason_ls_executable = '/home/ryujin/Apps/rls-linux/reason-language-server'
+
+let g:ale_java_eclipselsp_path = '/home/ryujin/Apps/eclipse.jdt.ls'
+
+function ALELSPMappings()
+  for linter in ale#linter#Get(&filetype)
+    if !empty(linter.lsp) && ale#lsp_linter#CheckWithLSP(bufnr(''), linter)
+      nnoremap <buffer> gk :ALEDocumentation<cr>
+      nnoremap <buffer> gr :ALEFindReferences<cr>
+      nnoremap <buffer> gd :ALEGoToDefinition<cr>
+      nnoremap <buffer> gy :ALEGoToTypeDefinition<cr>
+      nnoremap <buffer> gh :ALEHover<cr>
+      setlocal omnifunc=ale#completion#OmniFunc
+    endif
+  endfor
+endfunction
+
+augroup ALEMappings
+  autocmd BufRead,FileType * call ALELSPMappings()
+augroup END
+
+let g:wordy#ring = [
+  \ 'weak',
+  \ ['being', 'passive-voice', ],
+  \ 'business-jargon',
+  \ 'weasel',
+  \ 'puffery',
+  \ ['problematic', 'redundant', ],
+  \ ['colloquial', 'idiomatic', 'similies', ],
+  \ 'art-jargon',
+  \ ['contractions', 'opinion', 'vague-time', 'said-synonyms', ],
+  \ 'adjectives',
+  \ 'adverbs',
+  \ ]

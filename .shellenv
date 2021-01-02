@@ -6,6 +6,7 @@ export TERM='xterm-256color'
 export DOTFILES=~/dotfiles
 export BOOKMARKS=~/dotfiles/.config/nvim/bookmarks.md
 export MYVIMRC=~/dotfiles/.config/nvim/init.vim
+export TASKS=~/notes/tasks/
 export TASK=~/notes/tasks/$(date +%Y)/$(date +%m)
 export BOX=~/notes/tasks/box
 export EDITOR=nvim
