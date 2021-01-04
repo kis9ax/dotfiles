@@ -1,44 +1,44 @@
 # unix
 alias a='alias'
-alias c='cat'
 alias b='bat'
-alias h='cd ~/'
-alias d='cd ~/d/'
+alias c='cat'
+alias d='cd $DEV'
+alias h='cd $HOME'
 alias n='cd $NOTES'
-alias p='cd ~/pnotes'
 alias s='sudo'
 alias o='open'
 alias x='exit'
 alias v='nvim'
 alias y='yarn'
-alias j='nvim $TASK'
-alias jj='aws s3 sync $TASKS s3://kis9atask --size-only'
+
 alias .='cd $DOTFILES;'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias mem="top -l 1 | grep Mem"
+
 alias tree='tree -a -I ".svn|.git|.hg|.idea"'
 alias tree2='tree -L 2'
 alias tree3='tree -L 3'
-alias pp=pbpaste
-alias path='echo $PATH | tr ":" "\n"'
+
 alias rmi='rm -i'
 alias rmf='rm -fr'
-alias do='docker'
-alias dc='docker-compose'
-alias sl='ls -a -GF'
-alias l='ls -la -GF'
+alias ls='ls -la -GF'
 alias lsg='ls | fzf | pbcopy'
 alias lsc='cowsay $(ls)'
+
 alias t='tmux -u new -s $(basename `pwd`)'
 alias ta='tmux a'
 alias tkw='tmux kill-server'
+
+alias pp=pbpaste
+alias mem="top -l 1 | grep Mem"
+alias path='echo $PATH | tr ":" "\n"'
 alias tzsh='time  zsh -i -c exit'
 alias te='trans {en=ja}'
 alias tj='trans {ja=en}'
-alias lofia="mpv ~/data/lofi/a.mp3"
-alias lofi="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
+alias lofi="mpv --shuffle $LOFI"
+alias lofir="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
+alias jj='aws s3 sync $TASKS s3://kis9atask --size-only'
 alias pomo='termdown -f univers -s 25m; terminal-notifier -message "stop task and break" -sound default; termdown -f univers -s 5m; terminal-notifier -sound default -message "break stop"'
 alias port='lsof -Pan -i tcp -i udp'
 alias pshttpd='ps aux | grep httpd'
@@ -85,8 +85,23 @@ function search_zenn () {
    open "https://zenn.dev/search?q=$1"
 }
 
-# bin
-alias f='source f'
+
+# global alias
+alias -g A='| awk'
+alias -g C='| pbcopy'
+alias -g C='| wc -l'
+alias -g G='| grep --color=auto'
+alias -g H='| head'
+alias -g L='| less -R'
+alias -g X='| xargs'
+alias -g C='| pbcopy'
+alias -g F='| fzf'
+alias -g cpjson="-XPOST -H 'Content-Type: application/json' -d '{}'"
+alias -g cptext="-XPOST -H 'Content-Type: text/plain' -d"
+alias -g On="--output name"
+alias -g Oj="--output json"
+alias -g Oy="--output yaml"
+alias -g Ow="--output wide"
 
 # git
 alias g='git'
@@ -99,7 +114,7 @@ alias gsta='git stash'
 alias gstal='git stash list'
 alias gstas='git stash save'
 alias gstaa='git stash apply'
-alias gsu='git submodules'
+alias gsu='git submodule'
 alias gc='git commit'
 alias gcm='git commit -m'
 alias gca='git commit --am'
@@ -235,21 +250,3 @@ alias kcii='kubectl-ingress-ip-address'
 alias kcni='kubectl-nginx-ip-address'
 alias kcigip='kubectl-istio-gateway-ip-address'
 alias kcignp='kubectl-istio-gateway-http-nodeport'
-
-# global alias
-alias -g A='| awk'
-alias -g C='| pbcopy'
-alias -g C='| wc -l'
-alias -g G='| grep --color=auto'
-alias -g H='| head'
-alias -g L='| less -R'
-alias -g X='| xargs'
-alias -g C='| pbcopy'
-alias -g F='| fzf'
-alias -g cpjson="-XPOST -H 'Content-Type: application/json' -d '{}'"
-alias -g cptext="-XPOST -H 'Content-Type: text/plain' -d"
-alias -g On="--output name"
-alias -g Oj="--output json"
-alias -g Oy="--output yaml"
-alias -g Ow="--output wide"
-alias -g Ot="--template"

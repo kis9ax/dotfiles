@@ -19,15 +19,15 @@ fi
 source "$HOME/.shellenv"
 source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
-autoload -Uz run-help
 autoload -Uz add-zsh-hook
 autoload -Uz colors && colors
 autoload -Uz compinit && compinit -u
-autoload -Uz is-at-least
-autoload zsh/complist
 
 (( ${+_comps} )) && _comps[zinit]=_zinit
 zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-history-substring-search
+zinit light zdharma/fast-syntax-highlighting
+zinit light zdharma/history-search-multi-word
 zinit ice wait'!0'; zinit load zsh-users/zsh-syntax-highlighting
 zinit ice wait'!0'; zinit load zsh-users/zsh-completions
 
@@ -45,25 +45,37 @@ _vcs_precmd () { vcs_info }
 add-zsh-hook precmd _vcs_precmd
 PROMPT='%F{142}< %~%f${vcs_info_msg_0_} %F{142}>%f '
 
-# functions
+# bindkey
+bindkey -v
 bindkey -s '^v' 'nvim^M'
-bindkey "^P" up-line-or-search
-bindkey "^N" down-line-or-search
-bindkey "^P" up-line-or-search
-bindkey '^i'	menu-expand-or-complete
-bindkey -v '^a' beginning-of-line
-bindkey -v '^b' backward-char
-bindkey -v '^e' end-of-line
-bindkey -v '^f' forward-char
-bindkey -v '^h' backward-delete-char
-bindkey -v '^i' expand-or-complete
+bindkey '^F' autosuggest-accept
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+bindkey '^I' expand-cmd-path
+bindkey '^I' complete-word
+bindkey '^T' menu-expand-or-complete
+bindkey '^A' end-of-line
+bindkey '^B' backward-char
+bindkey '^E' forward-char
+bindkey '^D' backward-delete-char
 
-function fzf-history() {
-  BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
-  CURSOR=$#BUFFER
+function f() {
+  dir=$(fd -t d -d 3 | fzf)
+  cd $dir
 }
-zle -N fzf-history
-bindkey '^r' fzf-history
+
+function ff() {
+  baseDir=$DEV
+  dir=$(fd -t d --base-directory $baseDir -d 3 | fzf)
+  cd $baseDir/$dir
+}
+
+
+function m() {
+  baseDir=$NOTES/memos
+  memo=$(fd -t f --base-directory $baseDir | fzf)
+  bat $baseDir/$memo
+}
 
 # alias
 setopt aliases

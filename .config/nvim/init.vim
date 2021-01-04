@@ -34,6 +34,7 @@ set noruler
 set spelllang=en_us
 set tabpagemax=100
 " set shell=zsh\ -i
+set termguicolors
 set noerrorbells
 set novisualbell
 set viminfo="NONE"
@@ -123,6 +124,8 @@ inoremap <C-b> <Esc>bi
 inoremap <C-e> <Esc>ea
 inoremap <C-d> <BS>
 inoremap <C-c> <DEL>
+inoremap <C-w> <C-\><C-o>db
+inoremap <C-r> <C-\><C-o>de
 inoremap <C-f>i <Esc>I
 inoremap <C-f>a <Esc>A
 inoremap <C-f>d <Esc>dd<BS>A
@@ -135,7 +138,6 @@ inoremap <C-f>w <Esc>diwi
 inoremap <C-f>y <Esc>yyi
 inoremap <C-f>w <Esc>diwi
 inoremap <C-f>u <Esc>ui
-inoremap <C-f>w <Esc><C-r>i
 " vnoremap
 vnoremap ; :
 vnoremap : ;
@@ -144,6 +146,7 @@ vnoremap <C-j> "zx"zp`[V`]
 vnoremap <Leader>r y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
 vnoremap <Leader>/ "xy:%s/<C-R>=escape(@x, '\\/.*$^~[]')<CR>//gc<Left><Left><Left>
 vnoremap gc :Commentary<CR>
+vnoremap <Leader>i :'<,'>!tail -r<CR>
 " cnoremap
 cnoremap <C-k> <Up>
 cnoremap <C-j> <Down>

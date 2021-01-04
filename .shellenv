@@ -1,24 +1,28 @@
 # general
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export NOTES=~/notes
-export TERM='xterm-256color'
-export DOTFILES=~/dotfiles
-export BOOKMARKS=~/dotfiles/.config/nvim/bookmarks.md
-export MYVIMRC=~/dotfiles/.config/nvim/init.vim
-export TASKS=~/notes/tasks/
-export TASK=~/notes/tasks/$(date +%Y)/$(date +%m)
-export BOX=~/notes/tasks/box
+export NOTES=$HOME/notes
 export EDITOR=nvim
+export TERM='screen-256color'
 export KEYTIMEOUT=1
-export HISTSIZE=1000
-export HISTFILE=${HOME}/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=1000000
 export LANG=ja_JP.UTF-n
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
 export FZF_DEFAULT_OPTS='--height 100% --reverse'
 
+# dir
+export DOTFILES=$HOME/dotfiles
+export HISTFILE=$HOME/.zsh_history
+export MYVIMRC=$HOME/dotfiles/.config/nvim/init.vim
+export TASKS=$HOME/notes/tasks/
+export TASK=$HOME/notes/tasks/$(date +%Y)/$(date +%m)
+export BOX=$HOME/notes/tasks/box
+export DEV=$HOME/dev
+export LOFI=$HOME/lofi
+
 # bin
-export PATH=~/bin:"$PATH"
+export PATH=$HOME/bin:"$PATH"
 
 # go
 export GOPATH=$HOME/go

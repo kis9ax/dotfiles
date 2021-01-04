@@ -36,11 +36,12 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'terryma/vim-expand-region'
   " Plug 'kshenoy/vim-signature'
   Plug 'stefandtw/quickfix-reflector.vim', { 'for': 'qf' }
-  Plug 'voldikss/vim-translator'
+  " Plug 'voldikss/vim-translator'
   Plug 'dense-analysis/ale'
+  " Plug 'dhruvasagar/vim-table-mode', { 'for': 'markdown' }
   Plug 'dhruvasagar/vim-table-mode'
   " Plug 'rhysd/vim-grammarous', { 'for': ['markdown', 'txt'] }
-  Plug 'reedes/vim-wordy'
+  " Plug 'reedes/vim-wordy'
 
   " Plug 'thinca/vim-quickrun'
   " Plug 'tyru/open-browser.vim'
@@ -92,8 +93,8 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'idanarye/vim-smile', { 'on': 'Smile' }
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
-  Plug 'vim-scripts/dbext.vim'
-  Plug '/tpope/vim-dadbod'
+  " Plug 'vim-scripts/dbext.vim'
+  " Plug 'tpope/vim-dadbod'
 call plug#end()
 
 " --- function ---
@@ -150,10 +151,10 @@ nmap <Leader>h <Plug>(quickhl-manual-this)
 xmap <Leader>h <Plug>(quickhl-manual-this)
 nmap <Leader>H <Plug>(quickhl-manual-reset)
 xmap <Leader>H <Plug>(quickhl-manual-reset)
-nmap <silent> <Leader>t <Plug>Translate
-vmap <silent> <Leader>t <Plug>TranslateV
-nmap <silent> <Leader>w <Plug>TranslateW
-vmap <silent> <Leader>w <Plug>TranslateWV
+" nmap <silent> <Leader>t <Plug>Translate
+" vmap <silent> <Leader>t <Plug>TranslateV
+" nmap <silent> <Leader>w <Plug>TranslateW
+" vmap <silent> <Leader>w <Plug>TranslateWV
 " nmap <silent> <Leader>l <Plug>TranslateR
 " vmap <silent> <Leader>l <Plug>TranslateRV
 nnoremap <silent> <Leader>l :Limelight!!<CR>
@@ -184,7 +185,8 @@ let g:go_highlight_methods = 1
 let g:qf_modifiable = 1
 let g:qf_write_changes = 1
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-let g:translator_target_lang='ja'
+" let g:translator_target_lang='ja'
+let g:table_mode_corner = '|'
 let g:vim_jsx_pretty_colorful_config = 1
 let g:mkdp_auto_close=0
 let g:mkdp_refresh_slow=1
@@ -273,11 +275,11 @@ let g:ale_fixers = {
   \   'ruby': ['rubocop'],
   \   'kotlin': ['ktlint']
 \}
+  " \   'markdown': ['proselint'],
 
-  " \   'markdown': ['markdownlint', 'vale'],
 let g:ale_linters = {
   \   'asciidoc': ['vale'],
-  \   'markdown': ['proselint'],
+  \   'markdown': ['markdownlint', 'vale'],
   \   'dockerfile': ['dockerfile_lint'],
   \   'bib': ['bibclean'],
   \   'go': ['gofmt', 'golint', 'go vet', 'golangserver'],
@@ -333,16 +335,16 @@ augroup ALEMappings
   autocmd BufRead,FileType * call ALELSPMappings()
 augroup END
 
-let g:wordy#ring = [
-  \ 'weak',
-  \ ['being', 'passive-voice', ],
-  \ 'business-jargon',
-  \ 'weasel',
-  \ 'puffery',
-  \ ['problematic', 'redundant', ],
-  \ ['colloquial', 'idiomatic', 'similies', ],
-  \ 'art-jargon',
-  \ ['contractions', 'opinion', 'vague-time', 'said-synonyms', ],
-  \ 'adjectives',
-  \ 'adverbs',
-  \ ]
+" let g:wordy#ring = [
+"   \ 'weak',
+"   \ ['being', 'passive-voice', ],
+"   \ 'business-jargon',
+"   \ 'weasel',
+"   \ 'puffery',
+"   \ ['problematic', 'redundant', ],
+"   \ ['colloquial', 'idiomatic', 'similies', ],
+"   \ 'art-jargon',
+"   \ ['contractions', 'opinion', 'vague-time', 'said-synonyms', ],
+"   \ 'adjectives',
+"   \ 'adverbs',
+"   \ ]
