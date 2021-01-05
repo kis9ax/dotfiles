@@ -5,7 +5,11 @@ if [ -z "${DOTPATH:-}" ]; then
   DOTPATH=~/dotfiles; export DOTPATH
 fi
 
-. ${DOTPATH}/etc/install
+echo $DOTPATH
+
+source ${DOTPATH}/etc/utiles/general.sh
+source ${DOTPATH}/etc/utiles/ostype.sh
+source ${DOTPATH}/etc/utiles/message.sh
 
 init() {
   if is_osx; then
@@ -13,7 +17,6 @@ init() {
       e_header "Install Homebrew"
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     else
-      e_header "Initialize on osx"
       cd $DOTPATH
       make init-osx
     fi

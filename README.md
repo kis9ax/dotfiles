@@ -5,5 +5,5 @@
 ⚠️ May destroy your environment
 
 ```
-curl -L https://git.io/kis9adot | sh
+curl -L https://git.io/kis9adot | bash
 ```
