@@ -39,7 +39,8 @@ module.exports = {
     "hyper",
     "hyperfull",
     "hyperminimal",
+    "hyper-gruvbox"
   ],
-  localPlugins: ["gruvbox"],
+  localPlugins: [],
   keymaps: {},
 }

@@ -1,13 +1,14 @@
-ev:
+env:
   TERM: xterm-256color
   WINIT_X11_SCALE_FACTOR: "1.0"
+  LANG: "en_US.UTF-8"
 window:
   dimensions:
     columns: 1
     lines: 1
   padding:
-    x: 8
-    y: 4
+    x: 6
+    y: 2
 
   dynamic_padding: false
   decorations: none
@@ -16,13 +17,13 @@ window:
 font:
   normal:
     family: "Victor Mono"
-    style: Medium Oblique
+    style: Regular
   bold:
     family: "Hack Nerd Font"
     style: Regular
-  italic:
-    family: "Fira code"
-    style: Italic
+  # normal:
+  #   family: "Fira code"
+  #   style: Light
   size: 12
   offset:
     x: 0
@@ -37,28 +38,26 @@ scrolling:
 
 colors:
   primary:
-    background: '0x1d2021'
-    foreground: '0xd4be98'
-
+    background: "0x1d2021"
+    foreground: "0xebdbb2"
   normal:
-    black:   '0x665c54'
-    red:     '0xea6962'
-    green:   '0xa9b665'
-    yellow:  '0xd8a657'
-    blue:    '0x7daea3'
-    magenta: '0xd3869b'
-    cyan:    '0x89b482'
-    white:   '0xd4be98'
-
+    black: "0x282828"
+    red: "0xcc241d"
+    green: "0x98971a"
+    yellow: "0xd79921"
+    blue: "0x458588"
+    magenta: "0xb16286"
+    cyan: "0x689d6a"
+    white: "0xa89984"
   bright:
-    black:   '0x928374'
-    red:     '0xea6962'
-    green:   '0xa9b665'
-    yellow:  '0xd8a657'
-    blue:    '0x7daea3'
-    magenta: '0xd3869b'
-    cyan:    '0x89b482'
-    white:   '0xd4be98'
+    black: "0x928374"
+    red: "0xfb4934"
+    green: "0xb8bb26"
+    yellow: "0xfabd2f"
+    blue: "0x83a598"
+    magenta: "0xd3869b"
+    cyan: "0x8ec07c"
+    white: "0xebdbb2"
 
 bell:
   animation: EaseOutExpo

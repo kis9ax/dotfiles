@@ -29,8 +29,4 @@ export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 
-# nodebrew
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-
-# java
-export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+[ -d ~/.anyenv/bin ] && export PATH=$HOME/.anyenv/bin:$PATH

@@ -16,20 +16,24 @@ if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && print -P "success" || print -P "fail"
 fi
 
+if [ $DOTFILES/.zshrc -nt ~/.zshrc.zwc ]; then
+  zcompile ~/.zshrc
+fi
+
 source "$HOME/.shellenv"
 source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 autoload -Uz add-zsh-hook
 autoload -Uz colors && colors
-autoload -Uz compinit && compinit -u
+autoload -Uz compinit
 
 (( ${+_comps} )) && _comps[zinit]=_zinit
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-history-substring-search
-# zinit light zdharma/fast-syntax-highlighting
 zinit light zdharma/history-search-multi-word
 zinit ice wait'!0'; zinit load zsh-users/zsh-syntax-highlighting
 zinit ice wait'!0'; zinit load zsh-users/zsh-completions
+[ -f ~/.anyenv/bin/anyenv ] && eval "$(anyenv init - zsh)"
 
 # prompt
 autoload -Uz vcs_info
@@ -47,7 +51,7 @@ PROMPT='%F{142}< %~%f${vcs_info_msg_0_} %F{142}>%f '
 
 # bindkey
 bindkey -v
-bindkey -s '^v' 'nvim^M'
+bindkey -s '^v' 'nvim .^M'
 bindkey '^F' autosuggest-accept
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
@@ -61,7 +65,9 @@ bindkey '^D' backward-delete-char
 
 function f() {
   dir=$(fd -t d -d 3 | fzf)
-  cd $dir
+  if [ "$(echo $dir)" ]; then
+    cd $dir
+  fi
 }
 
 function ff() {

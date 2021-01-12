@@ -8,13 +8,19 @@ endif
 " --- vim-plug plugins ---
 call plug#begin('~/.config/nvim/plugged')
   " Plug 'kis9a/coc-hello', {'do': 'yarn install --frozen-lockfile && yarn build'}
+  Plug '~/vim-zalgolizer'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim', { 'on': [ 'Files', 'GFiles', 'Commands', 'Commits', 'Rg', 'Buffers', 'Maps', 'Marks' ] }
   Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'dpelle/vim-LanguageTool'
+  " Plug 'mattn/emmet-vim', { 'on': [ 'html', 'jsx', 'tsx', 'markdown', 'vue' ] }
+  Plug 'mattn/emmet-vim'
+  Plug 'Yggdroot/indentLine'
   " git
   " Plug 'lambdalisue/gina.vim'
   Plug 'tpope/vim-fugitive'
-  Plug 'jreybert/vimagit', { 'on': 'Magit' }
+  " Plug 'jreybert/vimagit', { 'on': 'Magit' }
 
   " window
   Plug 'simeji/winresizer', { 'on': [ 'WinResizerStartFocus', 'WinResizerStartResize'] }
@@ -31,16 +37,21 @@ call plug#begin('~/.config/nvim/plugged')
   " Plug 'vimwiki/vimwiki'
 
   " utiles
+  Plug 'liuchengxu/vista.vim'
   Plug 'junegunn/limelight.vim', { 'on': [ 'Limelight', 'Limelight!', 'Limelight!!' ] }
+  Plug 'junegunn/vim-easy-align'
+  Plug 'joshdick/onedark.vim'
+  " Plug 'gruvbox/gruvbox.vim'
   " Plug 'luochen1990/rainbowl'
   " Plug 'terryma/vim-expand-region'
-  " Plug 'kshenoy/vim-signature'
+  Plug 'kshenoy/vim-signature'
   Plug 'stefandtw/quickfix-reflector.vim', { 'for': 'qf' }
-  " Plug 'voldikss/vim-translator'
+  Plug 'voldikss/vim-translator'
   Plug 'dense-analysis/ale'
   " Plug 'dhruvasagar/vim-table-mode', { 'for': 'markdown' }
   Plug 'dhruvasagar/vim-table-mode'
-  " Plug 'rhysd/vim-grammarous', { 'for': ['markdown', 'txt'] }
+  " Plug 'rhysd/vim-grammarous'
+  Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
   " Plug 'reedes/vim-wordy'
 
   " Plug 'thinca/vim-quickrun'
@@ -63,16 +74,23 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'iamcco/mathjax-support-for-mkdp', { 'for': 'markdown' }
   Plug 'aklt/plantuml-syntax', { 'for': 'uml' }
   Plug 'scrooloose/vim-slumlord', { 'for': 'uml' }
-  " Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+  Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
   " javascript/typescript
-  Plug 'yuezk/vim-js', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
-  Plug 'leafgarland/typescript-vim', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
-  Plug 'pangloss/vim-javascript', { 'for': ['js', 'jsx', 'ts', 'tsx'] }
-  " Plug 'maxmellon/vim-jsx-pretty', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
-  " Plug 'posva/vim-vue', { 'for': 'vue' }
-  " Plug 'othree/yajs.vim', { 'for': ['js', 'jsx', 'ts', 'tsx'] }
-  " Plug 'HerringtonDarkholme/yats.vim', { 'for': ['js', 'ts', 'jsx', 'tsx'] }
+  " Plug 'yuezk/vim-js', { 'for': ['javascript'] }
+  " Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
+  " Plug 'pangloss/vim-javascript', { 'for': ['javascript','jsx'] }
+  " Plug 'peitalin/vim-jsx-typescript', { 'for': 'typescript' }
+  " Plug 'maxmellon/vim-jsx-pretty', { 'for': ['jsx'] }
+  " Plug 'sheerun/vim-polyglot'
+  " " Plug 'posva/vim-vue', { 'for': 'vue' }
+  " Plug 'othree/yajs.vim', { 'for': [ 'javascript'] }
+  " Plug 'HerringtonDarkholme/yats.vim', { 'for': ['typescript'] }
+  " augroup SyntaxSettings
+  "   autocmd!
+  "   autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+" augroup END
+" autocmd FileType vue syntax sync fromstart
 
   " golang
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
@@ -114,11 +132,34 @@ function! Wait(mil)
 endfunction
 
 " --- plugin mapping
+nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 nnoremap <silent> ge :WinResizerStartResize<CR>
 nnoremap <silent>gm :SignatureListGlobalMarks<CR>
-nnoremap <silent>ga :Magit<CR>
+" nnoremap <silent>ga :Magit<CR>
 nnoremap <silent>gr :Grepper<CR>
-nnoremap gc :Grepper-cd 
+nnoremap gp :Grepper-
+nnoremap gc :Grepper-cd<CR>
+nnoremap gb :Grepper-buffer<CR>
+
+    " |:Grepper-buffer|
+    " |:Grepper-buffers|
+    " |:Grepper-highlight|
+    " |:Grepper-jump|
+    " |:Grepper-open|
+    " |:Grepper-switch|
+    " |:Grepper-quickfix|
+    " |:Grepper-prompt|
+    " |:Grepper-dir|
+    " |:Grepper-side|
+    " |:Grepper-tool|
+    " |:Grepper-cword|
+    " |:Grepper-cd|
+    " |:Grepper-query|
+    " |:Grepper-grepprg|
+    " |:Grepper-stop|
+    " |:Grepper-append|
+
 nnoremap <silent><C-p> :GFiles<CR>
 nnoremap <silent>gdi :Gdiffsplit@<CR>
 nnoremap <silent>sp :Commands<CR>
@@ -129,8 +170,8 @@ nnoremap <silent>sj :Buffers<CR>
 nnoremap <silent>sl :Lines<CR>
 nnoremap <silent>sc :Commits<CR>
 nnoremap <silent>s: :CocCommand<CR>
-nnoremap <silent>sn :CocCommand explorer --sources=buffer+,file+ --width=60<CR>
-nnoremap <silent><C-n> :CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width=1000 --floating-height=1000<CR>
+nnoremap <silent>sn :CocCommand explorer --sources=buffer+,file+ --width=55<CR>
+nnoremap <silent><C-n> :CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width=10000 --floating-height=10000<CR>
 nnoremap <silent>s; :<C-u>CocList<cr>
 nnoremap <silent>K :call <SID>show_documentation()<CR>
 nnoremap <silent>su :UndotreeToggle<CR>
@@ -147,16 +188,17 @@ nmap sk <Plug>(coc-format)
 " vmap gx <Plug>(openbrowser-smart-search)
 vnoremap gc :Commentary<CR>
 nnoremap <Leader>gn :Gina 
+nnoremap <Leader>v :Vista!!<CR>
 nmap <Leader>h <Plug>(quickhl-manual-this)
 xmap <Leader>h <Plug>(quickhl-manual-this)
 nmap <Leader>H <Plug>(quickhl-manual-reset)
 xmap <Leader>H <Plug>(quickhl-manual-reset)
-" nmap <silent> <Leader>t <Plug>Translate
-" vmap <silent> <Leader>t <Plug>TranslateV
-" nmap <silent> <Leader>w <Plug>TranslateW
-" vmap <silent> <Leader>w <Plug>TranslateWV
-" nmap <silent> <Leader>l <Plug>TranslateR
-" vmap <silent> <Leader>l <Plug>TranslateRV
+nmap <silent> <Leader>t <Plug>Translate
+vmap <silent> <Leader>t <Plug>TranslateV
+nmap <silent> <Leader>w <Plug>TranslateW
+vmap <silent> <Leader>w <Plug>TranslateWV
+nmap <silent> <Leader>l <Plug>TranslateR
+vmap <silent> <Leader>l <Plug>TranslateRV
 nnoremap <silent> <Leader>l :Limelight!!<CR>
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
 nmap , <Leader><Leader>
@@ -167,11 +209,26 @@ command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call CocAction('runCommand', 'editor.action.organizeImport')
 
+function Test() range
+  echo system('echo '.shellescape(join(getline(a:firstline, a:lastline), "\n")).'| pbcopy')
+endfunction
+
+command! -range=% -nargs=0 Test :<line1>,<line2>call Test()
+
+" hello
+
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+
 " ---- plugin valiables
-let g:undotree_WindowLayout = 2
-let g:undotree_SplitWidth = 50
-let g:undotree_DiffpanelHeight = 10
+let g:user_emmet_leader_key='<c-z>'
+" let g:undotree_WindowLayout = 2
+" let g:undotree_SplitWidth = 50
+" let g:undotree_DiffpanelHeight = 10
 let g:winresizer_start_key = '<Leader>e'
+let g:vista_sidebar_width = 60
+let g:vista_default_executive = 'coc'
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.vue,*,tsx"
 let g:mkdp_echo_preview_url = 1
 let g:go_fmt_command = "gofmt"
@@ -185,7 +242,7 @@ let g:go_highlight_methods = 1
 let g:qf_modifiable = 1
 let g:qf_write_changes = 1
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-" let g:translator_target_lang='ja'
+let g:translator_target_lang='ja'
 let g:table_mode_corner = '|'
 let g:vim_jsx_pretty_colorful_config = 1
 let g:mkdp_auto_close=0
@@ -195,6 +252,7 @@ let g:fzf_buffers_jump = 1
 let g:coc_global_extensions = [
       \  'coc-git'
       \, 'coc-pairs'
+      \, 'coc-prettier'
       \, 'coc-explorer'
       \, 'coc-highlight'
       \, 'coc-snippets'
@@ -210,15 +268,18 @@ let g:coc_global_extensions = [
       \, ]
 
 " treesitter
-" lua <<EOF
-" require'nvim-treesitter.configs'.setup {
-"   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-"   highlight = {
-"     enable = true
-"   },
-" }
-" EOF
-
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    disable = {},
+    indent = {
+      enable = true
+    }
+  },
+  ensure_installed = 'all'
+}
+EOF
 " call ale#linter#Define('text', {
 " \   'name': 'proselint',
 " \   'executable': 'proselint',
@@ -265,6 +326,9 @@ let g:ale_echo_msg_warning_str = ''
 let g:ale_writegood_options = '--no-passive'
 let g:ale_virtualtext_cursor = 1
 let g:ale_virtualtext_prefix = ' '
+let g:indentLine_char_list = ['¦', '┆', '┊']
+" let g:indentLine_char_list = ['.','·','˙']
+let g:indentLine_faster = 1
 
 let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -322,7 +386,7 @@ function ALELSPMappings()
   for linter in ale#linter#Get(&filetype)
     if !empty(linter.lsp) && ale#lsp_linter#CheckWithLSP(bufnr(''), linter)
       nnoremap <buffer> gk :ALEDocumentation<cr>
-      nnoremap <buffer> gr :ALEFindReferences<cr>
+      " nnoremap <buffer> gr :ALEFindReferences<cr>
       nnoremap <buffer> gd :ALEGoToDefinition<cr>
       nnoremap <buffer> gy :ALEGoToTypeDefinition<cr>
       nnoremap <buffer> gh :ALEHover<cr>

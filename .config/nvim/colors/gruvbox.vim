@@ -12,17 +12,18 @@ endif
 let g:colors_name='gruvbox'
 
 let s:gb = {}
-" let s:gb.dark0_hard  = ['#1d1d1d', 234]
-let s:gb.dark0_hard  = ['black', 0]
+let s:gb.dark0_hard  = ['#1d1d1d', 234]
+" let s:gb.dark0_hard  = ['black', 0]
 let s:gb.dark0       = ['#282828', 235]
 let s:gb.dark0_soft  = ['#32302f', 236]
-let s:gb.dark1       = ['#3c3836', 237]
+" let s:gb.dark1       = ['#3c3836', 237]
+let s:gb.dark1       = ['#1d1d1d', 234]
 let s:gb.dark2       = ['#504945', 239]
 let s:gb.dark3       = ['#665c54', 241]
 let s:gb.dark4       = ['#7c6f64', 243]
 let s:gb.dark4_256   = ['#7c6f64', 243]
-" let s:gb.gray_245    = ['#928374', 245]
-let s:gb.gray_245    = ['#458588', 245]
+let s:gb.gray_245    = ['#928374', 245]
+" let s:gb.gray_245    = ['#458588', 245]
 let s:gb.gray_244    = ['#928374', 244]
 let s:gb.light0      = ['#fbf1c7', 229]
 let s:gb.light1      = ['#ebcdb2', 223]
@@ -73,7 +74,6 @@ let s:blue   = s:gb.bright_blue
 let s:purple = s:gb.bright_purple
 let s:aqua   = s:gb.bright_aqua
 let s:orange = s:gb.bright_orange
-let s:pow    = s:gb.neutral_red
 let s:gb.bg0 = s:bg0
 let s:gb.bg1 = s:bg1
 let s:gb.bg2 = s:bg2
@@ -153,10 +153,11 @@ endfunction
 " Version_700: {{{
 call s:HL('CursorLine',   s:none, s:bg1)
 hi! link CursorColumn CursorLine
-call s:HL('TabLineFill', s:pow, s:bg1, s:invert_tabline)
+" call s:HL('TabLineFill', s:red, s:bg1, s:invert_tabline)
+" call s:HL('TabLineS]@#el', s:red, s:bg1, s:invert_tabline)
+call s:HL('TabLineFill', s:bg4, s:bg1, s:invert_tabline)
 call s:HL('TabLineSel', s:red, s:bg1, s:invert_tabline)
-" call s:HL('TabLineFill', s:bg4, s:bg1, s:invert_tabline)
-" call s:HL('TabLineSel', s:green, s:bg1, s:invert_tabline)
+call s:HL('TabLineDir', s:red, s:bg1, s:invert_tabline)
 hi! link TabLine TabLineFill
 call s:HL('MatchParen', s:none, s:bg3, s:bold)
 call s:HL('Pmenu', s:fg1, s:bg2)
@@ -283,7 +284,7 @@ call s:HL('Search',    s:yellow, s:bg0, s:inverse)
 call s:HL('IncSearch', s:hls_cursor, s:bg0, s:inverse)
 call s:HL('Underlined', s:blue, s:none, s:underline)
 call s:HL('StatusLine',   s:bg0, s:red, s:inverse)
-call s:HL('StatusLineNC', s:bg0, s:pow, s:inverse)
+call s:HL('StatusLineNC', s:bg0, s:fg4, s:inverse)
 " call s:HL('StatusLine',   s:bg1, s:green, s:inverse)
 " call s:HL('StatusLineNC', s:bg1, s:fg4, s:inverse)
 call s:HL('VertSplit', s:bg3, s:vert_split)

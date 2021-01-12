@@ -7,9 +7,9 @@ fi
 
 echo $DOTPATH
 
-source ${DOTPATH}/etc/utiles/general.sh
-source ${DOTPATH}/etc/utiles/ostype.sh
-source ${DOTPATH}/etc/utiles/message.sh
+. ${DOTPATH}/etc/utiles/general.sh
+. ${DOTPATH}/etc/utiles/ostype.sh
+. ${DOTPATH}/etc/utiles/message.sh
 
 init() {
   if is_osx; then

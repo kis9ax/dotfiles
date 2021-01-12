@@ -43,17 +43,17 @@ set virtualedit=block
 let mapleader="\<Space>"
 let maplocalleader="\,"
 let g:netrw_browsex_viewer="open"
-let g:loaded_gzip = 1
-let g:loaded_tar = 1
-let g:loaded_tarPlugin = 1
-let g:loaded_zip = 1
-let g:loaded_zipPlugin = 1
-let g:loaded_rrhelper = 1
-let g:loaded_2html_plugin = 1
-let g:loaded_vimball = 1
-let g:loaded_vimballPlugin = 1
-let g:loaded_getscript = 1
-let g:loaded_getscriptPlugin = 1
+" let g:loaded_gzip = 1
+" let g:loaded_tar = 1
+" let g:loaded_tarPlugin = 1
+" let g:loaded_zip = 1
+" let g:loaded_zipPlugin = 1
+" let g:loaded_rrhelper = 1
+" let g:loaded_2html_plugin = 1
+" let g:loaded_vimball = 1
+" let g:loaded_vimballPlugin = 1
+" let g:loaded_getscript = 1
+" let g:loaded_getscriptPlugin = 1
 
 " --- plugins ---
 source ~/.config/nvim/plugins.vim
@@ -97,6 +97,9 @@ nnoremap su :let @+ = expand("%:p")<cr>
 nnoremap <Leader>j :tabnew<CR>:e $TASK<CR>
 nnoremap <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
 nnoremap <Leader>b :tabnew<CR>:e $BOOKMARKS<CR>
+nnoremap <silent> <Leader>o :call ToggleSpellCheck()<CR>
+nnoremap <silent> cy ce<C-r>0<ESC>:let @/=@1<CR>:noh<CR>
+vnoremap <silent> cy c<C-r>0<ESC>:let @/=@1<CR>:noh<CR>
 "" vimtab
 nnoremap ,1 1gt
 nnoremap ,2 2gt
@@ -141,6 +144,9 @@ inoremap <C-f>u <Esc>ui
 " vnoremap
 vnoremap ; :
 vnoremap : ;
+vnoremap > >gv
+vnoremap < <gv
+vnoremap y ygv
 vnoremap <C-k> "zx<Up>"zP`[V`]
 vnoremap <C-j> "zx"zp`[V`]
 vnoremap <Leader>r y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
@@ -170,13 +176,39 @@ nnoremap <script> <silent> <Leader>q :call ToggleQuickfix()<CR>
 if $TMUX != ""
   augroup titlesettings
     autocmd!
-    autocmd BufEnter * call system("tmux rename-window " . "'[vim] " . expand("%:t") . "'")
+    " autocmd BufEnter * call system("tmux rename-window " . "'[vim] " . expand("%:t") . "'")
+    autocmd VimEnter * call system("tmux rename-window " . "'[vim] " . fnamemodify(getcwd(), ':t') . "'")
     autocmd VimLeave * call system("tmux rename-window zsh")
   augroup END
 endif
-command! RemoveTrairing :%s/\s\+$//e
+command! Rmt :%s/\s\+$//e
 command! M :SignatureListGlobalMarks
 match errorMsg /\s\+$/
+
+" CoC Explorer Settings
+augroup MyCocExplorer
+  autocmd!
+  autocmd VimEnter * sil! au! F
+  " set window status line
+  autocmd FileType coc-explorer setl statusline=File-Explorer
+  "quit explorer whein it's the last
+  autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
+  " Make sure nothing opened in coc-explorer buffer
+  autocmd BufEnter * if bufname('#') =~# "\[coc-explorer\]-." && winnr('$') > 1 | b# | endif
+  " open if directory specified or if buffer empty
+  autocmd VimEnter * let d = expand('%:p')
+    \ | if argc() == 0
+      \ | exe 'CocCommand explorer --quit-on-open --position floating --floating-width=10000 --floating-height=10000 --sources buffer+,file+'
+    \ | elseif isdirectory(d) || (bufname()=='')
+      \ | silent! bd
+      \ | exe 'CocCommand explorer --quit-on-open --position floating --floating-width=10000 --floating-height=10000 --sources buffer+,file+ ' . d
+      \ | exe 'cd ' . d
+    \ | else
+      \ | cd %:p:h
+    \ | endif
+  " cd after open
+  autocmd User CocExplorerOpenPost let dir = getcwd() | call CocActionAsync("runCommand", "explorer.doAction", "closest", {"name": "cd", "args": [dir]})
+augroup END
 
 " --- tabline ---
 function! s:SID_PREFIX()
@@ -184,7 +216,7 @@ function! s:SID_PREFIX()
 endfunction
 
 function! s:my_tabline()
-  let s= '%#TabLineSel#< %{getcwd()} > '
+  let s='%#TabLineDir#:%{getcwd()} '
   for i in range(1, tabpagenr('$'))
     let bufnrs = tabpagebuflist(i)
     let bufnr = bufnrs[tabpagewinnr(i) - 1]
@@ -194,7 +226,7 @@ function! s:my_tabline()
     let title = title
     let s .= '%'.i.'T'
     let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
-    let s .= no . ': ' . title
+    let s .= no . ':' . title
     let s .= mod
     let s .= '%#TabLineFill# '
   endfor
@@ -206,7 +238,24 @@ let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 
 " --- statusline ---
 let &statusline=':%n %f %q %y'
+let s:hidden_all = 0
+function! ToggleHiddenAll()
+    if s:hidden_all  == 0
+        let s:hidden_all = 1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+    else
+        let s:hidden_all = 0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+    endif
+endfunction
 
+nnoremap <silent> <Leader>s :call ToggleHiddenAll()<CR>
 
 " --- Toggle spell checking ---
 function! ToggleSpellCheck()
@@ -217,5 +266,3 @@ function! ToggleSpellCheck()
     echo "Spellcheck OFF"
   endif
 endfunction
-
-nnoremap <silent> <Leader>o :call ToggleSpellCheck()<CR>

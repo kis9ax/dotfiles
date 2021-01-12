@@ -1,11 +1,9 @@
-# unix
+#alias unix
 alias a='alias'
 alias b='bat'
 alias c='cat'
 alias d='cd $DEV'
-alias h='cd $HOME'
 alias n='cd $NOTES'
-alias s='sudo'
 alias o='open'
 alias x='exit'
 alias v='nvim'
@@ -16,13 +14,15 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
+alias earth="curl -s http://artscene.textfiles.com/vt100/movglobe.vt | pv -q -L 9600"
+alias timepv="for (( i = 1 ; i <= 100 ; i++ )); do sleep 1; echo $i; done | (>&2 echo -en "\r"; pv --progress --line-mode --size 100 --eta --timer)"
 alias tree='tree -a -I ".svn|.git|.hg|.idea"'
 alias tree2='tree -L 2'
 alias tree3='tree -L 3'
 
 alias rmi='rm -i'
 alias rmf='rm -fr'
-alias ls='ls -la -GF'
+alias sl='ls -lahGpt'
 alias lsg='ls | fzf | pbcopy'
 alias lsc='cowsay $(ls)'
 
@@ -30,18 +30,37 @@ alias t='tmux -u new -s $(basename `pwd`)'
 alias ta='tmux a'
 alias tkw='tmux kill-server'
 
+alias ffp='ffprobe -hide_banner -show_format'
+alias ffimg='ls *(.png|.jpg) | fzf -m --prompt="twimg" | xargs -I {} sips -Z 720 {}'
+alias ff2gif='ls *(.mp4|.mov) | fzf -m --prompt="tw2gif" | xargs -I {} ffmpeg -y -i {} -vf scale="720:trunc(ow/a/2)*2" -r 10 {}.gif'
+alias ffmov2mp4='ls *.mov | fzf -m --prompt="twmov2mp4" | xargs -I {} ffmpeg -y -i {} -vf scale="720:trunc(ow/a/2)*2" {}.mp4'
+alias ffgif2mp4='ls *.gif | fzf -m --prompt="gif2mp4" | xargs -I {} ffmpeg -y -i {} -vf scale="720:trunc(ow/a/2)*2" {}.mp4'
+
 alias pp=pbpaste
 alias mem="top -l 1 | grep Mem"
 alias path='echo $PATH | tr ":" "\n"'
 alias tzsh='time  zsh -i -c exit'
 alias te='trans {en=ja}'
 alias tj='trans {ja=en}'
+alias yd='youtube-dl -f 22'
 alias lofi="mpv --shuffle $LOFI"
 alias lofir="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
 alias jj='aws s3 sync $TASKS s3://kis9atask --size-only'
 alias pomo='termdown -f univers -s 25m; terminal-notifier -message "stop task and break" -sound default; termdown -f univers -s 5m; terminal-notifier -sound default -message "break stop"'
 alias port='lsof -Pan -i tcp -i udp'
 alias pshttpd='ps aux | grep httpd'
+alias qi=qi
+function qi () {
+  curl -s https://qiita.com | pup '.css-qrra2n json{}' \
+  | jq -r -C '.[] | [.text, .href] | join(" < ")' \
+  | cat -n | fzf -m --ansi --border --prompt="Qiita trends open > " \
+  | xargs -I {} | grep -Eo '(http|https)://[^/"]+\/[^/"]+\/items/[^/"]+' | xargs open
+}
+alias qil=qil
+functiton qil() {
+  curl -s https://qiita.com | pup '.css-qrra2n json{}' | jq -r -C '.[] | [.text, .href] | join(" < ")' | cat -n | fzf -m --ansi --border --prompt="Qiita trends open > " | xargs -I {} | grep -Eo '(http|https)://[^/"]+\/[^/"]+\/items/[^/"]+' | xargs curl -s | pup '.it-MdContent' | pup 'text{}' | sed '/^[[:space:]]*$/d' | less
+}
+
 alias pkill=pkill
 function pkill () {
   lsof -i :$1 | awk '{l=$2} END {print l}' | xargs kill
@@ -85,17 +104,16 @@ function search_zenn () {
    open "https://zenn.dev/search?q=$1"
 }
 
-
 # global alias
 alias -g A='| awk'
 alias -g C='| pbcopy'
-alias -g C='| wc -l'
 alias -g G='| grep --color=auto'
 alias -g H='| head'
 alias -g L='| less -R'
 alias -g X='| xargs'
 alias -g C='| pbcopy'
 alias -g F='| fzf'
+alias -g P='| curl -T - https://ppng.io/kis9a'
 alias -g cpjson="-XPOST -H 'Content-Type: application/json' -d '{}'"
 alias -g cptext="-XPOST -H 'Content-Type: text/plain' -d"
 alias -g On="--output name"
@@ -107,6 +125,7 @@ alias -g Ow="--output wide"
 alias g='git'
 alias ga='git add'
 alias ga.='git add .'
+alias gclast='git log --since='last month' --author="$(git config user.name)" --oneline'
 alias gs='git status'
 alias gd='git diff'
 alias gd@='git diff @'
@@ -118,6 +137,12 @@ alias gsu='git submodule'
 alias gc='git commit'
 alias gcm='git commit -m'
 alias gca='git commit --am'
+alias gco=gco
+function gco() {
+  date=$(date -v -$1d)
+  git commit --date $date
+}
+alias gcoa='git rebase HEAD~ --committer-date-is-author-date'
 alias gr='git reset'
 alias gch='git checkout'
 alias gac='git add . && git commit -am'
@@ -127,6 +152,7 @@ alias gpl='git pull'
 alias gf='git fetch'
 alias gb='git branch'
 alias gcl='git clone'
+alias gclu='git clone https://github.com/'
 alias gclr='git clone --recurse-submodules'
 alias gupd='git update'
 alias gg='git graph'
@@ -155,7 +181,7 @@ alias dk='docker'
 alias dkp='docker ps'
 alias dkpa='docker ps -a'
 alias dkpaq='docker ps -a -q'
-alias dkb='docker build -t'
+alias dkb='docker build'
 alias dkbnc='docker build --no-cache -t'
 alias dkr='docker run --rm'
 alias dkrti='docker run --rm -ti'
