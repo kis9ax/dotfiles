@@ -13,6 +13,7 @@ let g:colors_name='gruvbox'
 
 let s:gb = {}
 let s:gb.dark0_hard  = ['#1d1d1d', 234]
+let s:gb.dark00  = ['#212121', 234]
 " let s:gb.dark0_hard  = ['black', 0]
 let s:gb.dark0       = ['#282828', 235]
 let s:gb.dark0_soft  = ['#32302f', 236]
@@ -55,7 +56,9 @@ let s:gb.faded_orange   = ['#af3a03', 130]
 let s:vim_bg = ['bg', 'bg']
 let s:vim_fg = ['fg', 'fg']
 let s:none = ['NONE', 'NONE']
-let s:bg0  = s:gb.dark0_hard
+let s:bg = s:gb.dark0_soft
+let s:bg0  = s:gb.dark00
+" let s:bg0  = s:gb.dark0
 let s:bg1  = s:gb.dark1
 let s:bg2  = s:gb.dark2
 let s:bg3  = s:gb.dark3
@@ -151,13 +154,15 @@ function! s:HL(group, fg, ...) " Arguments: group, guifg, guibg, gui, guisp
 endfunction
 
 " Version_700: {{{
-call s:HL('CursorLine',   s:none, s:bg1)
 hi! link CursorColumn CursorLine
 " call s:HL('TabLineFill', s:red, s:bg1, s:invert_tabline)
 " call s:HL('TabLineS]@#el', s:red, s:bg1, s:invert_tabline)
-call s:HL('TabLineFill', s:bg4, s:bg1, s:invert_tabline)
-call s:HL('TabLineSel', s:red, s:bg1, s:invert_tabline)
-call s:HL('TabLineDir', s:red, s:bg1, s:invert_tabline)
+" call s:HL('TabLineFill', s:bg4, s:bg1, s:invert_tabline)
+" call s:HL('TabLineSel', s:red, s:bg1, s:invert_tabline)
+" call s:HL('TabLineDir', s:red, s:bg1, s:invert_tabline)
+call s:HL('TabLineFill', s:bg4, s:bg1, s:bold)
+call s:HL('TabLineSel', s:orange, s:bg1, s:bold)
+call s:HL('TabLineDir', s:orange, s:bg1, s:bold)
 hi! link TabLine TabLineFill
 call s:HL('MatchParen', s:none, s:bg3, s:bold)
 call s:HL('Pmenu', s:fg1, s:bg2)
@@ -169,6 +174,7 @@ call s:HL('PmenuThumb', s:none, s:bg4)
 " Version_703: {{{
 call s:HL('ColorColumn',  s:none, s:color_column)
 call s:HL('Conceal', s:blue, s:none)
+call s:HL('CursorLine',   s:none, s:bg)
 call s:HL('CursorLineNr', s:yellow, s:bg1)
 " }}}
 
@@ -308,3 +314,26 @@ call s:HL('CocErrorHighlight', s:none, s:none, s:undercurl, s:red)
 call s:HL('CocWarningHighlight', s:none, s:none, s:undercurl, s:orange)
 call s:HL('CocInfoHighlight', s:none, s:none, s:undercurl, s:yellow)
 call s:HL('CocHintHighlight', s:none, s:none, s:undercurl, s:blue)
+
+" Vim: {{{
+
+call s:HL('vimCommentTitle', s:fg4_256, s:none, s:bold . s:italicize_comments)
+
+hi! link vimNotation GruvboxOrange
+hi! link vimBracket GruvboxOrange
+hi! link vimMapModKey GruvboxOrange
+hi! link vimFuncSID GruvboxFg3
+hi! link vimSetSep GruvboxFg3
+hi! link vimSep GruvboxFg3
+hi! link vimContinue GruvboxFg3
+
+" }}}
+" Go: {{{
+
+hi! link goDirective GruvboxAqua
+hi! link goConstants GruvboxPurple
+hi! link goDeclaration GruvboxRed
+hi! link goDeclType GruvboxBlue
+hi! link goBuiltins GruvboxOrange
+
+" }}}

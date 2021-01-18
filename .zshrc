@@ -33,7 +33,6 @@ zinit light zsh-users/zsh-history-substring-search
 zinit light zdharma/history-search-multi-word
 zinit ice wait'!0'; zinit load zsh-users/zsh-syntax-highlighting
 zinit ice wait'!0'; zinit load zsh-users/zsh-completions
-[ -f ~/.anyenv/bin/anyenv ] && eval "$(anyenv init - zsh)"
 
 # prompt
 autoload -Uz vcs_info
@@ -52,6 +51,7 @@ PROMPT='%F{142}< %~%f${vcs_info_msg_0_} %F{142}>%f '
 # bindkey
 bindkey -v
 bindkey -s '^v' 'nvim .^M'
+bindkey -M viins '^K'  backward-kill-line
 bindkey '^F' autosuggest-accept
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down

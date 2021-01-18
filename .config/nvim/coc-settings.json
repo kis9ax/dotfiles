@@ -1,12 +1,25 @@
 {
   "explorer.previewAction.onHover": false,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.icon.enableVimDevicons": false,
+  "explorer.floating.border.enable": false,
   "explorer.buffer.showHiddenBuffers": true,
   "explorer.file.showHiddenFiles": true,
-  "explorer.icon.enableNerdfont": false,
-  "explorer.icon.enableVimDevicons": true,
-  "explorer.floating.border.enable": false,
+  "eslint.autoFixOnSave": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+    "graphql",
+    "vue",
+    "json",
+    "markdown"
+  ],
+  "tabnine.priority": 90,
   "tsserver.trace.server": "verbose",
-  "tsserver.enableJavascript": false,
+  "tsserver.enableJavascript": true,
   "coc.preferences.extensionUpdateCheck": "daily",
   "coc.preferences.jumpCommand": "drop"
 }
