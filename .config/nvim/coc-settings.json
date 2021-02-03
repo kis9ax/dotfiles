@@ -6,6 +6,8 @@
   "explorer.buffer.showHiddenBuffers": true,
   "explorer.file.showHiddenFiles": true,
   "eslint.autoFixOnSave": true,
+  "prettier.eslintIntegration": true,
+  "coc.source.word.filetypes": ["markdown", "text"],
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
     "javascriptreact",
@@ -15,11 +17,26 @@
     "graphql",
     "vue",
     "json",
-    "markdown"
+    "sh",
+    "markdown",
+    "go"
   ],
   "tabnine.priority": 90,
   "tsserver.trace.server": "verbose",
   "tsserver.enableJavascript": true,
   "coc.preferences.extensionUpdateCheck": "daily",
-  "coc.preferences.jumpCommand": "drop"
+  "coc.preferences.jumpCommand": "drop",
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "javascript": "javascriptreact"
+  },
+  "diagnostic-languageserver.enable": true,
+  "diagnostic-languageserver.filetypes": {
+    "vim": "vint",
+    "sh": "shellcheck"
+  },
+  "diagnostic-languageserver.formatFiletypes": {
+    "lua": "lua-format",
+    "sh": "shfmt"
+  }
 }

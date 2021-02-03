@@ -1,2 +1,0 @@
-dir=$(fd -t d | fzf)
-cd $dir

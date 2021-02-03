@@ -84,8 +84,8 @@ nnoremap ; :
 nnoremap : ;
 nnoremap x "_x
 nnoremap s "_s
-nnoremap n nzz
-nnoremap N Nzz
+nnoremap gn nzz
+nnoremap gN Nzz
 nnoremap == gg=G''
 nnoremap ss :sp<CR>
 nnoremap sv :vsp<CR>
@@ -101,11 +101,12 @@ nnoremap <silent> <C-s> :w<cr>
 nnoremap <Leader>r :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap <silent> su :let @+ = expand("%:p")<cr>
-nnoremap <silent> <Leader>j :tabnew<CR>:e $TASK<CR>
+nnoremap <silent> <Leader>b :tabnew<CR>:cd $MEMOS<CR>
 nnoremap <silent> <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
-nnoremap <silent> <Leader>b :tabnew<CR>:e $BOOKMARKS<CR>
+nnoremap <silent> <Leader>j :tabnew<CR>:e $TASK<CR>
 nnoremap <silent> <Leader>o :set spell!<CR>
-
+nnoremap dt :Gtabedit<CR><CR>:Gdiffsplit<CR>
+nnoremap <Leader>w :!trans -b 
 autocmd FileType markdown nnoremap md :r! mdl 
 " }}}
 
@@ -154,11 +155,10 @@ cnoremap <C-c> <Del>
 
 " --- command ---{{{
 command! Rmt :%s/\s\+$//e
-command! M :SignatureListGlobalMarks
 command! Rdl :r! echo <args>
 command! -nargs=* Xyz :call s:SomeFunc(<q-args>)
+autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
 match errorMsg /\s\+$/
-nnoremap dt :Gtabedit<CR><CR>:Gdiffsplit<CR>
 " }}}
 
 " --- tabline --- {{{
@@ -167,7 +167,8 @@ function! s:SID_PREFIX()
 endfunction
 
 function! s:my_tabline()
-  let s='%#TabLineDir#< %{fnamemodify(getcwd(), ":t")} >  '
+  let s='%#TabLineDir#< %{fnamemodify(getcwd(), ":t")} >'
+  " let s=''
   for i in range(1, tabpagenr('$'))
     let bufnrs = tabpagebuflist(i)
     let bufnr = bufnrs[tabpagewinnr(i) - 1]
@@ -177,9 +178,9 @@ function! s:my_tabline()
     let title = title
     let s .= '%'.i.'T'
     let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
-    let s .= no . ': ' . title
+    let s .= ' '.no .':'. title
     let s .= mod
-    let s .= '%#TabLineFill# '
+    let s .= '%#TabLineFill#'
   endfor
   let s .= '%#TabLineFill#%T%=%#TabLine#'
   return s
@@ -208,12 +209,12 @@ nnoremap <C-w>c :tabnew<CR>
 
 " --- statusline --- {{{
 
-" set noshowmode
-" set noruler
-" set laststatus=0
-" set noshowcmd
-let &statusline=':%n %f %q %y'
-let s:hidden_all = 0
+set noshowmode
+set noruler
+set laststatus=0
+set noshowcmd
+let &statusline='%n:%f %q %y'
+let s:hidden_all = 1
 function! ToggleHiddenAll()
   if s:hidden_all  == 0
     let s:hidden_all = 1

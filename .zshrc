@@ -20,7 +20,6 @@ if [ $DOTFILES/.zshrc -nt ~/.zshrc.zwc ]; then
   zcompile ~/.zshrc
 fi
 
-source "$HOME/.shellenv"
 source "$HOME/.zinit/bin/zinit.zsh"
 autoload -Uz _zinit
 autoload -Uz add-zsh-hook
@@ -78,7 +77,7 @@ function ff() {
 
 
 function m() {
-  baseDir=$NOTES/memos
+  baseDir=$KIS9A/memos
   memo=$(fd -t f --base-directory $baseDir | fzf)
   bat $baseDir/$memo
 }

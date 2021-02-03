@@ -13,12 +13,19 @@ window:
 
   dynamic_padding: false
   decorations: none
-  startup_mode: Windowed
+  # startup_mode: Windowed
+  startup_mode: Maximized
 
 font:
+  # normal:
+  #   family: "VictorMono Nerd Font"
+  #   style: Light 
+  # normal:
+  #   family: "VictorMono Nerd Font"
+  #   style: ExtraLight 
   normal:
     family: "VictorMono Nerd Font"
-    style: Light 
+    style: Thin
   # normal:
   #   family: "VictorMono Nerd Font Mono"
   #   style: Regular
@@ -28,7 +35,8 @@ font:
   # normal:
   #   family: "Fira code"
   #   style: Light
-  size: 12.5
+  size: 14
+  # size: 12.5
   offset:
     x: 0
     y: 1

@@ -32,6 +32,7 @@ let s:gb.light2      = ['#d5c4a1', 250]
 let s:gb.light3      = ['#bdae93', 248]
 let s:gb.light4      = ['#a89984', 246]
 let s:gb.light4_256  = ['#a89984', 246]
+let s:gb.red0     = ['#ff0000', 9]
 let s:gb.bright_red     = ['#df5f5f', 167]
 let s:gb.bright_green   = ['#b8bb26', 142]
 let s:gb.bright_yellow  = ['#fabd2f', 214]
@@ -70,6 +71,7 @@ let s:fg2 = s:gb.light2
 let s:fg3 = s:gb.light3
 let s:fg4 = s:gb.light4
 let s:fg4_256 = s:gb.light4_256
+let s:red0 = s:gb.red0
 let s:red    = s:gb.bright_red
 let s:green  = s:gb.bright_green
 let s:yellow = s:gb.bright_yellow
@@ -156,13 +158,16 @@ endfunction
 " Version_700: {{{
 hi! link CursorColumn CursorLine
 " call s:HL('TabLineFill', s:red, s:bg1, s:invert_tabline)
-" call s:HL('TabLineS]@#el', s:red, s:bg1, s:invert_tabline)
+" call s:HL('TabLineSel', s:red, s:bg1, s:invert_tabline)
 " call s:HL('TabLineFill', s:bg4, s:bg1, s:invert_tabline)
 " call s:HL('TabLineSel', s:red, s:bg1, s:invert_tabline)
 " call s:HL('TabLineDir', s:red, s:bg1, s:invert_tabline)
 call s:HL('TabLineFill', s:bg4, s:bg1, s:bold)
-call s:HL('TabLineSel', s:orange, s:bg1, s:bold)
-call s:HL('TabLineDir', s:orange, s:bg1, s:bold)
+" call s:HL('TabLineSel', s:orange, s:bg1, s:underline)
+" call s:HL('TabLineDir', s:red0, s:bg1, s:underline)
+" call s:HL('TabLineSel', s:red, s:bg1, s:invert_tabline)
+call s:HL('TabLineSel', s:red0, s:bg1, s:invert_tabline)
+call s:HL('TabLineDir', s:red0, s:bg1, s:invert_tabline)
 hi! link TabLine TabLineFill
 call s:HL('MatchParen', s:none, s:bg3, s:bold)
 call s:HL('Pmenu', s:fg1, s:bg2)
@@ -251,6 +256,8 @@ hi! link QuickScopePrimary GruvboxRed
 hi! link QuickScopeSecondary GruvboxGreen
 hi! link CocExplorerNormalFloat GruvboxFg0
 hi! link CocExplorerNormalFloatBorder GruvboxFg0
+" hi! link CocExplorerFileDirectory GruvboxOrange
+" hi! link CocExplorerFileDirectory GruvboxRed
 
 call s:HL('GruvboxFg0', s:fg0)
 call s:HL('GruvboxFg1', s:fg1)
@@ -289,11 +296,12 @@ call s:HL('Visual',    s:none,  s:bg3, s:invert_selection)
 call s:HL('Search',    s:yellow, s:bg0, s:inverse)
 call s:HL('IncSearch', s:hls_cursor, s:bg0, s:inverse)
 call s:HL('Underlined', s:blue, s:none, s:underline)
-call s:HL('StatusLine',   s:bg0, s:red, s:inverse)
-call s:HL('StatusLineNC', s:bg0, s:fg4, s:inverse)
+call s:HL('StatusLine',   s:bg0, s:red0, s:inverse)
+" call s:HL('StatusLineNC', s:bg0, s:fg4, s:inverse)
 " call s:HL('StatusLine',   s:bg1, s:green, s:inverse)
-" call s:HL('StatusLineNC', s:bg1, s:fg4, s:inverse)
-call s:HL('VertSplit', s:bg3, s:vert_split)
+call s:HL('StatusLineNC', s:bg1, s:fg4, s:inverse)
+" call s:HL('VertSplit', s:bg3, s:vert_split)
+call s:HL('VertSplit', s:bg0, s:vert_split)
 call s:HL('WildMenu', s:blue, s:bg2, s:bold)
 call s:HL('ErrorMsg',   s:bg0, s:red, s:bold)
 call s:HL('LineNr', s:bg4, s:number_column)
