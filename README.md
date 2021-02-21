@@ -1,12 +1,12 @@
 ### Installation
 
-⚠️ Always in progress. May destroy your environment.
-
-Now on MacOS X init this environment configure automatically.
-
-- Install package manager Hombrew [dotfiles/init/init.sh](https://github.com/kis9a/dotfiles/blob/master/etc/init/init.sh)
-- Install Brew packages collections [dotfiles/etc/osx/init.sh](https://github.com/kis9a/dotfiles/tree/master/etc/osx/init.sh)
+⚠️ Always in progress
 
 ```
 curl -L https://git.io/kis9adot | bash
 ```
+
+### Images
+
+| ![Image 2021-02-21 at 19 25 2](https://user-images.githubusercontent.com/65019715/108623768-072fa480-7484-11eb-9117-7c345976b916.jpg) | ![Brew-packages](https://user-images.githubusercontent.com/65019715/108623579-0fd3ab00-7483-11eb-9669-4df89818ee02.png) | ![Coc extensions](https://user-images.githubusercontent.com/65019715/108623584-1530f580-7483-11eb-9a31-9ad60e8b14d4.png) |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
