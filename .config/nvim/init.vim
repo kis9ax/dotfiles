@@ -11,7 +11,7 @@ set hidden
 set ignorecase
 set laststatus=2
 set lazyredraw
-set list lcs=tab:\ \┆
+" set list lcs=tab:\ \┆
 set modifiable
 set mouse=nv
 set nobackup

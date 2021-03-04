@@ -179,7 +179,7 @@ call s:HL('PmenuThumb', s:none, s:bg4)
 " Version_703: {{{
 call s:HL('ColorColumn',  s:none, s:color_column)
 call s:HL('Conceal', s:blue, s:none)
-call s:HL('CursorLine',   s:none, s:bg)
+call s:HL('CursorLine',s:none, s:bg)
 call s:HL('CursorLineNr', s:yellow, s:bg1)
 " }}}
 

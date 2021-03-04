@@ -17,6 +17,7 @@ alias ....='cd ../../..'
 alias earth="curl -s http://artscene.textfiles.com/vt100/movglobe.vt | pv -q -L 9600"
 alias timepv="for (( i = 1 ; i <= 100 ; i++ )); do sleep 1; echo $i; done | (>&2 echo -en "\r"; pv --progress --line-mode --size 100 --eta --timer)"
 alias la='tree -a -C -h -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
+alias l1='tree -a -C -h -L 1 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
 alias l2='tree -a -C -h -L 2 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
 alias l3='tree -a -C -h -L 3 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
 
@@ -51,7 +52,7 @@ alias lofi="mpv --shuffle $LOFI"
 alias lofir="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
 alias jj='aws s3 sync $TASKS s3://kis9atask --size-only'
 alias pomo='termdown -f univers -s 25m; terminal-notifier -message "stop task and break" -sound default; termdown -f univers -s 5m; terminal-notifier -sound default -message "break stop"'
-alias port='lsof -Pan -i tcp -i udp'
+alias porta='lsof -Pan -i tcp -i udp'
 alias pshttpd='ps aux | grep httpd'
 alias qi=qi
 function qi () {

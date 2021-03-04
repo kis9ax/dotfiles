@@ -14,18 +14,20 @@
     "typescript",
     "typescriptreact",
     "html",
+    "css",
     "graphql",
     "vue",
     "json",
     "sh",
     "markdown",
-    "go"
+    "go",
+    "lua"
   ],
   "tabnine.priority": 90,
   "tsserver.trace.server": "verbose",
   "tsserver.enableJavascript": true,
   "coc.preferences.extensionUpdateCheck": "daily",
-  "coc.preferences.jumpCommand": "drop",
+  "coc.preferences.jumpCommand": "tab drop",
   "emmet.includeLanguages": {
     "vue-html": "html",
     "javascript": "javascriptreact"

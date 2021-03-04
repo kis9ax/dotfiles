@@ -8,7 +8,7 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim', { 'on': [ 'Files', 'GFiles', 'Commands', 'Commits', 'Rg', 'Buffers', 'Maps', 'Marks' ] }
+Plug 'junegunn/fzf.vim', { 'on': [ 'Files', 'GFiles', 'Commands', 'Commits', 'Buffers' ] }
 " junegunn/fzf {{{
 nnoremap <silent><C-p> :GFiles<CR>
 nnoremap <silent>gdi :Gdiffsplit@<CR>
@@ -42,6 +42,8 @@ let g:coc_global_extensions = [
       \, 'coc-vimlsp'
       \, 'coc-word'
       \, 'coc-tsserver'
+      \, 'coc-lua'
+      \, 'coc-sh'
       \, ]
 
 nnoremap <silent>sn :CocCommand explorer --sources=file+ --width=55<CR>
@@ -81,45 +83,15 @@ nnoremap <Leader>v :Vista!!<CR>
 let g:vista_sidebar_width = 60
 let g:vista_default_executive = 'coc'
 "}}}
-Plug 'stefandtw/quickfix-reflector.vim', { 'for': 'qf' }
-" stefandtw/quickfix-reflector.vim {{{
-let g:qf_modifiable = 1
-let g:qf_write_changes = 1
-"}}}
 Plug 'simeji/winresizer', { 'on': [ 'WinResizerStartFocus', 'WinResizerStartResize'] }
 " simeji/winresizer {{{
 let g:winresizer_start_key = 'ge'
 nnoremap <silent> ge :WinResizerStartResize<CR>
 "}}}
-Plug 'junegunn/vim-easy-align', { 'on': 'EasyAlign' }
-" junegunn/vim-easy-align {{{
-" =の代わりに使えるその他
-" コマンド	説明
-" =	一致した一つ目の=を基準に整列させる
-" 2=	一致した二つ目の=を基準に整列させる
-" *=	一致した全ての=を基準に整列させる
-" **=	一致した全ての=を基準に左右交互に整列させる
-" Enter	整列させる位置を（左/ 右/ 中央）で切り替える
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-"}}}
-Plug 't9md/vim-quickhl', { 'on': 'QuickhlCwordToggle' }
-" t9md/vim-quickhl {{{
-nnoremap <Leader>k :QuickhlCwordToggle<CR>
-nmap <Leader>h <plug>(quickhl-manual-this)
-xmap <Leader>h <plug>(quickhl-manual-this)
-nmap <Leader>H <plug>(quickhl-manual-reset)
-xmap <Leader>H <plug>(quickhl-manual-reset)
-"}}}
-Plug 'junegunn/limelight.vim', { 'on': [ 'Limelight', 'Limelight!', 'Limelight!!' ] }
-" junegunn/limelight.vim {{{
-autocmd! User GoyoEnter Limelight
-nnoremap <silent> <Leader>m :Limelight!!<CR>
-let g:limelight_default_coefficient = 0.4
-"}}}
-Plug 'kshenoy/vim-signature', { 'on': 'SignatureListGlobalMarks' }
-" kshenoy/vim-signature {{{
-nnoremap <silent>gm :SignatureListGlobalMarks<CR>
+Plug 'stefandtw/quickfix-reflector.vim', { 'for': 'qf' }
+" stefandtw/quickfix-reflector.vim {{{
+let g:qf_modifiable = 1
+let g:qf_write_changes = 1
 "}}}
 Plug 'tpope/vim-commentary', { 'on': 'Commentary' }
 " tpope/vim-commentary {{{
@@ -134,15 +106,13 @@ nnoremap gk :Grepper-cd<CR>
 nnoremap gb :Grepper-buffer<CR>
 "}}}
 Plug 'tpope/vim-fugitive', { 'on': 'G' }
-Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
-Plug 'cocopon/colorswatch.vim', { 'on': 'ColorSwatchGenerate' }
 Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
-Plug 'alvan/vim-closetag', { 'for': ['html', 'jsx', 'tsx', 'vue', 'javascriptreact', 'typescriptreact'] }
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'iamcco/markdown-preview.nvim', { 'for': 'markdown', 'on': 'MarkdownPreview' }
 Plug 'unblevable/quick-scope'
 " unblevable/quick-scope {{{
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:qs_lazy_highlight = 1
 "}}}
 Plug 'Yggdroot/indentLine'
 " Yggdroot/indentLine {{{
@@ -153,6 +123,39 @@ Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
 Plug 'wakatime/vim-wakatime'
 " not usually {{{
+" Plug 't9md/vim-quickhl', { 'on': 'QuickhlCwordToggle' }
+" t9md/vim-quickhl {{{
+" nnoremap <Leader>k :QuickhlCwordToggle<CR>
+" nmap <Leader>h <plug>(quickhl-manual-this)
+" xmap <Leader>h <plug>(quickhl-manual-this)
+" nmap <Leader>H <plug>(quickhl-manual-reset)
+" xmap <Leader>H <plug>(quickhl-manual-reset)
+"}}}
+" Plug 'guns/xterm-color-table.vim', { 'on': 'XtermColorTable' }
+" Plug 'cocopon/colorswatch.vim', { 'on': 'ColorSwatchGenerate' }
+" Plug 'junegunn/limelight.vim', { 'on': [ 'Limelight', 'Limelight!', 'Limelight!!' ] }
+" junegunn/limelight.vim {{{
+" autocmd! User GoyoEnter Limelight
+" nnoremap <silent> <Leader>m :Limelight!!<CR>
+" let g:limelight_default_coefficient = 0.4
+"}}}
+" Plug 'junegunn/vim-easy-align', { 'on': 'EasyAlign' }
+" junegunn/vim-easy-align {{{
+" =の代わりに使えるその他
+" コマンド	説明
+" =	一致した一つ目の=を基準に整列させる
+" 2=	一致した二つ目の=を基準に整列させる
+" *=	一致した全ての=を基準に整列させる
+" **=	一致した全ての=を基準に左右交互に整列させる
+" Enter	整列させる位置を（左/ 右/ 中央）で切り替える
+" xmap ga <Plug>(EasyAlign)
+" nmap ga <Plug>(EasyAlign)
+"}}}
+" Plug 'kshenoy/vim-signature', { 'on': 'SignatureListGlobalMarks' }
+" kshenoy/vim-signature {{{
+" nnoremap <silent>gm :SignatureListGlobalMarks<CR>
+"}}}
+" Plug 'chr4/nginx.vim'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 " fatih/vim-go {{{
 " vim-go
@@ -205,6 +208,7 @@ Plug 'wakatime/vim-wakatime'
 " augroup END
 
 "}}}
+" Plug 'alvan/vim-closetag', { 'for': ['html', 'jsx', 'tsx', 'vue', 'javascriptreact', 'typescriptreact'] }
 " iamcco/mathjax-support-for-mkdp {{{
 let g:mkdp_echo_preview_url = 1
 let g:mkdp_auto_close=0
@@ -298,6 +302,33 @@ let g:mkdp_refresh_slow=1
 " Plug 'reedes/vim-wordy'
 " Plug 'rhysd/vim-grammarous'
 " Plug 'thinca/vim-quickrun'
+" Plug 'thinca/vim-quickrun', { 'on': 'QuickRun' }
+" thinca/vim-quickrun"{{{
+" nnoremap sa :QuickRun<CR>
+
+" let g:quickrun_config = {
+" \  'go': {
+" \    'command': '8g',
+" \    'exec': ['8g %s', '8l -o %s:p:r %s:p:r.8', '%s:p:r %a', 'rm -f %s:p:r']
+" \  }
+" \}
+
+" let g:quickrun_config.c = {
+" 			\'type':'c/clang',
+" 			\}
+
+" let g:quickrun_config.cpp = {
+" 			\'type':'cpp/clang++',
+" 			\}
+
+" let g:quickrun_config.javascript = {
+" 			\'type':'javascript/nodejs',
+" 			\}
+
+" let g:quickrun_config.lua = {
+" 			\'command':'lua',
+" 			\}
+"}}}
 " Plug 'tyru/open-browser.vim'
 " Plug 'SirVer/ultisnips'
 " Plug 'embear/vim-localvimrc'
