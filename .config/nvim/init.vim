@@ -107,7 +107,7 @@ nnoremap <silent> <Leader>j :tabnew<CR>:e $TASK<CR>
 nnoremap <silent> <Leader>o :set spell!<CR>
 nnoremap dt :Gtabedit<CR><CR>:Gdiffsplit<CR>
 nnoremap <Leader>w :!trans -b 
-autocmd FileType markdown nnoremap md :r! mdl 
+nnoremap md :r! mdl 
 " }}}
 
 " --- inoremap --- {{{

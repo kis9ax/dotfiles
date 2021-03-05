@@ -1,4 +1,5 @@
 brew "cask"
+brew "alaclitty"
 cask "amethyst"
 cask "docker"
 cask "font-hack-nerd-font"
