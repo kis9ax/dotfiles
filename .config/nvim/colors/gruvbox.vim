@@ -206,7 +206,7 @@ hi! link ALEInfoSign GruvboxBlueSign
 hi! link NonText GruvboxBg2
 hi! link SpecialKey GruvboxBg2
 hi! link VisualNOS Visual
-hi! link Directory GruvboxGreenBold
+hi! link Directory GruvboxOrangeBold
 hi! link Title GruvboxGreenBold
 hi! link MoreMsg GruvboxYellowBold
 hi! link ModeMsg GruvboxYellowBold
@@ -297,8 +297,6 @@ call s:HL('Search',    s:yellow, s:bg0, s:inverse)
 call s:HL('IncSearch', s:hls_cursor, s:bg0, s:inverse)
 call s:HL('Underlined', s:blue, s:none, s:underline)
 call s:HL('StatusLine',   s:bg0, s:red0, s:inverse)
-" call s:HL('StatusLineNC', s:bg0, s:fg4, s:inverse)
-" call s:HL('StatusLine',   s:bg1, s:green, s:inverse)
 call s:HL('StatusLineNC', s:bg1, s:fg4, s:inverse)
 " call s:HL('VertSplit', s:bg3, s:vert_split)
 call s:HL('VertSplit', s:bg0, s:vert_split)

@@ -11,7 +11,6 @@ set hidden
 set ignorecase
 set laststatus=2
 set lazyredraw
-" set list lcs=tab:\ \┆
 set modifiable
 set mouse=nv
 set nobackup
@@ -79,33 +78,31 @@ if exists("&termguicolors") && exists("&winblend")
 endif
 "}}}
 
-" --- nnoremap --- {{{
+" --- no remap --- {{{
 nnoremap ; :
 nnoremap : ;
 nnoremap x "_x
 nnoremap s "_s
-nnoremap gn nzz
-nnoremap gN Nzz
+nnoremap n nzz
+nnoremap N Nzz
 nnoremap == gg=G''
-nnoremap ss :sp<CR>
-nnoremap sv :vsp<CR>
 nnoremap z0 zt
 nnoremap gF <C-w>gF
-nnoremap <c-t> [s1z=<c-o>"
-nnoremap cy ce<C-r>0<ESC>:let @/=@1<CR>:noh<CR>
-nnoremap <silent> <Leader>rl :so $MYVIMRC<CR>
+nnoremap ss :sp<CR>
+nnoremap sv :vsp<CR>
+nnoremap sn :tab split<CR>
+nnoremap <silent> <C-s> :w!<cr>
 nnoremap <silent> <C-c> :bd<cr>
 nnoremap <silent> <C-q> :q!<cr>
 nnoremap <silent> <C-w><C-q> :%bd<CR>
-nnoremap <silent> <C-s> :w<cr>
 nnoremap <Leader>r :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap <silent> su :let @+ = expand("%:p")<cr>
 nnoremap <silent> <Leader>b :tabnew<CR>:cd $MEMOS<CR>
 nnoremap <silent> <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
 nnoremap <silent> <Leader>j :tabnew<CR>:e $TASK<CR>
+nnoremap <silent> <Leader>rl :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>o :set spell!<CR>
-nnoremap dt :Gtabedit<CR><CR>:Gdiffsplit<CR>
 nnoremap <Leader>w :!trans -b 
 nnoremap md :r! mdl 
 " }}}
@@ -115,16 +112,16 @@ inoremap <C-k> <Up>
 inoremap <C-j> <Down>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
-inoremap <C-s> <Esc>:w<cr>
-inoremap <C-]> <Esc><Right>
-inoremap <C-x> <End><CR>
-inoremap <C-o> <Home><CR><Up>
-inoremap <C-b> <Esc>bi
-inoremap <C-e> <Esc>ea
 inoremap <C-d> <BS>
 inoremap <C-c> <DEL>
+inoremap <C-]> <Esc><Right>
+inoremap <C-s> <Esc>:w!<cr>
+inoremap <C-x> <End><CR>
+inoremap <C-o> <Home><CR><Up>
 inoremap <C-w> <C-\><C-o>db
 inoremap <C-r> <C-\><C-o>de
+inoremap <C-b> <Esc>bi
+inoremap <C-e> <Esc>ea
 inoremap <C-f> <C-y>
 inoremap <C-i> <C-y>
 "}}}
@@ -155,9 +152,6 @@ cnoremap <C-c> <Del>
 
 " --- command ---{{{
 command! Rmt :%s/\s\+$//e
-command! Rdl :r! echo <args>
-command! -nargs=* Xyz :call s:SomeFunc(<q-args>)
-autocmd FileType javascript.jsx setlocal commentstring={/*\ %s\ */}
 match errorMsg /\s\+$/
 " }}}
 

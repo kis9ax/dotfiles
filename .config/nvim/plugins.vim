@@ -20,7 +20,8 @@ nnoremap <silent>sj :Buffers<CR>
 nnoremap <silent>sl :Lines<CR>
 nnoremap <silent>sc :Commits<CR>
 tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
-let g:fzf_layout = {  'window': { 'yoffset': 0.05 , 'width': 1, 'height': 0.6 } }
+let g:fzf_preview_window = []
+let g:fzf_layout = {  'window': { 'yoffset': 0.05 , 'width': 1, 'height': 0.4, 'border': 'rounded' } }
 let g:fzf_buffers_jump = 1
 "}}}
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
@@ -46,8 +47,24 @@ let g:coc_global_extensions = [
       \, 'coc-sh'
       \, ]
 
-nnoremap <silent>sn :CocCommand explorer --sources=file+ --width=55<CR>
-nnoremap <silent><C-n> :CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width=10000 --floating-height=10000<CR>
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+
+nnoremap <silent><C-n> :CocCommand explorer --sources=file+ --width=55<CR>
+nnoremap <silent><C-y> :CocCommand explorer --sources=buffer+,file+ --position=floating --floating-width=10000 --floating-height=10000<CR>
 nnoremap <silent>s: :CocCommand<CR>
 nnoremap <silent>s; :<C-u>CocList<cr>
 nnoremap <silent>K :call <SID>show_documentation()<CR>
@@ -106,7 +123,6 @@ nnoremap gk :Grepper-cd<CR>
 nnoremap gb :Grepper-buffer<CR>
 "}}}
 Plug 'tpope/vim-fugitive', { 'on': 'G' }
-Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'iamcco/markdown-preview.nvim', { 'for': 'markdown', 'on': 'MarkdownPreview' }
 Plug 'unblevable/quick-scope'
@@ -123,6 +139,7 @@ Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
 Plug 'wakatime/vim-wakatime'
 " not usually {{{
+" Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
 " Plug 't9md/vim-quickhl', { 'on': 'QuickhlCwordToggle' }
 " t9md/vim-quickhl {{{
 " nnoremap <Leader>k :QuickhlCwordToggle<CR>
@@ -210,9 +227,9 @@ Plug 'wakatime/vim-wakatime'
 "}}}
 " Plug 'alvan/vim-closetag', { 'for': ['html', 'jsx', 'tsx', 'vue', 'javascriptreact', 'typescriptreact'] }
 " iamcco/mathjax-support-for-mkdp {{{
-let g:mkdp_echo_preview_url = 1
-let g:mkdp_auto_close=0
-let g:mkdp_refresh_slow=1
+" let g:mkdp_echo_preview_url = 1
+" let g:mkdp_auto_close=0
+" let g:mkdp_refresh_slow=1
 "}}}
 " Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " Plug 'cespare/vim-toml', { 'for': 'toml' }
