@@ -45,6 +45,7 @@ let g:coc_global_extensions = [
       \, 'coc-tsserver'
       \, 'coc-lua'
       \, 'coc-sh'
+      \, 'coc-clangd'
       \, ]
 
 let g:fzf_colors =

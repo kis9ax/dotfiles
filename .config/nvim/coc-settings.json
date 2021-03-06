@@ -24,10 +24,15 @@
     "vim": "vint",
     "sh": "shellcheck"
   },
-
+  "diagnostic-languageserver.formatters": {
+    "clang-format": {
+      "command": "clang-format"
+    }
+  },
   "diagnostic-languageserver.formatFiletypes": {
     "vim": "vint",
     "lua": "lua-format",
-    "sh": "shfmt"
+    "sh": "shfmt",
+    "c": "clang-format"
   }
 }
