@@ -40,6 +40,9 @@ set ttimeoutlen=0
 set updatetime=300
 set viminfo="NONE"
 set virtualedit=block
+"}}}
+
+" --- variables --- {{{
 let mapleader="\<Space>"
 let maplocalleader="\,"
 let g:netrw_browsex_viewer="open"
@@ -78,9 +81,14 @@ if exists("&termguicolors") && exists("&winblend")
 endif
 "}}}
 
-" --- no remap --- {{{
-nnoremap ; :
-nnoremap : ;
+" --- maps --- {{{
+
+" --- noremap --- {{{
+noremap ; :
+noremap : ;
+"  }}}
+
+" --- nnoremap --- {{{
 nnoremap x "_x
 nnoremap s "_s
 nnoremap n nzz
@@ -89,7 +97,7 @@ nnoremap == gg=G''
 nnoremap z0 zt
 nnoremap gF <C-w>gF
 nnoremap ss :sp<CR>
-nnoremap sv :vsp<CR>
+nnoremap sv :vs<CR>
 nnoremap sn :tab split<CR>
 nnoremap <silent> <C-s> :w!<cr>
 nnoremap <silent> <C-c> :bd<cr>
@@ -112,43 +120,34 @@ inoremap <C-k> <Up>
 inoremap <C-j> <Down>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
-inoremap <C-d> <BS>
-inoremap <C-c> <DEL>
-inoremap <C-]> <Esc><Right>
-inoremap <C-s> <Esc>:w!<cr>
 inoremap <C-x> <End><CR>
 inoremap <C-o> <Home><CR><Up>
+inoremap <C-d> <BS>
+inoremap <C-c> <DEL>
 inoremap <C-w> <C-\><C-o>db
 inoremap <C-r> <C-\><C-o>de
 inoremap <C-b> <Esc>bi
 inoremap <C-e> <Esc>ea
 inoremap <C-f> <C-y>
 inoremap <C-i> <C-y>
+inoremap <C-]> <Esc><Right>
+inoremap <C-s> <Esc>:w!<cr>
 "}}}
 
 " --- vnoremap --- {{{
-vnoremap ; :
-vnoremap : ;
-vnoremap > >gv
-vnoremap < <gv
-vnoremap <C-k> "zx<Up>"zP`[V`]
-vnoremap <C-j> "zx"zp`[V`]
-vnoremap <Leader>r y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
-vnoremap <Leader>/ "xy:%s/<C-R>=escape(@x, '\\/.*$^~[]')<CR>//gc<Left><Left><Left>
-vnoremap <silent> <Leader>i :'<,'>!tail -r<CR>
-vnoremap <silent> cy c<C-r>0<ESC>:let @/=@1<CR>:noh<CR>"
-vnoremap <silent> <Leader>t :'<,'> !trans -b -sl=en -tl=ja<CR>
-vnoremap <silent> <Leader>w :'<,'>w !trans -b -sl=en -tl=ja<CR>
+xnoremap > >gv
+xnoremap < <gv
+xnoremap <C-k> "zx<Up>"zP`[V`]
+xnoremap <C-j> "zx"zp`[V`]
+xnoremap <Leader>r y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
+xnoremap <Leader>/ "xy:%s/<C-R>=escape(@x, '\\/.*$^~[]')<CR>//gc<Left><Left><Left>
+xnoremap <silent> <Leader>i :'<,'>!tail -r<CR>
+xnoremap <silent> cy c<C-r>0<ESC>:let @/=@1<CR>:noh<CR>"
+xnoremap <silent> <Leader>t :'<,'> !trans -b -sl=en -tl=ja<CR>
+xnoremap <silent> <Leader>w :'<,'>w !trans -b -sl=en -tl=ja<CR>
 " }}}
 
-" --- cnoremap --- {{{
-cnoremap <C-k> <Up>
-cnoremap <C-j> <Down>
-cnoremap <C-h> <Left>
-cnoremap <C-l> <Right>
-cnoremap <C-d> <BS>
-cnoremap <C-c> <Del>
-"}}}
+" --- end maps --- }}}
 
 " --- command ---{{{
 command! Rmt :%s/\s\+$//e
@@ -162,7 +161,6 @@ endfunction
 
 function! s:my_tabline()
   let s='%#TabLineDir#< %{fnamemodify(getcwd(), ":t")} >'
-  " let s=''
   for i in range(1, tabpagenr('$'))
     let bufnrs = tabpagebuflist(i)
     let bufnr = bufnrs[tabpagewinnr(i) - 1]
@@ -182,22 +180,29 @@ endfunction
 
 let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
 
-nnoremap ,1 1gt
-nnoremap ,2 2gt
-nnoremap ,3 3gt
-nnoremap ,4 4gt
-nnoremap ,5 5gt
-nnoremap ,6 6gt
-nnoremap ,7 7gt
-nnoremap ,8 8gt
-nnoremap ,9 9gt
-nnoremap ,10 10gt
-nnoremap ,11 11gt
-nnoremap ,12 12gt
+nnoremap <Leader>1 1gt
+nnoremap <Leader>2 2gt
+nnoremap <Leader>3 3gt
+nnoremap <Leader>4 4gt
+nnoremap <Leader>5 5gt
+nnoremap <Leader>6 6gt
+nnoremap <Leader>7 7gt
+nnoremap <Leader>8 8gt
+nnoremap <Leader>9 9gt
+nnoremap <Leader>10 10gt
+nnoremap <Leader>11 11gt
+nnoremap <Leader>12 12gt
+nnoremap <Leader>13 13gt
+nnoremap <Leader>14 14gt
+nnoremap <Leader>15 15gt
+nnoremap <Leader>16 16gt
+nnoremap <Leader>17 17gt
+nnoremap <Leader>18 18gt
+nnoremap <Leader>19 19gt
+nnoremap <Leader>20 20gt
 nnoremap <C-h> :tabprevious<CR>
 nnoremap <C-l> :tabnext<CR>
 nnoremap <C-w>d :tabclose<CR>
-nnoremap <C-w>n :tab split<CR>
 nnoremap <C-w>c :tabnew<CR>
 "}}}
 
@@ -241,23 +246,28 @@ nnoremap <script> <silent> <Leader>q :call ToggleQuickfix()<CR>
 
 " --- netrw gx --- {{{
 if !exists("g:netrw_nogx")
- if maparg('gx','n') == ""
-  if !hasmapto('<Plug>NetrwBrowseX')
-   nmap <unique> gx <Plug>NetrwBrowseX
+  if maparg('gx','n') == ""
+    if !hasmapto('<Plug>NetrwBrowseX')
+      nmap <unique> gx <Plug>NetrwBrowseX
+    endif
+    nno <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
   endif
-  nno <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
- endif
- if maparg('gx','v') == ""
-  if !hasmapto('<Plug>NetrwBrowseXVis')
-   vmap <unique> gx <Plug>NetrwBrowseXVis
+  if maparg('gx','v') == ""
+    if !hasmapto('<Plug>NetrwBrowseXVis')
+      vmap <unique> gx <Plug>NetrwBrowseXVis
+    endif
+    vno <silent> <Plug>NetrwBrowseXVis :<c-u>call netrw#BrowseXVis()<cr>
   endif
-  vno <silent> <Plug>NetrwBrowseXVis :<c-u>call netrw#BrowseXVis()<cr>
- endif
 endif
 if exists("g:netrw_usetab") && g:netrw_usetab
- if maparg('<c-tab>','n') == ""
-  nmap <unique> <c-tab> <Plug>NetrwShrink
- endif
- nno <silent> <Plug>NetrwShrink :call netrw#Shrink()<cr>
+  if maparg('<c-tab>','n') == ""
+    nmap <unique> <c-tab> <Plug>NetrwShrink
+  endif
+  nno <silent> <Plug>NetrwShrink :call netrw#Shrink()<cr>
 endif
 "}}}
+
+" ---- ppng  --- {{{
+xnoremap mpr :!curl -T - https://ppng.io/kis9a<CR>u
+nnoremap mpn :r! curl -sL https://ppng.io/kis9a<CR>
+" }}}
