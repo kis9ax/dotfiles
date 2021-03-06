@@ -7,6 +7,8 @@ setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt hist_reduce_blanks
 setopt share_history
+setopt prompt_subst
+setopt aliases
 unsetopt PROMPT_SP
 disable r
 
@@ -21,10 +23,12 @@ if [ $DOTFILES/.zshrc -nt ~/.zshrc.zwc ]; then
 fi
 
 source "$HOME/.zinit/bin/zinit.zsh"
+
 autoload -Uz _zinit
 autoload -Uz add-zsh-hook
 autoload -Uz colors && colors
 autoload -Uz compinit
+autoload -Uz vcs_info
 
 (( ${+_comps} )) && _comps[zinit]=_zinit
 zinit light zsh-users/zsh-autosuggestions
@@ -34,9 +38,6 @@ zinit ice wait'!0'; zinit load zsh-users/zsh-syntax-highlighting
 zinit ice wait'!0'; zinit load zsh-users/zsh-completions
 
 # prompt
-autoload -Uz vcs_info
-autoload -Uz add-zsh-hook
-setopt prompt_subst
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
 zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
@@ -75,7 +76,6 @@ function ff() {
   cd $baseDir/$dir
 }
 
-
 function m() {
   baseDir=$KIS9A/memos
   memo=$(fd -t f --base-directory $baseDir | fzf)
@@ -83,5 +83,4 @@ function m() {
 }
 
 # alias
-setopt aliases
 source ~/.alias;
