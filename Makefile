@@ -13,12 +13,6 @@ list: ## Show dot files in this repo
 deploy: ## Create symlink to home directory
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
 
-init: ## Setup environment settings
-	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
-
-init-osx: ## Setup osx environment settings
-	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/osx/init.sh
-
 clean: ## Remove the dot files and this repo
 	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
 	-rm -rf $(DOTPATH)

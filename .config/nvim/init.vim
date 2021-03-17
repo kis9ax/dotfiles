@@ -46,6 +46,7 @@ set virtualedit=block
 let mapleader="\<Space>"
 let maplocalleader="\,"
 let g:netrw_browsex_viewer="open"
+let &statusline='%n:%f %q %y'
 "" let g:loaded_~~ to disable default neovim plugins
 let g:loaded_netrwPlugin = 1
 let g:loaded_man = 1
@@ -125,8 +126,6 @@ nnoremap <silent> <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
 nnoremap <silent> <Leader>j :tabnew<CR>:e $TASK<CR>
 nnoremap <silent> <Leader>rl :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>o :set spell!<CR>
-nnoremap <Leader>w :!trans -b 
-nnoremap md :r! mdl 
 " }}}
 
 " --- inoremap --- {{{
@@ -209,8 +208,6 @@ nnoremap <C-l> :tabnext<CR>
 nnoremap <C-w>d :tabclose<CR>
 nnoremap <C-w>c :tabnew<CR>
 "}}}
-
-let &statusline='%n:%f %q %y'
 
 "  --- vimquickfix --- {{{
 function! ToggleQuickfix()

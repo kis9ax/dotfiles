@@ -19,7 +19,7 @@ nnoremap <silent>sg :Rg!<CR>
 nnoremap <silent>sj :Buffers<CR>
 nnoremap <silent>sl :Lines<CR>
 nnoremap <silent>sc :Commits<CR>
-tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
+nnoremap <silent>sh :History'<CR>
 let g:fzf_preview_window = []
 let g:fzf_layout = {  'window': { 'yoffset': 0.05 , 'width': 1, 'height': 0.4, 'border': 'rounded' } }
 let g:fzf_buffers_jump = 1
