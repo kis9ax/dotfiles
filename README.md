@@ -18,6 +18,9 @@ pip install neovim
 gem install neovim
 
 # execute :checkhealth in nvim
+```
+
+```sh
 
 # I use this tools
 brew install fd
@@ -41,3 +44,15 @@ brew install alaclitty
 brew install amethyst
 
 ```
+
+```sh
+cd ~/
+git clone https://github.com/kis9a/dotfiles
+git checkout ev
+cd dotfiles/
+make deploy
+zsh
+nvim
+```
+
+<img width="937" alt="Screen Shot 2021-03-18 at 1 12 04" src="https://user-images.githubusercontent.com/65019715/111500182-0d652800-8787-11eb-9f30-1db41472aa7b.png">
