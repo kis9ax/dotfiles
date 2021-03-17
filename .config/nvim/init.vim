@@ -1,4 +1,5 @@
 " --- setting --- {{{
+"  To reference, ctrl -k or :h option<CR>
 set autochdir
 set autoindent
 set clipboard+=unnamedplus
@@ -34,7 +35,6 @@ set switchbuf+=newtab
 set synmaxcol=200
 set tabpagemax=100
 set tabstop=2
-set termguicolors
 set timeoutlen=1000
 set ttimeoutlen=0
 set updatetime=300
@@ -46,6 +46,7 @@ set virtualedit=block
 let mapleader="\<Space>"
 let maplocalleader="\,"
 let g:netrw_browsex_viewer="open"
+"" let g:loaded_~~ to disable default neovim plugins
 let g:loaded_netrwPlugin = 1
 let g:loaded_man = 1
 let g:loaded_gzip = 1
@@ -71,6 +72,7 @@ source ~/.config/nvim/plugins.vim
 " --- color setting --- {{{
 syntax on
 set background=dark
+" ~/.config/nvim/colors/gruvbox.vim
 colorscheme gruvbox
 
 if exists("&termguicolors") && exists("&winblend")
@@ -82,6 +84,18 @@ endif
 "}}}
 
 " --- maps --- {{{
+"---------------------------------------------------------------------------|
+" Commands \ Modes | Normal | Insert | Command | Visual | Select | Operator |
+" map  / noremap   |    @   |   -    |    -    |   @    |   @    |    @     |
+" nmap / nnoremap  |    @   |   -    |    -    |   -    |   -    |    -     |
+" vmap / vnoremap  |    -   |   -    |    -    |   @    |   @    |    -     |
+" omap / onoremap  |    -   |   -    |    -    |   -    |   -    |    @     |
+" xmap / xnoremap  |    -   |   -    |    -    |   @    |   -    |    -     |
+" smap / snoremap  |    -   |   -    |    -    |   -    |   @    |    -     |
+" map! / noremap!  |    -   |   @    |    @    |   -    |   -    |    -     |
+" imap / inoremap  |    -   |   @    |    -    |   -    |   -    |    -     |
+" cmap / cnoremap  |    -   |   -    |    @    |   -    |   -    |    -     |
+"---------------------------------------------------------------------------"
 
 " --- noremap --- {{{
 noremap ; :
@@ -150,8 +164,8 @@ xnoremap <silent> <Leader>w :'<,'>w !trans -b -sl=en -tl=ja<CR>
 " --- end maps --- }}}
 
 " --- command ---{{{
-command! Rmt :%s/\s\+$//e
-match errorMsg /\s\+$/
+command! Rmt :%s/\s\+$//e " delete trailing space
+match errorMsg /\s\+$/ " hilight trailing space
 " }}}
 
 " --- tabline --- {{{
@@ -190,47 +204,13 @@ nnoremap <Leader>7 7gt
 nnoremap <Leader>8 8gt
 nnoremap <Leader>9 9gt
 nnoremap <Leader>10 10gt
-nnoremap <Leader>11 11gt
-nnoremap <Leader>12 12gt
-nnoremap <Leader>13 13gt
-nnoremap <Leader>14 14gt
-nnoremap <Leader>15 15gt
-nnoremap <Leader>16 16gt
-nnoremap <Leader>17 17gt
-nnoremap <Leader>18 18gt
-nnoremap <Leader>19 19gt
-nnoremap <Leader>20 20gt
 nnoremap <C-h> :tabprevious<CR>
 nnoremap <C-l> :tabnext<CR>
 nnoremap <C-w>d :tabclose<CR>
 nnoremap <C-w>c :tabnew<CR>
 "}}}
 
-" --- statusline --- {{{
-
-set noshowmode
-set noruler
-set laststatus=0
-set noshowcmd
 let &statusline='%n:%f %q %y'
-let s:hidden_all = 1
-function! ToggleHiddenAll()
-  if s:hidden_all  == 0
-    let s:hidden_all = 1
-    set noshowmode
-    set noruler
-    set laststatus=0
-    set noshowcmd
-  else
-    let s:hidden_all = 0
-    set showmode
-    set ruler
-    set laststatus=2
-    set showcmd
-  endif
-endfunction
-nnoremap <silent> <Leader>s :call ToggleHiddenAll()<CR>
-"}}}
 
 "  --- vimquickfix --- {{{
 function! ToggleQuickfix()
@@ -243,31 +223,3 @@ function! ToggleQuickfix()
 endfunction
 nnoremap <script> <silent> <Leader>q :call ToggleQuickfix()<CR>
 "}}}
-
-" --- netrw gx --- {{{
-if !exists("g:netrw_nogx")
-  if maparg('gx','n') == ""
-    if !hasmapto('<Plug>NetrwBrowseX')
-      nmap <unique> gx <Plug>NetrwBrowseX
-    endif
-    nno <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
-  endif
-  if maparg('gx','v') == ""
-    if !hasmapto('<Plug>NetrwBrowseXVis')
-      vmap <unique> gx <Plug>NetrwBrowseXVis
-    endif
-    vno <silent> <Plug>NetrwBrowseXVis :<c-u>call netrw#BrowseXVis()<cr>
-  endif
-endif
-if exists("g:netrw_usetab") && g:netrw_usetab
-  if maparg('<c-tab>','n') == ""
-    nmap <unique> <c-tab> <Plug>NetrwShrink
-  endif
-  nno <silent> <Plug>NetrwShrink :call netrw#Shrink()<cr>
-endif
-"}}}
-
-" ---- ppng  --- {{{
-xnoremap mpr :!curl -T - https://ppng.io/kis9a<CR>u
-nnoremap mpn :r! curl -sL https://ppng.io/kis9a<CR>
-" }}}

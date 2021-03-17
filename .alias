@@ -5,17 +5,13 @@ alias c='cat'
 alias d='cd $DEV'
 alias n='cd $KIS9A'
 alias o='open'
-alias x='exit'
 alias v='nvim'
-alias y='yarn'
 
 alias .='cd $DOTFILES;'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
-alias earth="curl -s http://artscene.textfiles.com/vt100/movglobe.vt | pv -q -L 9600"
-alias timepv="for (( i = 1 ; i <= 100 ; i++ )); do sleep 1; echo $i; done | (>&2 echo -en "\r"; pv --progress --line-mode --size 100 --eta --timer)"
 alias la='tree -a -C -h -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
 alias l1='tree -a -C -h -L 1 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
 alias l2='tree -a -C -h -L 2 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
@@ -24,11 +20,7 @@ alias l3='tree -a -C -h -L 3 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -
 alias rmi='rm -i'
 alias rmf='rm -fr'
 alias sl='ls -lahGpt'
-alias lj='ls -ahGpt'
-alias lsg='ls | fzf | pbcopy'
-alias lexa -lhasc='cowsay $(ls)'
 
-alias nd="du -sh ./node_modules/* | sort -nr | grep '\dM.*'"
 alias t='tmux -u new -s $(basename `pwd`)'
 alias ta='tmux a'
 alias tkw='tmux kill-server'
@@ -51,21 +43,8 @@ alias yd='youtube-dl -ciw --restrict-filenames'
 alias ydd='youtube-dl -ciw --extract-audio --audio-format mp3 --restrict-filenames'
 alias lofi="mpv --shuffle $LOFI"
 alias lofir="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
-alias jj='aws s3 sync $TASKS s3://kis9atask --size-only'
-alias pomo='termdown -f univers -s 25m; terminal-notifier -message "stop task and break" -sound default; termdown -f univers -s 5m; terminal-notifier -sound default -message "break stop"'
 alias porta='lsof -Pan -i tcp -i udp'
 alias pshttpd='ps aux | grep httpd'
-alias qi=qi
-function qi () {
-  curl -s https://qiita.com | pup '.css-qrra2n json{}' \
-  | jq -r -C '.[] | [.text, .href] | join(" < ")' \
-  | cat -n | fzf -m --ansi --border --prompt="Qiita trends open > " \
-  | xargs -I {} | grep -Eo '(http|https)://[^/"]+\/[^/"]+\/items/[^/"]+' | xargs open
-}
-alias qil=qil
-functiton qil() {
-  curl -s https://qiita.com | pup '.css-qrra2n json{}' | jq -r -C '.[] | [.text, .href] | join(" < ")' | cat -n | fzf -m --ansi --border --prompt="Qiita trends open > " | xargs -I {} | grep -Eo '(http|https)://[^/"]+\/[^/"]+\/items/[^/"]+' | xargs curl -s | pup '.it-MdContent' | pup 'text{}' | sed '/^[[:space:]]*$/d' | less
-}
 
 alias pkill=pkill
 function pkill () {
@@ -75,39 +54,9 @@ alias pss=pss
 function pss () {
   ps aux | grep -E "PID|$1" | grep -v grep
 }
-alias gre=gre
-function gre () {
-  grep -E $1 -rl $2
-}
 alias mk=mk
 function mk () {
   mkdir $1; cd $1;
-}
-
-# search
-alias /g=search_google
-function search_google () {
-  open "https://www.google.com/search?q=$1"
-}
-
-alias /gy=search_google_last_year
-function search_google_last_year () {
-  open "https://www.google.com/search?q=%$1&tbs=qdr:y"
-}
-
-alias /q=search_qiita
-function search_qiita () {
-  open "https://qiita.com/search?q=$1"
-}
-
-alias /h=search_github
-function search_github () {
-  open "https://github.com/search?q=$1"
-}
-
-alias /z=search_zenn
-function search_zenn () {
-   open "https://zenn.dev/search?q=$1"
 }
 
 function colors() {
@@ -115,10 +64,6 @@ function colors() {
   do
       print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}
   done
-}
-
-function bdiff() {
-  git diff --name-only --diff-filter=d | xargs bat --diff
 }
 
 # global alias
@@ -132,14 +77,6 @@ alias -g X='| xargs'
 alias -g C='| pbcopy'
 alias -g F='| fzf'
 alias -g N='| nvim -'
-alias -g J='| jq '
-alias -g P='| curl -T - https://ppng.io/kis9a'
-alias -g cpjson="-XPOST -H 'Content-Type: application/json' -d '{}'"
-alias -g cptext="-XPOST -H 'Content-Type: text/plain' -d"
-alias -g On="--output name"
-alias -g Oj="--output json"
-alias -g Oy="--output yaml"
-alias -g Ow="--output wide"
 
 # git
 alias g='git'
@@ -157,12 +94,6 @@ alias gsu='git submodule'
 alias gc='git commit'
 alias gcm='git commit -m'
 alias gca='git commit --am'
-alias gco=gco
-function gco() {
-  date=$(date -v -$1d)
-  git commit --date $date
-}
-alias gcoa='git rebase HEAD~ --committer-date-is-author-date'
 alias gr='git reset'
 alias gch='git checkout'
 alias gac='git add . && git commit -am'
@@ -177,12 +108,7 @@ alias gclr='git clone --recurse-submodules'
 alias gupd='git update'
 alias gg='git graph'
 alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative -10"
-alias gdiff="git ls-files -m -o --exclude-standard | fzf -m --preview 'git diff --color=always {}' | xargs git add && git s"
 alias gll='git log --graph --oneline --decorate --all'
-alias ggpusht='git push origin $(git_current_branch) --tags'
-alias ggpushf='git push origin $(git_current_branch) --force'
-alias ggpushtf='git push origin $(git_current_branch) --tags --force'
-alias ggpushft='git push origin $(git_current_branch) --tags --force'
 alias gst-staged="git status --short | grep '^\w.'"
 alias gst-unstaged="git status  --short | grep '^\W.'"
 alias gst-unstaged-tracked="git status  --short | grep '^\s.'"
@@ -191,109 +117,4 @@ alias gste="gst-staged | awk '{ print $2}' | xargs nvim -p"
 alias ggpull='git pull --rebase origin $(git_current_branch)'
 alias ggpp='git pull --rebase origin $(git_current_branch) && git push origin $(git_current_branch)'
 alias gcob='git checkout -b'
-alias gsts='git stash save'
 alias grget='git remote get-url origin'
-alias gpr='hub pull-request'
-alias gci='hub issue create'
-alias hcl='hub clone'
-alias vimdiff='nvim -d '
-
-# docker
-alias dk='docker'
-alias dkp='docker ps'
-alias dkpa='docker ps -a'
-alias dkpaq='docker ps -a -q'
-alias dkb='docker build'
-alias dkbnc='docker build --no-cache -t'
-alias dkr='docker run --rm'
-alias dkrti='docker run --rm -ti'
-alias dkrd='docker run -d'
-alias dkrp8='docker run --rm -p 8080:8080'
-alias dkrp9='docker run --rm -p 9080:9080'
-alias dks='docker start'
-alias dkt='docker stop'
-alias dktt='docker stop $(docker ps -q)'
-alias dkk='docker kill'
-alias dkkk='docker kill $(docker ps -q)'
-alias dkrm='docker rm'
-alias dkri='docker rmi'
-alias dke='docker exec -ti'
-alias dkl='docker logs -f'
-alias dki='docker images'
-alias dkpu='docker pull'
-alias dkph='docker push'
-alias dkin='docker inspect'
-alias dkn='docker network'
-alias dkc='docker-compose'
-alias dkcu='docker-compose up'
-alias dkclean='docker ps -q -a -f status=exited | xargs -r docker rm && docker images -q -f dangling=true | xargs -r docker rmi'
-
-# kubernetes
-alias kc='kubectl'
-alias kcg='kubectl get'
-alias kcgn='kubectl get --namespace'
-alias kcd='kubectl describe'
-alias kcdn='kubectl describe --namespace'
-alias kcdl='kubectl delete'
-alias kcdln='kubectl delete --namespace'
-alias kcdlp='kubectl-delete-pod'
-alias kcgno='kubectl get nodes'
-alias kcgp='kubectl get pods'
-alias kcgpn='kubectl get pods --namespace'
-alias kcgpp='kubectl get pods --all-namespaces'
-alias kcgd='kubectl get deployments'
-alias kcgdn='kubectl get deployments --namespace'
-alias kcgdd='kubectl get deployments --all-namespaces'
-alias kcgs='kubectl get services'
-alias kcgsn='kubectl get services --namespace'
-alias kcgss='kubectl get services --all-namespaces'
-alias kcgi='kubectl get ingresses'
-alias kcgin='kubectl get ingresses --namespace'
-alias kcgii='kubectl get ingresses --all-namespaces'
-alias kcgc='kubectl get configmaps'
-alias kcgcn='kubectl get configmaps --namespace'
-alias kcgcc='kubectl get configmaps --all-namespaces'
-alias kcgv='kubectl get virtualservices'
-alias kcgvn='kubectl get virtualservices --namespace'
-alias kcgvv='kubectl get virtualservices --all-namespaces'
-alias kcgdr='kubectl get destinationrules'
-alias kcgdrn='kubectl get destinationrules --namespace'
-alias kcgdrr='kubectl get destinationrules --all-namespaces'
-alias kcgg='kubectl get gateways'
-alias kcggn='kubectl get gateways --namespace'
-alias kcggg='kubectl get gateways --all-namespaces'
-alias kcgse='kubectl get serviceentries'
-alias kcgsen='kubectl get serviceentries --namespace'
-alias kcgsee='kubectl get serviceentries --all-namespaces'
-alias kcgr='kubectl get routerules'
-alias kcgrn='kubectl get routerules --namespace'
-alias kcgrr='kubectl get routerules --all-namespaces'
-alias kcgdp='kubectl get destinationpolicies'
-alias kcgdpn='kubectl get destinationpolicies --namespace'
-alias kcgdpp='kubectl get destinationpolicies --all-namespaces'
-alias kcge='kubectl get events --sort-by=".lastTimestamp" --all-namespaces --watch'
-alias kcc='kubectl create'
-alias kccn='kubectl create --namespace'
-alias kca='kubectl apply -f'
-alias kcan='kubectl apply -f --namespace'
-alias kce='kubectl exec -t -i'
-alias kcen='kubectl exec -t -i --namespace'
-alias kcl='kubectl logs -f'
-alias kcll='kubectl-logs'
-alias kcln='kubectl logs -f --namespace'
-alias kcgx='kubectl config get-contexts'
-alias kcux='kubectl config use-context'
-alias kcxsn='kubectl config set-context $(kubectl config current-context) --namespace'
-alias kcpf='kubectl port-forward'
-alias kcpfn='kubectl port-forward --namespace'
-alias kcpfg='kubectl-port-forward-grafana'
-alias kcpfj='kubectl-port-forward-jaeger'
-alias kcpfk='kubectl-port-forward-kiali'
-alias kcpfp='kubectl-port-forward-prometheus'
-alias kcpfpf='kubectl-port-forward-prometheus-federation'
-alias kcpfz='kubectl-port-forward-zipkin'
-alias kcdldr='kubectl-delete-default-resources'
-alias kcii='kubectl-ingress-ip-address'
-alias kcni='kubectl-nginx-ip-address'
-alias kcigip='kubectl-istio-gateway-ip-address'
-alias kcignp='kubectl-istio-gateway-http-nodeport'
