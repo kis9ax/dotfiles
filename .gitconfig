@@ -3,8 +3,6 @@
 	email = kis9ax@gmail.com
 [github]
 	user = kis9a
-[commit]
-	template = /Users/kis9a/.gitmessage
 [core]
     pager = delta
 [merge]

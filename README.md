@@ -1,17 +1,20 @@
 #
 
+**!! Simple but Powerful !!**
+
+### neovim, tmux
+
 ```sh
 
-# neovim, tmux, required
 brew install tmux
 brew install reattach-to-user-namespace
+
 brew install neovim --HEAD
 brew install node
 brew install lua
 brew install python
 brew install python@3.8
 brew install ruby@2.4
-brew install watchman
 
 npm install -g neovim
 pip install neovim
@@ -20,9 +23,9 @@ gem install neovim
 # execute :checkhealth in nvim
 ```
 
-```sh
+### I use this tools
 
-# I use this tools
+```sh
 brew install fd
 brew install ripgrep
 brew install bat
@@ -32,6 +35,8 @@ brew install git-delta
 brew install lua-format
 brew install shfmt
 brew install shellcheck
+brew install watchman
+brew install jq
 brew install pup
 brew install translate-shell
 brew install youtube-dl
@@ -50,6 +55,22 @@ cd ~/
 git clone https://github.com/kis9a/dotfiles
 git checkout ev
 cd dotfiles/
+
+```
+
+vim ./.gitconfig
+
+```toml
+[user]
+	name = kis9a # change your name
+	email = kis9ax@gmail.com # change to your email
+[github]
+	user = kis9a #change to your userId
+
+ ...
+```
+
+```
 make deploy
 zsh
 nvim

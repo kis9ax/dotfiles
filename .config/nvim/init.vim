@@ -121,30 +121,28 @@ nnoremap <silent> <C-w><C-q> :%bd<CR>
 nnoremap <Leader>r :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap <silent> su :let @+ = expand("%:p")<cr>
-nnoremap <silent> <Leader>b :tabnew<CR>:cd $MEMOS<CR>
 nnoremap <silent> <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
-nnoremap <silent> <Leader>j :tabnew<CR>:e $TASK<CR>
 nnoremap <silent> <Leader>rl :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>o :set spell!<CR>
 " }}}
 
+" --- nnoremap! ---
+noremap! <C-k> <Up>
+noremap! <C-j> <Down>
+noremap! <C-h> <Left>
+noremap! <C-l> <Right>
+noremap! <C-d> <BS>
+noremap! <C-c> <DEL>
+
 " --- inoremap --- {{{
-inoremap <C-k> <Up>
-inoremap <C-j> <Down>
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
 inoremap <C-x> <End><CR>
 inoremap <C-o> <Home><CR><Up>
-inoremap <C-d> <BS>
-inoremap <C-c> <DEL>
 inoremap <C-w> <C-\><C-o>db
 inoremap <C-r> <C-\><C-o>de
-inoremap <C-b> <Esc>bi
-inoremap <C-e> <Esc>ea
-inoremap <C-f> <C-y>
-inoremap <C-i> <C-y>
 inoremap <C-]> <Esc><Right>
 inoremap <C-s> <Esc>:w!<cr>
+inoremap <C-f> <C-y>
+inoremap <C-i> <C-y>
 "}}}
 
 " --- vnoremap --- {{{
@@ -153,7 +151,6 @@ xnoremap < <gv
 xnoremap <C-k> "zx<Up>"zP`[V`]
 xnoremap <C-j> "zx"zp`[V`]
 xnoremap <Leader>r y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
-xnoremap <Leader>/ "xy:%s/<C-R>=escape(@x, '\\/.*$^~[]')<CR>//gc<Left><Left><Left>
 xnoremap <silent> <Leader>i :'<,'>!tail -r<CR>
 xnoremap <silent> cy c<C-r>0<ESC>:let @/=@1<CR>:noh<CR>"
 xnoremap <silent> <Leader>t :'<,'> !trans -b -sl=en -tl=ja<CR>

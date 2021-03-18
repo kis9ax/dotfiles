@@ -19,7 +19,7 @@ nnoremap <silent>sg :Rg!<CR>
 nnoremap <silent>sj :Buffers<CR>
 nnoremap <silent>sl :Lines<CR>
 nnoremap <silent>sc :Commits<CR>
-nnoremap <silent>sh :History'<CR>
+nnoremap <silent>s' :History:<CR>
 let g:fzf_preview_window = []
 let g:fzf_layout = {  'window': { 'yoffset': 0.05 , 'width': 1, 'height': 0.4, 'border': 'rounded' } }
 let g:fzf_buffers_jump = 1
@@ -69,10 +69,9 @@ nnoremap <silent><C-w>n :CocCommand explorer --sources=buffer+,file+ --position=
 nnoremap <silent>s: :CocCommand<CR>
 nnoremap <silent>s; :<C-u>CocList<cr>
 nnoremap <silent>K :call <SID>show_documentation()<CR>
-nnoremap <silent>su :UndotreeToggle<CR>
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-nnoremap <silent>sk :CocCommand prettier.formatFile<CR>
 nnoremap <silent>dg :CocCommand git.diffCached<CR>
+nnoremap <silent>sk :CocCommand prettier.formatFile<CR>
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 nmap sd <Plug>(coc-definition)
 nmap sq <Plug>(coc-fix-current)
 nmap st <Plug>(coc-type-definition)
@@ -81,9 +80,6 @@ nmap sr <Plug>(coc-rename)
 nmap sk <Plug>(coc-format)
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
-command! -nargs=0 Format :call CocAction('format')
-command! -nargs=? Fold :call CocAction('fold', <f-args>)
-command! -nargs=0 OR   :call CocAction('runCommand', 'editor.action.organizeImport')
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -113,7 +109,7 @@ let g:qf_write_changes = 1
 "}}}
 Plug 'tpope/vim-commentary', { 'on': 'Commentary' }
 " tpope/vim-commentary {{{
-vnoremap <silent> gc :Commentary<CR>
+xnoremap <silent> gc :Commentary<CR>
 nnoremap <silent> gc :Commentary<CR>
 "}}}
 Plug 'mhinz/vim-grepper', { 'on': 'Grepper' }
