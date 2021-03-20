@@ -7,17 +7,17 @@ DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 all:
 
-list: ## Show dot files in this repo
+list: ## show dotfiles
 	@$(foreach val, $(DOTFILES), /bin/ls -dF $(val);)
 
-deploy: ## Create symlink to home directory
+deploy: ## create symlink
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
 
-clean: ## Remove the dot files and this repo
+clean: ## remove dotfiles
 	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
 	-rm -rf $(DOTPATH)
 
-help: ## Self-documented Makefile
+help: ## show help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
 		| sort \
 		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
