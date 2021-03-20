@@ -1,4 +1,5 @@
 setopt no_beep
+export PATH=/usr/local/Cellar/openresty/1.19.3.1_1/nginx/sbin:$PATH
 setopt nolistbeep
 setopt auto_cd
 setopt auto_pushd

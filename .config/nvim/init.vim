@@ -1,4 +1,5 @@
 " --- setting --- {{{
+"  To reference, ctrl -k or :h option<CR>
 set autochdir
 set autoindent
 set clipboard+=unnamedplus
@@ -34,7 +35,6 @@ set switchbuf+=newtab
 set synmaxcol=200
 set tabpagemax=100
 set tabstop=2
-set termguicolors
 set timeoutlen=1000
 set ttimeoutlen=0
 set updatetime=300
@@ -46,6 +46,8 @@ set virtualedit=block
 let mapleader="\<Space>"
 let maplocalleader="\,"
 let g:netrw_browsex_viewer="open"
+let &statusline='%n:%f %q %y'
+"" let g:loaded_~~ to disable default neovim plugins
 let g:loaded_netrwPlugin = 1
 let g:loaded_man = 1
 let g:loaded_gzip = 1
@@ -71,6 +73,7 @@ source ~/.config/nvim/plugins.vim
 " --- color setting --- {{{
 syntax on
 set background=dark
+" ~/.config/nvim/colors/gruvbox.vim
 colorscheme gruvbox
 
 if exists("&termguicolors") && exists("&winblend")
@@ -82,6 +85,18 @@ endif
 "}}}
 
 " --- maps --- {{{
+"---------------------------------------------------------------------------|
+" Commands \ Modes | Normal | Insert | Command | Visual | Select | Operator |
+" map  / noremap   |    @   |   -    |    -    |   @    |   @    |    @     |
+" nmap / nnoremap  |    @   |   -    |    -    |   -    |   -    |    -     |
+" vmap / vnoremap  |    -   |   -    |    -    |   @    |   @    |    -     |
+" omap / onoremap  |    -   |   -    |    -    |   -    |   -    |    @     |
+" xmap / xnoremap  |    -   |   -    |    -    |   @    |   -    |    -     |
+" smap / snoremap  |    -   |   -    |    -    |   -    |   @    |    -     |
+" map! / noremap!  |    -   |   @    |    @    |   -    |   -    |    -     |
+" imap / inoremap  |    -   |   @    |    -    |   -    |   -    |    -     |
+" cmap / cnoremap  |    -   |   -    |    @    |   -    |   -    |    -     |
+"---------------------------------------------------------------------------"
 
 " --- noremap --- {{{
 noremap ; :
@@ -106,28 +121,28 @@ nnoremap <silent> <C-w><C-q> :%bd<CR>
 nnoremap <Leader>r :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap <silent> su :let @+ = expand("%:p")<cr>
-nnoremap <silent> <Leader>b :tabnew<CR>:cd $MEMOS<CR>
 nnoremap <silent> <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
-nnoremap <silent> <Leader>j :tabnew<CR>:e $TASK<CR>
 nnoremap <silent> <Leader>rl :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>o :set spell!<CR>
-nnoremap <Leader>w :!trans -b 
-nnoremap md :r! mdl 
 " }}}
 
+" --- nnoremap! ---
+noremap! <C-k> <Up>
+noremap! <C-j> <Down>
+noremap! <C-h> <Left>
+noremap! <C-l> <Right>
+noremap! <C-d> <BS>
+noremap! <C-c> <DEL>
+
 " --- inoremap --- {{{
-inoremap <C-k> <Up>
-inoremap <C-j> <Down>
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
 inoremap <C-x> <End><CR>
 inoremap <C-o> <Home><CR><Up>
 inoremap <C-d> <BS>
 inoremap <C-c> <DEL>
 inoremap <C-w> <C-\><C-o>db
 inoremap <C-r> <C-\><C-o>de
-inoremap <C-b> <Esc>bi
-inoremap <C-e> <Esc>ea
+inoremap <C-]> <Esc><Right>
+inoremap <C-s> <Esc>:w!<cr>
 inoremap <C-f> <C-y>
 inoremap <C-i> <C-y>
 inoremap <C-]> <Esc><Right>
@@ -140,7 +155,6 @@ xnoremap < <gv
 xnoremap <C-k> "zx<Up>"zP`[V`]
 xnoremap <C-j> "zx"zp`[V`]
 xnoremap <Leader>r y/<C-R>=escape(@", '\\/.*$^~[]')<CR><CR>
-xnoremap <Leader>/ "xy:%s/<C-R>=escape(@x, '\\/.*$^~[]')<CR>//gc<Left><Left><Left>
 xnoremap <silent> <Leader>i :'<,'>!tail -r<CR>
 xnoremap <silent> cy c<C-r>0<ESC>:let @/=@1<CR>:noh<CR>"
 xnoremap <silent> <Leader>t :'<,'> !trans -b -sl=en -tl=ja<CR>
@@ -150,16 +164,16 @@ xnoremap <silent> <Leader>w :'<,'>w !trans -b -sl=en -tl=ja<CR>
 " --- end maps --- }}}
 
 " --- command ---{{{
-command! Rmt :%s/\s\+$//e
-match errorMsg /\s\+$/
+command! Rmt :%s/\s\+$//e " delete trailing space
+match errorMsg /\s\+$/ " hilight trailing space
 " }}}
 
 " --- tabline --- {{{
-function! s:SID_PREFIX()
+function! s:sid_prefix()
   return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
 endfunction
 
-function! s:my_tabline()
+function! s:tb()
   let s='%#TabLineDir#< %{fnamemodify(getcwd(), ":t")} >'
   for i in range(1, tabpagenr('$'))
     let bufnrs = tabpagebuflist(i)
@@ -178,7 +192,7 @@ function! s:my_tabline()
   return s
 endfunction
 
-let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
+let &tabline = '%!'. s:sid_prefix() . 'tb()'
 
 nnoremap <Leader>1 1gt
 nnoremap <Leader>2 2gt
@@ -190,50 +204,14 @@ nnoremap <Leader>7 7gt
 nnoremap <Leader>8 8gt
 nnoremap <Leader>9 9gt
 nnoremap <Leader>10 10gt
-nnoremap <Leader>11 11gt
-nnoremap <Leader>12 12gt
-nnoremap <Leader>13 13gt
-nnoremap <Leader>14 14gt
-nnoremap <Leader>15 15gt
-nnoremap <Leader>16 16gt
-nnoremap <Leader>17 17gt
-nnoremap <Leader>18 18gt
-nnoremap <Leader>19 19gt
-nnoremap <Leader>20 20gt
 nnoremap <C-h> :tabprevious<CR>
 nnoremap <C-l> :tabnext<CR>
 nnoremap <C-w>d :tabclose<CR>
 nnoremap <C-w>c :tabnew<CR>
 "}}}
 
-" --- statusline --- {{{
-
-set noshowmode
-set noruler
-set laststatus=0
-set noshowcmd
-let &statusline='%n:%f %q %y'
-let s:hidden_all = 1
-function! ToggleHiddenAll()
-  if s:hidden_all  == 0
-    let s:hidden_all = 1
-    set noshowmode
-    set noruler
-    set laststatus=0
-    set noshowcmd
-  else
-    let s:hidden_all = 0
-    set showmode
-    set ruler
-    set laststatus=2
-    set showcmd
-  endif
-endfunction
-nnoremap <silent> <Leader>s :call ToggleHiddenAll()<CR>
-"}}}
-
 "  --- vimquickfix --- {{{
-function! ToggleQuickfix()
+function! Toggle_qf()
   let l:nr = winnr('$')
   cwindow
   let l:nr2 = winnr('$')
@@ -241,33 +219,4 @@ function! ToggleQuickfix()
     cclose
   endif
 endfunction
-nnoremap <script> <silent> <Leader>q :call ToggleQuickfix()<CR>
-"}}}
-
-" --- netrw gx --- {{{
-if !exists("g:netrw_nogx")
-  if maparg('gx','n') == ""
-    if !hasmapto('<Plug>NetrwBrowseX')
-      nmap <unique> gx <Plug>NetrwBrowseX
-    endif
-    nno <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
-  endif
-  if maparg('gx','v') == ""
-    if !hasmapto('<Plug>NetrwBrowseXVis')
-      vmap <unique> gx <Plug>NetrwBrowseXVis
-    endif
-    vno <silent> <Plug>NetrwBrowseXVis :<c-u>call netrw#BrowseXVis()<cr>
-  endif
-endif
-if exists("g:netrw_usetab") && g:netrw_usetab
-  if maparg('<c-tab>','n') == ""
-    nmap <unique> <c-tab> <Plug>NetrwShrink
-  endif
-  nno <silent> <Plug>NetrwShrink :call netrw#Shrink()<cr>
-endif
-"}}}
-
-" ---- ppng  --- {{{
-xnoremap mpr :!curl -T - https://ppng.io/kis9a<CR>u
-nnoremap mpn :r! curl -sL https://ppng.io/kis9a<CR>
-" }}}
+nnoremap <script> <silent> <Leader>q :call Toggle_qf()<CR>
