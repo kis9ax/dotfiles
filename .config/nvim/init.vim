@@ -165,11 +165,11 @@ match errorMsg /\s\+$/ " hilight trailing space
 " }}}
 
 " --- tabline --- {{{
-function! s:SID_PREFIX()
+function! s:sid_prefix()
   return matchstr(expand('<sfile>'), '<SNR>\d\+_\zeSID_PREFIX$')
 endfunction
 
-function! s:my_tabline()
+function! s:tb()
   let s='%#TabLineDir#< %{fnamemodify(getcwd(), ":t")} >'
   for i in range(1, tabpagenr('$'))
     let bufnrs = tabpagebuflist(i)
@@ -188,7 +188,7 @@ function! s:my_tabline()
   return s
 endfunction
 
-let &tabline = '%!'. s:SID_PREFIX() . 'my_tabline()'
+let &tabline = '%!'. s:sid_prefix() . 'tb()'
 
 nnoremap <Leader>1 1gt
 nnoremap <Leader>2 2gt
@@ -207,7 +207,7 @@ nnoremap <C-w>c :tabnew<CR>
 "}}}
 
 "  --- vimquickfix --- {{{
-function! ToggleQuickfix()
+function! s:toggle_qf()
   let l:nr = winnr('$')
   cwindow
   let l:nr2 = winnr('$')
@@ -215,5 +215,11 @@ function! ToggleQuickfix()
     cclose
   endif
 endfunction
-nnoremap <script> <silent> <Leader>q :call ToggleQuickfix()<CR>
+nnoremap <script> <silent> <Leader>q :call s:toggle_qf()<CR>
 "}}}
+
+
+  " let l:nr = winnr('$')
+  " let l:nr2 = winnr('$')
+  " l:nr == l:nr2 ?  cclose : return
+  " cwindow
