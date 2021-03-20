@@ -207,7 +207,7 @@ nnoremap <C-w>c :tabnew<CR>
 "}}}
 
 "  --- vimquickfix --- {{{
-function! s:toggle_qf()
+function! Toggle_qf()
   let l:nr = winnr('$')
   cwindow
   let l:nr2 = winnr('$')
@@ -215,11 +215,5 @@ function! s:toggle_qf()
     cclose
   endif
 endfunction
-nnoremap <script> <silent> <Leader>q :call s:toggle_qf()<CR>
+nnoremap <script> <silent> <Leader>q :call Toggle_qf()<CR>
 "}}}
-
-
-  " let l:nr = winnr('$')
-  " let l:nr2 = winnr('$')
-  " l:nr == l:nr2 ?  cclose : return
-  " cwindow

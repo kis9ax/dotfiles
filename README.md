@@ -2,52 +2,88 @@
 
 **!! Simple but Powerful !!**
 
-### neovim, tmux
+## Pre Installation
+
+### tmux, neovim
 
 ```sh
 
+# tmux
 brew install tmux
 brew install reattach-to-user-namespace
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+# neovim
 brew install neovim --HEAD
 brew install node
 brew install lua
 brew install python
 brew install python@3.8
 brew install ruby@2.4
-
 npm install -g neovim
 pip install neovim
 gem install neovim
-
 # execute :checkhealth in nvim
+
 ```
+
+#
 
 ### I use this tools
 
+Importance, priority. (ip)  
+[low] 1 =< ip =< 10 [high], this is just my sense.
+
 ```sh
+# (ip: 8)
+# fast terminal
+# settings in .config/alacritty/alacritty.yml
+# https://github.com/alacritty/alacritty
+brew install alaclitty
+brew install gh
 brew install fd
 brew install ripgrep
 brew install bat
-brew install gh
+
+# (ip: 5)
 brew install tig
+brew install amethyst
 brew install git-delta
-brew install lua-format
-brew install shfmt
-brew install shellcheck
-brew install watchman
-brew install jq
-brew install pup
 brew install translate-shell
-brew install youtube-dl
+brew install watchman
+
+# (ip: 3)
 brew install mpv
+brew install archey
 brew install cowsay
 brew install figlet
 brew install lolcat
-brew install archey
-brew install alaclitty
-brew install amethyst
+brew install youtube-dl
 
+## parser (ip: 6)
+brew install jq
+brew install yq
+brew install pup
+
+# formatter, linter (ip: 6)
+# used with https://github.com/iamcco/coc-diagnostic
+# settings in .config/nvim/coc-settings.json
+brew install lua-format
+brew install shfmt
+brew install gofmt
+brew install clang-format
+brew install psalm
+brew install vint
+brew install shellcheck
+...
+```
+
+## Installation
+
+```sh
+mkdir dotbackup
+cp -r .zshrc .zshenv .tmux.conf .gitconfig .config/ bin/ ./dotbackup
+ls -la ./dotbackup
 ```
 
 ```sh
@@ -71,6 +107,8 @@ vim ./.gitconfig
 ```
 
 ```
+cd ~/
+rm -rf .config/ bin/
 make deploy
 zsh
 nvim
