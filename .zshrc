@@ -1,5 +1,4 @@
 setopt no_beep
-export PATH=/usr/local/Cellar/openresty/1.19.3.1_1/nginx/sbin:$PATH
 setopt nolistbeep
 setopt auto_cd
 setopt auto_pushd
@@ -78,10 +77,10 @@ function ff() {
 }
 
 function m() {
-  baseDir=$KIS9A/memos
+  baseDir=$MEMOS
   memo=$(fd -t f --base-directory $baseDir | fzf)
   bat $baseDir/$memo
 }
 
 # alias
-source ~/.alias;
+source ~/.aliases;

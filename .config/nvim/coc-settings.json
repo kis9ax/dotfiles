@@ -12,7 +12,7 @@
   "tabnine.priority": 90,
   "tsserver.trace.server": "verbose",
   "tsserver.enableJavascript": true,
-  "coc.preferences.extensionUpdateCheck": "daily",
+  "coc.preferences.extensionUpdateCheck": "never",
   "coc.preferences.jumpCommand": "tab drop",
   "emmet.includeLanguages": {
     "vue-html": "html",

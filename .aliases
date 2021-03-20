@@ -1,50 +1,79 @@
-#alias unix
 alias a='alias'
 alias b='bat'
-alias c='cat'
-alias d='cd $DEV'
-alias n='cd $KIS9A'
 alias o='open'
 alias v='nvim'
-
+alias d='cd $DEV'
+alias n='cd $KIS9A'
 alias .='cd $DOTFILES;'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-
-alias la='tree -a -C -h -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
-alias l1='tree -a -C -h -L 1 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
-alias l2='tree -a -C -h -L 2 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
-alias l3='tree -a -C -h -L 3 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
-
 alias rmi='rm -i'
 alias rmf='rm -fr'
 alias sl='ls -lahGpt'
-
 alias t='tmux -u new -s $(basename `pwd`)'
 alias ta='tmux a'
 alias tkw='tmux kill-server'
-alias lol='yes lolcat | tr '\n' '  ' | fold -w $COLUMNS | lolcat'
+alias pp=pbpaste
 alias ffp='ffprobe -hide_banner -show_format'
 alias ffimg='ls *(.png|.jpg) | fzf -m --prompt="twimg" | xargs -I {} sips -Z 720 {}'
 alias ff2gif='ls *(.mp4|.mov) | fzf -m --prompt="tw2gif" | xargs -I {} ffmpeg -y -i {} -vf scale="720:trunc(ow/a/2)*2" -r 10 {}.gif'
 alias ffmov2mp4='ls *.mov | fzf -m --prompt="twmov2mp4" | xargs -I {} ffmpeg -y -i {} -vf scale="720:trunc(ow/a/2)*2" {}.mp4'
 alias ffgif2mp4='ls *.gif | fzf -m --prompt="gif2mp4" | xargs -I {} ffmpeg -y -i {} -vf scale="720:trunc(ow/a/2)*2" {}.mp4'
-
-alias pp=pbpaste
-alias mpn='curl -sL https://ppng.io/kis9a'
+alias l='tree -a -C -h -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
+alias l1='tree -a -C -h -L 1 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
+alias l2='tree -a -C -h -L 2 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
+alias l3='tree -a -C -h -L 3 -I "\.DS_Store|\.git|node_modules|vendor\/bundle" -N'
 alias mem="top -l 1 | grep Mem"
-alias memr="sudo purge"
 alias path='echo $PATH | tr ":" "\n"'
 alias tzsh='time  zsh -i -c exit'
 alias te='trans {en=ja}'
 alias tj='trans {ja=en}'
 alias yd='youtube-dl -ciw --restrict-filenames'
 alias ydd='youtube-dl -ciw --extract-audio --audio-format mp3 --restrict-filenames'
-alias lofi="mpv --shuffle $LOFI"
-alias lofir="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
+alias lofi="mpv 'https://www.youtube.com/watch?v=5qap5aO4i9A&ab_channel=ChilledCow' --no-video"
 alias porta='lsof -Pan -i tcp -i udp'
-alias pshttpd='ps aux | grep httpd'
+
+alias -g C='| pbcopy'
+alias -g G='| grep --color=auto'
+alias -g H='| head -c'
+alias -g L='| less -R'
+alias -g B='| bat'
+alias -g X='| xargs'
+alias -g F='| fzf'
+alias -g N='| nvim -'
+
+# git
+alias g='git'
+alias ga='git add'
+alias ga.='git add . && git status -s'
+alias gs='git status -s'
+alias gd='git diff'
+alias gd@='git diff @'
+alias gsta='git stash'
+alias gsu='git submodule'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gca='git commit --am'
+alias gr='git reset'
+alias gch='git checkout'
+alias gchb='git checkout -b'
+alias gp='git push'
+alias gpf='git push -f'
+alias gpl='git pull'
+alias gf='git fetch'
+alias gb='git branch'
+alias gcl='git clone'
+alias gclr='git clone --recurse-submodules'
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative -10"
+alias gll='git log --graph --oneline --decorate --all'
+alias gst-staged="git status --short | grep '^\w.'"
+alias gst-unstaged="git status  --short | grep '^\W.'"
+alias gst-unstaged-tracked="git status  --short | grep '^\s.'"
+alias gst-untracked="git status --short | grep '^??'"
+alias gste="gst-staged | awk '{ print $2}' | xargs nvim -p"
+alias grget='git remote get-url origin'
+
 
 alias pkill=pkill
 function pkill () {
@@ -65,56 +94,3 @@ function colors() {
       print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}
   done
 }
-
-# global alias
-alias -g A='| awk'
-alias -g C='| pbcopy'
-alias -g G='| grep --color=auto'
-alias -g H='| head'
-alias -g L='| less -R'
-alias -g B='| bat'
-alias -g X='| xargs'
-alias -g C='| pbcopy'
-alias -g F='| fzf'
-alias -g N='| nvim -'
-
-# git
-alias g='git'
-alias ga='git add'
-alias ga.='git add . && git status -s'
-alias gclast='git log --since='last month' --author="$(git config user.name)" --oneline'
-alias gs='git status -s'
-alias gd='git diff'
-alias gd@='git diff @'
-alias gsta='git stash'
-alias gstal='git stash list'
-alias gstas='git stash save'
-alias gstaa='git stash apply'
-alias gsu='git submodule'
-alias gc='git commit'
-alias gcm='git commit -m'
-alias gca='git commit --am'
-alias gr='git reset'
-alias gch='git checkout'
-alias gac='git add . && git commit -am'
-alias gp='git push'
-alias gpf='git push -f'
-alias gpl='git pull'
-alias gf='git fetch'
-alias gb='git branch'
-alias gcl='git clone'
-alias gclu='git clone https://github.com/'
-alias gclr='git clone --recurse-submodules'
-alias gupd='git update'
-alias gg='git graph'
-alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative -10"
-alias gll='git log --graph --oneline --decorate --all'
-alias gst-staged="git status --short | grep '^\w.'"
-alias gst-unstaged="git status  --short | grep '^\W.'"
-alias gst-unstaged-tracked="git status  --short | grep '^\s.'"
-alias gst-untracked="git status --short | grep '^??'"
-alias gste="gst-staged | awk '{ print $2}' | xargs nvim -p"
-alias ggpull='git pull --rebase origin $(git_current_branch)'
-alias ggpp='git pull --rebase origin $(git_current_branch) && git push origin $(git_current_branch)'
-alias gcob='git checkout -b'
-alias grget='git remote get-url origin'

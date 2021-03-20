@@ -114,6 +114,7 @@ nnoremap gF <C-w>gF
 nnoremap ss :sp<CR>
 nnoremap sv :vs<CR>
 nnoremap sn :tab split<CR>
+nnoremap md :r! mdl 
 nnoremap <silent> <C-s> :w!<cr>
 nnoremap <silent> <C-c> :bd<cr>
 nnoremap <silent> <C-q> :q!<cr>
@@ -122,6 +123,7 @@ nnoremap <Leader>r :%s///g<Left><Left>
 nnoremap <Leader>rc :%s///gc<Left><Left><Left>
 nnoremap <silent> su :let @+ = expand("%:p")<cr>
 nnoremap <silent> <Leader>d :tabnew<CR>:e $MYVIMRC<CR>
+nnoremap <silent> <Leader>j :tabnew<CR>:e $MEMOS<CR>
 nnoremap <silent> <Leader>rl :so $MYVIMRC<CR>
 nnoremap <silent> <Leader>o :set spell!<CR>
 " }}}
@@ -141,10 +143,11 @@ inoremap <C-d> <BS>
 inoremap <C-c> <DEL>
 inoremap <C-w> <C-\><C-o>db
 inoremap <C-r> <C-\><C-o>de
-inoremap <C-]> <Esc><Right>
-inoremap <C-s> <Esc>:w!<cr>
+inoremap <C-b> <Esc>bi
+inoremap <C-e> <Esc>ea
 inoremap <C-f> <C-y>
 inoremap <C-i> <C-y>
+inoremap <C-]> <Esc><Right>
 inoremap <C-]> <Esc><Right>
 inoremap <C-s> <Esc>:w!<cr>
 "}}}

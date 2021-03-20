@@ -71,3 +71,4 @@ Pods/
 .tmux/*
 .config/coc
 .config/nvim/plugged/
+.code
