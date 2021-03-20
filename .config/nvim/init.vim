@@ -137,12 +137,16 @@ noremap! <C-c> <DEL>
 " --- inoremap --- {{{
 inoremap <C-x> <End><CR>
 inoremap <C-o> <Home><CR><Up>
+inoremap <C-d> <BS>
+inoremap <C-c> <DEL>
 inoremap <C-w> <C-\><C-o>db
 inoremap <C-r> <C-\><C-o>de
 inoremap <C-]> <Esc><Right>
 inoremap <C-s> <Esc>:w!<cr>
 inoremap <C-f> <C-y>
 inoremap <C-i> <C-y>
+inoremap <C-]> <Esc><Right>
+inoremap <C-s> <Esc>:w!<cr>
 "}}}
 
 " --- vnoremap --- {{{
@@ -216,4 +220,3 @@ function! Toggle_qf()
   endif
 endfunction
 nnoremap <script> <silent> <Leader>q :call Toggle_qf()<CR>
-"}}}

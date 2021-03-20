@@ -81,15 +81,14 @@ brew install shellcheck
 ## Installation
 
 ```sh
+# backup
 mkdir dotbackup
 cp -r .zshrc .zshenv .tmux.conf .gitconfig .config/ bin/ ./dotbackup
 ls -la ./dotbackup
-```
 
-```sh
+# clone
 cd ~/
 git clone https://github.com/kis9a/dotfiles
-git checkout ev
 cd dotfiles/
 
 ```

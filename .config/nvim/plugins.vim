@@ -62,6 +62,7 @@ let g:coc_global_extensions = [
       \, 'coc-lua'
       \, 'coc-sh'
       \, 'coc-clangd'
+      \, 'coc-phpls'
       \, ]
 
 nnoremap <silent><C-n> :CocCommand explorer --sources=file+ --width=45<CR>

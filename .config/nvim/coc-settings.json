@@ -22,7 +22,8 @@
   "diagnostic-languageserver.enable": true,
   "diagnostic-languageserver.filetypes": {
     "vim": "vint",
-    "sh": "shellcheck"
+    "sh": "shellcheck",
+    "php": "phpstan"
   },
   "diagnostic-languageserver.formatters": {
     "clang-format": {
