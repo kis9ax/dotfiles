@@ -9,7 +9,7 @@
   "prettier.eslintIntegration": true,
   "coc.source.word.filetypes": ["markdown", "text"],
   "coc.preferences.formatOnSaveFiletypes": ["*"],
-  "tabnine.priority": 90,
+  "tabnine.priority": 100,
   "tsserver.trace.server": "verbose",
   "tsserver.enableJavascript": true,
   "coc.preferences.extensionUpdateCheck": "never",
