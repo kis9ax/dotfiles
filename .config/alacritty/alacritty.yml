@@ -27,10 +27,10 @@ font:
   #   family: "VictorMono Nerd Font"
   #   style: Thin
   normal:
-    family: "VictorMono Nerd Font Mono"
+    family: "VictorMono Nerd Font"
     style: Regular
   bold:
-    family: "VictorMono NF"
+    family: "VictorMono Nerd Font"
     style: Medium
   # normal:
   #   family: "Fira code"

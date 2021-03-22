@@ -251,7 +251,7 @@ nnoremap ss :sp<CR>
 nnoremap sv :vs<CR>
 nnoremap sn :tab split<CR>
 nnoremap md :r! mdl 
-nnoremap <silent> <C-s> :w!<cr>
+nnoremap <silent> <C-s> :noa w!<cr>
 nnoremap <silent> <C-c> :bd<cr>
 nnoremap <silent> <C-q> :q!<cr>
 nnoremap <silent> <C-w><C-q> :%bd<CR>
@@ -365,3 +365,5 @@ nnoremap <silent> <Leader>q :call <SID>toggle_qf()<CR>
 " }}}
 
 " }}}
+
+autocmd BufWrite *.scss !npx node-sass /tmp/media/webroot/scss/ -o /tmp/media/webroot/css/
