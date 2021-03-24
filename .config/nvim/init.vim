@@ -146,6 +146,8 @@ nmap sh <Plug>(coc-references)
 nmap sr <Plug>(coc-rename)
 nmap sk <Plug>(coc-format)
 nmap sq <Plug>(coc-diagnostic)
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -203,6 +205,7 @@ let g:indentLine_char_list = ['¦', '┆', '┊']
 "}}}
 Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " vim-treesitter {{{
@@ -251,7 +254,7 @@ nnoremap ss :sp<CR>
 nnoremap sv :vs<CR>
 nnoremap sn :tab split<CR>
 nnoremap md :r! mdl 
-nnoremap <silent> <C-s> :noa w!<cr>
+nnoremap <silent> <C-s> :w!<cr>
 nnoremap <silent> <C-c> :bd<cr>
 nnoremap <silent> <C-q> :q!<cr>
 nnoremap <silent> <C-w><C-q> :%bd<CR>
@@ -366,4 +369,4 @@ nnoremap <silent> <Leader>q :call <SID>toggle_qf()<CR>
 
 " }}}
 
-autocmd BufWrite *.scss !npx node-sass /tmp/media/webroot/scss/ -o /tmp/media/webroot/css/
+autocmd BufWritePost *.scss,*.css !npx node-sass /tmp/media/webroot/scss/ -o /tmp/media/webroot/css/
