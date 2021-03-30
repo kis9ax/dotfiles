@@ -67,8 +67,7 @@ let g:loaded_tutor_mode_plugin = 1
 let g:loaded_matchparen = 1
 let g:loaded_matchit = 1
 let g:loaded_dbext = 1
-
-"}}}
+" }}}
 
 " Plugins {{{
 " vim-plug Installation {{{
@@ -104,6 +103,7 @@ let g:coc_global_extensions = [
       \, 'coc-pairs'
       \, 'coc-snippets'
       \, 'coc-highlight'
+      \, 'coc-translator'
       \, 'coc-prettier'
       \, 'coc-eslint'
       \, 'coc-clangd'
@@ -126,16 +126,17 @@ let g:coc_global_extensions = [
 nnoremap <silent>s: :CocCommand<CR>
 nnoremap <silent>s; :<C-u>CocList<cr>
 nnoremap <silent>K :call <SID>show_documentation()<CR>
-nnoremap <silent>gd :CocCommand git.diffCached<CR>
+nnoremap <silent>gd :CocCommand git.showCommit<CR>
 nnoremap <silent>sk :CocCommand prettier.formatFile<CR>
 nnoremap <silent><C-n> :CocCommand explorer --sources=file+ --width=45<CR>
 nnoremap <C-p> :CocList gfiles<CR>
-nnoremap sb :CocList buffers<CR>
+nnoremap sj :CocList buffers<CR>
 nnoremap sp :CocList vimcommands<CR>
 nnoremap sf :CocList files<CR>
 nnoremap sg :CocList grep<CR>
 nnoremap sy :CocList yank<CR>
 nnoremap sc :CocList commits<CR>
+nnoremap sb :CocList bcommits<CR>
 nnoremap gs :CocList gstatus<CR>
 nnoremap so :CocList outline<CR>
 nnoremap s' :CocList cmdhistory<CR>
@@ -143,15 +144,17 @@ nmap sd <Plug>(coc-definition)
 nmap sq <Plug>(coc-fix-current)
 nmap st <Plug>(coc-type-definition)
 nmap sh <Plug>(coc-references)
-nmap sr <Plug>(coc-rename)
-nmap sk <Plug>(coc-format)
+nmap si <Plug>(coc-format)
 nmap sq <Plug>(coc-diagnostic)
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap sk <Plug>(coc-translator-p)
+nmap sr <Plug>(coc-translator-r)
+vmap sk <Plug>(coc-translator-pv)
+vmap sr <Plug>(coc-translator-rv)
+nmap [g <Plug>(coc-diagnostic-prev)
+nmap ]g <Plug>(coc-diagnostic-next)
+nmap gjc <Plug>(coc-git-keepcurrent)
+nmap gjn <Plug>(coc-git-keepincoming)
+nmap gjb <Plug>(coc-git-keepboth)
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -203,11 +206,13 @@ Plug 'Yggdroot/indentLine'
 let g:indentLine_faster = 1
 let g:indentLine_char_list = ['¦', '┆', '┊']
 "}}}
+Plug 'easymotion/vim-easymotion'
+" easymotion/vim-easymotion{{{
+map , <Plug>(easymotion-overwin-f)
+"}}}
 Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
 call plug#end()
-
 " vim-treesitter {{{
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
@@ -366,7 +371,3 @@ function! s:toggle_qf()
 endfunction
 nnoremap <silent> <Leader>q :call <SID>toggle_qf()<CR>
 " }}}
-
-" }}}
-
-autocmd BufWritePost *.scss,*.css !npx node-sass /tmp/media/webroot/scss/ -o /tmp/media/webroot/css/
