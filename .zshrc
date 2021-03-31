@@ -23,6 +23,7 @@ if [ $DOTFILES/.zshrc -nt ~/.zshrc.zwc ]; then
 fi
 
 source "$HOME/.zinit/bin/zinit.zsh"
+source "$HOME/bin/z.sh"
 
 autoload -Uz _zinit
 autoload -Uz add-zsh-hook
@@ -75,6 +76,30 @@ function ff() {
   dir=$(fd -t d --base-directory $baseDir -d 3 | fzf)
   cd $baseDir/$dir
 }
+
+fshow() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
+}
+
+fzf-z-search() {
+    local res=$(z | sort -rn | cut -c 12- | fzf)
+    if [ -n "$res" ]; then
+        BUFFER+="cd $res"
+        zle accept-line
+    else
+        return 1
+    fi
+}
+
+zle -N fzf-z-search
+bindkey '^j' fzf-z-search
 
 # alias
 source ~/.aliases;

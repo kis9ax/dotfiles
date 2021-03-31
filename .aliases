@@ -42,6 +42,7 @@ alias -g B='| bat'
 alias -g X='| xargs'
 alias -g F='| fzf'
 alias -g N='| nvim -'
+alias -g P='| curl -s -T - https://ppng.io/kis9a'
 
 # git
 alias g='git'
