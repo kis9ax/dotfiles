@@ -371,3 +371,9 @@ function! s:toggle_qf()
 endfunction
 nnoremap <silent> <Leader>q :call <SID>toggle_qf()<CR>
 " }}}
+" }}}
+
+" au BufWritePost *.js,*.scss :!node-sass ~/Downloads/app_578/scss/dist.scss ~/Downloads/app_578/custom.css
+" au BufWritePost *.js,*.scss :!node-sass ~/Downloads/a/scss/dist.scss ~/Downloads/a/custom.css
+au BufWritePost *.js,*.scss :!node-sass /Users/evolany16/Downloads/a/scss/dist.scss /Users/evolany16/Downloads/b/custom.css
+
