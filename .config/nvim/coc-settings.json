@@ -13,6 +13,7 @@
   "tsserver.enableJavascript": true,
   "coc.preferences.extensionUpdateCheck": "never",
   "coc.preferences.jumpCommand": "drop",
+  "coc.preferences.formatOnSaveFiletypes": ["markdown", "sh", "bash", "go", "vim"],
   "emmet.includeLanguages": {
     "vue-html": "html",
     "javascript": "javascriptreact"

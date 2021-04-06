@@ -54,7 +54,7 @@ let g:loaded_tarPlugin = 1
 let g:loaded_zip = 1
 let g:loaded_zipPlugin = 1
 let g:loaded_rrhelper = 1
-let g:loaded_2html_plugin = 1
+" let g:loaded_2html_plugin = 1
 let g:loaded_vimball = 1
 let g:loaded_vimballPlugin = 1
 let g:loaded_getscript = 1
@@ -78,13 +78,14 @@ if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
 endif
 "}}}
 " :PlugSnapshot{{{
-silent! let g:plugs['coc.nvim'].commit = '70e5a383cd1c5e39505ef016e8507e7daa4bc7dc'
+silent! let g:plugs['coc.nvim'].commit = 'd3e40ceabd76323c07434fc2711521cc8bb2d028'
 silent! let g:plugs['indentLine'].commit = '5617a1cf7d315e6e6f84d825c85e3b669d220bfa'
-silent! let g:plugs['nvim-treesitter'].commit = '9d57216c0d94c9823c0d971caeaffb3b261e527e'
+silent! let g:plugs['nvim-treesitter'].commit = '11e1db3ec29abb5711556085766cb6912814c6dc'
 silent! let g:plugs['quick-scope'].commit = 'd4c02b85ff168f7749833607536cb02281464c26'
-silent! let g:plugs['vim-commentary'].commit = 'f8238d70f873969fb41bf6a6b07ca63a4c0b82b1'
+silent! let g:plugs['vim-commentary'].commit = '349340debb34f6302931f0eb7139b2c11dfdf427'
+silent! let g:plugs['vim-easymotion'].commit = 'd75d9591e415652b25d9e0a3669355550325263d'
 silent! let g:plugs['vim-grepper'].commit = 'e9004ce564891412cfe433cfbb97295cccd06b39'
-silent! let g:plugs['vim-rooter'].commit = '45ea40da3f223fff83fce0a643875e560ed20aae'
+silent! let g:plugs['vim-rooter'].commit = '544e701066c69bbeb45297d0285c2719e125440b'
 silent! let g:plugs['vim-surround'].commit = 'f51a26d3710629d031806305b6c8727189cd1935'
 " :PlugUpdate!
 "}}}
@@ -162,8 +163,6 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 inoremap <silent><expr> <c-space> coc#refresh()
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
@@ -212,6 +211,11 @@ map , <Plug>(easymotion-overwin-f)
 "}}}
 Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
+Plug 'kshenoy/vim-signature', { 'on': 'SignatureListGlobalMarks' }
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
+Plug 'junegunn/limelight.vim', { 'on': [ 'Limelight', 'Limelight!', 'Limelight!!' ] }
+Plug 'simeji/winresizer', { 'on': [ 'WinResizerStartFocus', 'WinResizerStartResize'] }
 call plug#end()
 " vim-treesitter {{{
 lua <<EOF
@@ -376,4 +380,3 @@ nnoremap <silent> <Leader>q :call <SID>toggle_qf()<CR>
 " au BufWritePost *.js,*.scss :!node-sass ~/Downloads/app_578/scss/dist.scss ~/Downloads/app_578/custom.css
 " au BufWritePost *.js,*.scss :!node-sass ~/Downloads/a/scss/dist.scss ~/Downloads/a/custom.css
 au BufWritePost *.js,*.scss :!node-sass /Users/evolany16/Downloads/a/scss/dist.scss /Users/evolany16/Downloads/b/custom.css
-
