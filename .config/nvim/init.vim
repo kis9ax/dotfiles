@@ -211,11 +211,16 @@ map , <Plug>(easymotion-overwin-f)
 "}}}
 Plug 'airblade/vim-rooter'
 Plug 'tpope/vim-surround'
-Plug 'kshenoy/vim-signature', { 'on': 'SignatureListGlobalMarks' }
-Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'dstein64/vim-startuptime', { 'on': 'StartupTime' }
-Plug 'junegunn/limelight.vim', { 'on': [ 'Limelight', 'Limelight!', 'Limelight!!' ] }
+Plug 'junegunn/limelight.vim', { 'on': 'Limelight!!' }
+" junegunn/limelight.vim{{
+nnoremap <Leader>l :Limelight!!<CR>
+" }}}
 Plug 'simeji/winresizer', { 'on': [ 'WinResizerStartFocus', 'WinResizerStartResize'] }
+" simeji/winresizer{{{
+nnoremap ge :WinResizerStartResize<CR>
+" }}}
+
 call plug#end()
 " vim-treesitter {{{
 lua <<EOF
